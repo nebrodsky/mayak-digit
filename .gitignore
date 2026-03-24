@@ -1,0 +1,15 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+venv/
+models/
+
+# macOS system files
+.DS_Store
+
+# raw corpora
+corpus/
+
+# unpublic tests of the app
+app/app_pretests/
