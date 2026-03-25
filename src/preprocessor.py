@@ -3,8 +3,8 @@ import re
 import pandas as pd
 from razdel import sentenize, tokenize
 from pymorphy3 import MorphAnalyzer
-from file_utils import get_files_in_folder, read_text_file
-from text_utils import lemmatize, separate_poem
+from src.file_utils import get_files_in_folder, read_text_file
+from src.text_utils import lemmatize, separate_poem
 
 morph = MorphAnalyzer()
 

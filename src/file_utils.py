@@ -339,6 +339,6 @@ def get_text_metadata(filename, metadata_path):
         return row.iloc[0].to_dict() # Возвращает словарь со всеми полями (title, year, genre)
     return {"title": "Unknown", "year": "Unknown", "genre": "Unknown"}
 
-if __name__ == "__main__":
-    import_poetree_corpora(18, "Маяковский", os.path.join('corpus', 'poetry'))
+# if __name__ == "__main__":
+    # import_poetree_corpora(18, "Маяковский", os.path.join('corpus', 'poetry'))
     # import_corpora_files('raw_entries', 'corpus')

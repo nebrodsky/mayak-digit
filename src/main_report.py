@@ -1,11 +1,11 @@
 import os
 from itertools import product
-from file_utils import get_files_in_folder, read_text_file, write_csv_file, read_csv_file, write_text_file
-from text_utils import count_words, count_unique_words, count_unique_lemmas, clean_punctuation, calculate_ttr_lemmatized, count_sentences, get_words, lemmatize, form_author_vocab, words_per_sent, avg_punct_rate, get_most_common_words, get_most_common_lemmas
+from src.file_utils import get_files_in_folder, read_text_file, write_csv_file, read_csv_file, write_text_file
+from src.text_utils import count_words, count_unique_words, count_unique_lemmas, clean_punctuation, calculate_ttr_lemmatized, count_sentences, get_words, lemmatize, form_author_vocab, words_per_sent, avg_punct_rate, get_most_common_words, get_most_common_lemmas
 
-def main():
+def main_text_report():
     '''
-    Главная функция программы.
+    Главная функция программы для генерации развернутого текстового отчета по корпусу.
     '''
     print("=" * 60)
     print("📂 Начинаю анализ текстовых файлов в корпусе!")
