@@ -1,7 +1,14 @@
+import os
 import re
 import ast
 from collections import Counter
+from navec import Navec
+from src.file_utils import read_text_file
 from src.text_utils import morph, get_sentences, get_words
+
+
+path = os.path.join('models', 'navec_hudlit_v1_12B_500K_300d_100q.tar')
+navec = Navec.load(path)
 
 POS_MAP = {
     'NOUN': 'Существительное', 'VERB': 'Глагол', 'ADJF': 'Прилагательное',
@@ -184,3 +191,58 @@ def full_word_analysis(df, target_word, window_size=5, decay_distance=0.95, deca
         'pos_dist': pos_dist,
         'proximity_weights': proximity_weights
     }
+
+# --- ФУНКЦИИ ДЛЯ СИНОНИМОВ И ФИЛЬТРАЦИИ ---
+
+def get_unique_synonyms(target_word, top_n_to_return=20, search_depth=50):
+    """
+    1. Находит глубокий топ синонимов (50 шт).
+    2. Приводит их к нормальной форме (лемме).
+    3. Оставляет только уникальные леммы, отличные от самого target_word.
+    4. Возвращает срез нужной длины.
+    """
+    if target_word not in navec:
+        return []
+
+    # 1. Получаем глубокий список (50 слов), чтобы было из чего выбирать после фильтрации
+    # Используем метод .sim(), который мы обсудили ранее
+    raw_sims = []
+    for word in navec.vocab.words: # Ограничимся 100к самых частых для скорости
+        if not word.isalpha():
+            continue
+        score = navec.sim(target_word, word)
+        raw_sims.append((word, score))
+    
+    raw_sims.sort(key=lambda x: x[1], reverse=True)
+    
+    # 2. Фильтрация через лемматизацию
+    unique_lemmas = []
+    seen_lemmas = {target_word.lower()} # Сразу игнорируем само искомое слово
+    
+    for word, score in raw_sims:
+        # Лемматизируем кандидата (используй свой морфо-объект, тут пример с pymorphy)
+        # Если используешь Natasha, замени на свой вызов лемматизатора
+        lemma = morph.parse(word)[0].normal_form 
+        
+        if lemma not in seen_lemmas:
+            unique_lemmas.append((lemma, score))
+            seen_lemmas.add(lemma)
+            
+        # Как только набрали нужное количество уникальных понятий — выходим
+        if len(unique_lemmas) >= search_depth:
+            break
+
+    # 3. Возвращаем срез (20 или сколько запрошено)
+    final_cutoff = min(len(unique_lemmas), top_n_to_return)
+    return unique_lemmas[:final_cutoff]
+
+def filter_synonyms_by_corpus(synonyms, corpus_df):
+    """
+    Дополнительная фильтрация синонимов через корпус.
+    Оставляет только те, которые реально встречаются в текстах.
+    """
+
+    author_vocab = read_text_file('data/author_vocabulary.txt').splitlines()
+    filtered_synonyms = [syn for syn, score in synonyms if syn in author_vocab]
+    
+    return filtered_synonyms

@@ -2,6 +2,8 @@ import pandas as pd
 import ast
 from gensim.models import Word2Vec
 
+# --- НА ДАННОМ ЭТАПЕ ИСПОЛЬЗОВАНИЕ МОДЕЛИ НЕ ПЛАНИРУЕТСЯ, ЭТО ПРОСТО СКРИПТ ДЛЯ ОБУЧЕНИЯ НОВОЙ МОДЕЛИ НА НАШЕМ КОРПУСЕ ---
+
 # 1. Загрузка
 print("Загрузка базы...")
 df = pd.read_csv('data/database.csv')

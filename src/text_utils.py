@@ -1,5 +1,5 @@
 import os
-import pymorphy3 # стопслова для корпуса
+import pymorphy3
 from razdel import sentenize, tokenize #для членения текста используем модуль razdel
 from src.file_utils import read_csv_file, read_text_file
 
