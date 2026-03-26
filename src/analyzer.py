@@ -31,7 +31,7 @@ def find_word_in_corpus(corpus, target_norm):
         text_positions = []
         for s_idx, sentence in enumerate(item['lemmas']):
             if target_norm in sentence:
-                indices = [i for i, l in enumerate(sentence) if l == target_norm]
+                indices = [i for i, l in enumerate([l for l in sentence if l != '_BRK_']) if l == target_norm]
                 text_positions.append((s_idx, indices))
         
         if text_positions:
@@ -40,7 +40,7 @@ def find_word_in_corpus(corpus, target_norm):
                 'year_finished': item['year_finished'],
                 'formatted_text': item['formatted_text'],
                 'lemmas': item['lemmas'], 
-                'pos': text_positions
+                'positions': text_positions
             })
 
     return corpus_with_target
@@ -58,15 +58,13 @@ def get_occurrence_data(corpus_with_target, target_norm):
 
     for item in corpus_with_target:
         # Считаем вхождения для графика
-        num_in_text = sum(len(indices) for s_idx, indices in item['pos'])
+        num_in_text = sum(len(indices) for s_idx, indices in item['positions'])
         total_occurrences += num_in_text
         year_dist[item['year_finished']] += num_in_text
 
-        # Разбиваем сырой текст на предложения для подсветки
-        # (Используем ту же логику разбиения, что была при создании базы)
         sentences_raw = get_sentences(str(item['formatted_text']))
-        
-        for s_idx, indices in item['pos']:
+
+        for s_idx, indicies in item['positions']:
             if s_idx < len(sentences_raw):
                 raw_sentence = sentences_raw[s_idx].replace('_BRK_', ' / ').strip(' /–-—')
                 
@@ -99,7 +97,7 @@ def get_window_neighbors(raw_data, target_norm, window_size, stopwords=None):
 
     for text in raw_data:
         sentences = text['lemmas']
-        for s_idx, t_indices in text['pos']:
+        for s_idx, t_indices in text['positions']:
             lemmas = sentences[s_idx]
             for t_idx in t_indices:
                 start = max(0, t_idx - window_size)
@@ -314,7 +312,7 @@ def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, 
     Ты — ведущий эксперт по цифровой филологии и творчеству Владимира Маяковского.
     Тебе нужно провести глубокий сравнительный анализ слова "{target_word.upper()}" на основе предоставленных данных для составления словарной статьи.
 
-    ДАННЫЕ ДЛЯ АНАЛИЗА:
+    Тебе предоставлены следующие данные:
 
     1. Основное слово "{target_word}".
 
@@ -327,11 +325,12 @@ def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, 
     5. Для каждого синонима из пункта 4 — топ-10 слов, которые были наиболее тесно связаны с этим синонимом в текстах (по динамическому индексу контекстуальной близости), вместе с их весами связи:
     {neighbors_for_synonyms_str}.
 
-    ЗАДАНИЕ:
-    1. Сравни "гравитационные поля" таргета и его используемых синонимов. В чем их функциональное различие в текстах?
-    2. Проанализируй список использованных синонимов и сравни их близость в общем корпусе и индексы контекстуальной близости к таргету. В каких случаях поэт выбирает менее "близкие" синонимы или наоборот избегает "популярных", и почему?
-    3. Проанализируй список проигнорированных синонимов. Почему, на твой взгляд, Маяковский полностью избегает этих слов?
+    Перед тобой поставлены следующие вопросы для анализа:
+    1. Сравни контекстуальное окружение таргета и его используемых синонимов. В чем функциональное различие таргета и синонимов в текстах?
+    2. Проанализируй список использованных синонимов и сравни, насколько они близки к таргету по дданным общего корпуса и насколько по данным корпуса Маяковского.
+    3. Поясни, в каких случаях поэт выбирает менее "близкие" синонимы или наоборот избегает "популярных"?
+    4. Проанализируй список проигнорированных синонимов. Почему, на твой взгляд, Маяковский полностью избегает этих слов?
 
-    Напиши аналитическое заключение (5-8 предложений). Будь конкретен, опирайся на предоставленные веса и леммы.
+    Напиши аналитическое заключение. Будь конкретен, опирайся на предоставленные веса и леммы. Язык должен быть понятен как специалисту, так и заинтересованным читателям, не погруженным в контекст.
     """
     return prompt

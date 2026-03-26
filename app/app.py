@@ -1,15 +1,23 @@
 import sys
 import os
-import ast
-import ollama # Для взаимодействия с локальной Ollama (или удаленной, если указать URL)
-import streamlit as st
-import pandas as pd
+
 # Добавляем корневую директорию проекта (mayak-digit) в пути поиска модулей
 # Доделать или убрать, если структура проекта изменится
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+# --------------------------------------------------------------
+import ast
+import ollama # Для взаимодействия с локальной Ollama
+import anthropic # Для взаимодействия с API Claude от Anthropic
+import streamlit as st
+import pandas as pd
 from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms
 from src.text_utils import morph, russian_stopwords
+from dotenv import load_dotenv
+
+# --------------------------------------------------------------
+
+load_dotenv()
+claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа к модели Claude от Anthropic 
 
 @st.cache_data # Чтобы не перегружать файл каждый раз
 def load_data():
@@ -54,6 +62,12 @@ year_range = st.sidebar.slider(
     "Период написания",
     min_year, max_year, (min_year, max_year)
 )
+with st.sidebar.expander("🤖 Настройки LLM"):
+    model_source = st.radio(
+    "Модель анализа:",
+    ["Локальная (Ollama)", "API (Claude 3.5 Sonnet)"],
+    help="Claude требует ключ в .env и интернет. Ollama работает локально."
+    )
 
 with st.sidebar.expander("⚙️ Настройки весов (Индекс Маяка)"):
     decay_distance = st.slider(
@@ -189,17 +203,17 @@ if search_word:
             st.dataframe(contexts_df, width='stretch') # Показываем всю ширину таблицы
 
 # --- ТЕСТОВЫЙ БЛОК ДЛЯ ПРОВЕРКИ ПРОМПТА ---
-if st.button("🚀 Запустить полный ИИ-анализ"):
+if st.button("🚀 Запустить интерпретацию через LLM"):
     # Создаем пустой контейнер для статуса
     status_text = st.empty()
     
-    with st.spinner("Маяковский «перепахивает» слова... Пожалуйста, подождите."):
+    with st.spinner("Собираем статистику для промпта... Пожалуйста, подождите."):
         
-        # 1. Шаг: Считаем близость синонимов к таргету в этом периоде
-        status_text.text("📊 Рассчитываю семантическую близость синонимов...")
+        # Считаем близость синонимов к таргету в этом периоде
+        status_text.text("📊 Рассчитываем семантическую близость синонимов...")
         syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
         
-        # 2. Шаг: Самый тяжелый — считаем "поля" для каждого синонима
+        # Самый тяжелый — считаем "поля" для каждого синонима
         status_text.text("🕸️ Анализирую гравитационные поля синонимов (это может занять время)...")
         neighbors_for_syns = proximity_neighbours_for_synonyms(
             synonyms_filtered, 
@@ -208,9 +222,9 @@ if st.button("🚀 Запустить полный ИИ-анализ"):
             stopwords=russian_stopwords
         )
 
-        # 3. Шаг: Сборка промпта
+        # Сборка промпта
         status_text.text("✍️ Формирую аналитическое досье для ИИ...")
-        test_prompt = prepare_llm_prompt(
+        interpr_prompt = prepare_llm_prompt(
             target_word=target_word,
             synonyms=synonyms,
             synonyms_filtered=synonyms_filtered,
@@ -221,67 +235,51 @@ if st.button("🚀 Запустить полный ИИ-анализ"):
         # Убираем временный текст статуса перед выводом результата
         status_text.empty()
 
-    # Выводим результат (промпт или сразу ответ от Ollama)
+    # Наглядный вывод промпта для проверки
     st.subheader("Сгенерированный промпт для ИИ:")
-    st.code(test_prompt, language="text")
-    
-    st.success("✅ Анализ данных завершен! Теперь промпт можно отправить в модель.")
-
-# --- ЗАПУСК ИИ-ИНТЕРПРЕТАЦИИ ---
-if st.button("🤖 Запустить ИИ-интерпретацию"):
-
-    status_text = st.empty()
-
-    # 1. Сначала прогоняем все тяжелые расчеты (твой код со спиннером)
-    with st.spinner("Сбор данных и подготовка промпта..."):
-        # 1. Шаг: Считаем близость синонимов к таргету в этом периоде
-        status_text.text("📊 Рассчитываю семантическую близость синонимов...")
-        syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
-        
-        # 2. Шаг: Самый тяжелый — считаем "поля" для каждого синонима
-        status_text.text("🕸️ Анализирую гравитационные поля синонимов (это может занять время)...")
-        neighbors_for_syns = proximity_neighbours_for_synonyms(
-            synonyms_filtered, 
-            filtered_corpus, # Твой отфильтрованный по годам корпус
-            decay_distance, decay_brks, decay_sents, 
-            stopwords=russian_stopwords
-        )
-
-        # 3. Шаг: Сборка промпта
-        status_text.text("✍️ Формирую аналитическое досье для ИИ...")
-        test_prompt = prepare_llm_prompt(
-            target_word=target_word,
-            synonyms=synonyms,
-            synonyms_filtered=synonyms_filtered,
-            syn_proximity=syn_prox_index,
-            neighbors_for_synonyms=neighbors_for_syns
-        )
-        status_text.empty() # Убираем спиннер
-        
+    st.code(interpr_prompt, language="text")
+      
     st.divider()
-    st.subheader("📝 Филологический комментарий (Llama 3)")
+    st.subheader("📝 Филологический комментарий от LLM:")
 
-    # 2. Создаем контейнер для потокового вывода текста
-    response_container = st.empty()
-    full_response = ""
+    # --- ЛОГИКА ВЫБОРА МОДЕЛИ ---
 
-    try:
-        # Отправляем запрос в Ollama
-        # Убедись, что в приложении Ollama скачана модель llama3:8b
-        stream = ollama.generate(
-            model='llama3:8b',
-            prompt=test_prompt,
-            stream=True,
-        )
+    if model_source == "Локальная (Ollama)":
+        response_container = st.empty()
+        full_response = ""
 
-        for chunk in stream:
-            full_response += chunk['response']
-            # Моментально обновляем текст в интерфейсе
-            response_container.markdown(full_response + "▌")
-        
-        # Финальное обновление без курсора
-        response_container.markdown(full_response)
+        try:
+            stream = ollama.generate(model='llama3:8b', prompt=interpr_prompt, stream=True)
+            for chunk in stream:
+                full_response += chunk['response']
+                response_container.markdown(full_response + "▌")
+            response_container.markdown(full_response)
 
-    except Exception as e:
-        st.error(f"Ошибка при обращении к Ollama: {e}")
-        st.info("Убедитесь, что приложение Ollama запущено и модель llama3:8b скачана.")
+        except Exception as e:
+            st.error(f"Ошибка при обращении к Ollama: {e}")
+            st.info("Убедитесь, что приложение Ollama запущено и модель llama3:8b скачана.")
+
+    elif model_source == "API (Claude 3.5 Sonnet)":
+        if not claude_key:
+            st.error("Ключ Anthropic не найден в .env!")
+        else:
+            client = anthropic.Anthropic(api_key=claude_key)
+
+            with st.spinner("Claude анализирует семантические поля..."):
+
+                try:
+
+                    message = client.messages.create(
+                        model="claude-sonnet-4-6",
+                        max_tokens=1024,
+                        system="Ты — эксперт-филолог, специализирующийся на творчестве В. В. Маяковского. Ты рыботаешь над составлением цифрового словаря авторского языка",
+                        messages=[
+                            {
+                                "role": "user",
+                                "content": interpr_prompt}]
+                    )
+                    st.markdown(message.content[0].text)
+
+                except Exception as e:
+                    st.error(f"Ошибка API Claude: {e}")
+                    st.info("Убедитесь, что ключ Anthropic корректно настроен.")

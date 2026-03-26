@@ -13,3 +13,6 @@ corpus/
 
 # unpublic tests of the app
 app/app_pretests/
+
+# secrets
+.env

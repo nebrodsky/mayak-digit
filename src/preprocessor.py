@@ -270,7 +270,7 @@ def process_poetry_corpus(raw_poetry_path, data_path):
 
         data.append({
             'filename': f,
-            'text_name': text_metadata.get('title'),
+            'title': text_metadata.get('title'),
             'genre': text_metadata.get('genre'),
             'year_finished': text_metadata.get('year_finished'),
             'raw_text': text,
