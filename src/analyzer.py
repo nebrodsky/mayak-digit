@@ -18,70 +18,76 @@ POS_MAP = {
     'PRED': 'Предикатив', 'PREP': 'Предлог', 'CONJ': 'Союз', 'PRCL': 'Частица'
 }
 
+# --- ФУНКЦИИ ДЛЯ АНАЛИЗА СЛОВА ---
+
+def find_word_in_corpus(corpus, target_norm):
+    """
+    Ищет вхождения любого слова в уже подготовленном корпусе.
+    Возвращает структуру raw_data для Индекса Маяка.
+    """
+    corpus_with_target = []
+
+    for item in corpus:
+        text_positions = []
+        for s_idx, sentence in enumerate(item['lemmas']):
+            if target_norm in sentence:
+                indices = [i for i, l in enumerate(sentence) if l == target_norm]
+                text_positions.append((s_idx, indices))
+        
+        if text_positions:
+            corpus_with_target.append({
+                'title': item['title'],
+                'year_finished': item['year_finished'],
+                'formatted_text': item['formatted_text'],
+                'lemmas': item['lemmas'], 
+                'pos': text_positions
+            })
+
+    return corpus_with_target
+
 # 1. Функция контекста и общей статистики
-def get_occurrence_data(df, target_norm):
+def get_occurrence_data(corpus_with_target, target_norm):
     """
     Возвращает: 
     - contexts: список словарей для нижней таблицы
     - year_dist: Counter для графика частотности
-    - raw_data: структурированные данные для других функций (чтобы не парсить CSV дважды)
     """
     contexts = []
     year_dist = Counter()
-    raw_data = []
     total_occurrences = 0
 
-    for _, row in df.iterrows():
-        try:
-            sentences_lemmas = ast.literal_eval(row['lemmas'])
-            sentences_raw = get_sentences(str(row['formatted_text']))
-        except:
-            continue
+    for item in corpus_with_target:
+        # Считаем вхождения для графика
+        num_in_text = sum(len(indices) for s_idx, indices in item['pos'])
+        total_occurrences += num_in_text
+        year_dist[item['year_finished']] += num_in_text
+
+        # Разбиваем сырой текст на предложения для подсветки
+        # (Используем ту же логику разбиения, что была при создании базы)
+        sentences_raw = get_sentences(str(item['formatted_text']))
         
-        text_occurrences = []
-        for s_idx, lemmas in enumerate(sentences_lemmas):
-            if target_norm in lemmas:
-                indices = [i for i, l in enumerate(lemmas) if l == target_norm]
-                text_occurrences.append((s_idx, indices))
+        for s_idx, indices in item['pos']:
+            if s_idx < len(sentences_raw):
+                raw_sentence = sentences_raw[s_idx].replace('_BRK_', ' / ').strip(' /–-—')
                 
-                total_occurrences += len(indices)
-
-                year_dist[row['year_finished']] += len(indices)
-
-                # Достаем оригинал по индексу предложения s_idx
-                if s_idx < len(sentences_raw):
-                    # 1. Берем оригинал (здесь он со всеми пробелами и знаками)
-                    raw_sentence = sentences_raw[s_idx].replace('_BRK_', ' / ').strip(' /–-—')
-                    
-                    # 2. Получаем токены (объекты с полями .text, .start, .stop)
-                    tokens = list(get_words(raw_sentence))
-                    
-                    # Идем с конца строки к началу, чтобы замены не сбивали индексы
-                    display_sentence = raw_sentence
-                    for token in reversed(tokens):
-                        # Проверяем, что это слово
-                        if any(c.isalpha() for c in token.text):
-                            p = morph.parse(token.text.lower())[0]
-                            if p.normal_form == target_norm:
-                                # Вырезаем старое слово и вставляем подсвеченное
-                                start, end = token.start, token.stop
-                                highlight = f"**{token.text.upper()}**"
-                                display_sentence = display_sentence[:start] + highlight + display_sentence[end:]
-
-                else:
-                    display_sentence = '[Неизвестный контекст]'
-
-                # Добавляем в таблицу контекстов (целое предложение)
+                # Подсветка через reversed tokens (как в твоем коде)
+                tokens = list(get_words(raw_sentence))
+                display_sentence = raw_sentence
+                
+                for token in reversed(tokens):
+                    if any(c.isalpha() for c in token.text):
+                        p = morph.parse(token.text.lower())[0]
+                        if p.normal_form == target_norm:
+                            start, end = token.start, token.stop
+                            display_sentence = display_sentence[:start] + f"**{token.text.upper()}**" + display_sentence[end:]
+                
                 contexts.append({
                     "Контекст": display_sentence,
-                    "Произведение": row['text_name'],
-                    "Год": row['year_finished']
+                    "Произведение": item['title'],
+                    "Год": item['year_finished']
                 })
-        
-        if text_occurrences:
-            raw_data.append({'lemmas': sentences_lemmas, 'pos': text_occurrences})
-            
-    return total_occurrences, contexts, year_dist, raw_data
+
+    return total_occurrences, contexts, year_dist
 
 # 2. Функция классического окна (без индексов)
 def get_window_neighbors(raw_data, target_norm, window_size, stopwords=None):
@@ -110,9 +116,13 @@ def get_window_neighbors(raw_data, target_norm, window_size, stopwords=None):
     return neighbors, neighbor_pos
 
 # 3. Функция "Индекса Маяка" (всеобъемлющая связь)
-def get_proximity_index(text, target_norm, decay_distance, decay_brks, decay_sents, stopwords=None):
+def get_proximity_index_neighbors(text, target_norm, decay_distance, decay_brks, decay_sents, stopwords=None):
     """
-    Считает веса для ВСЕХ слов в тексте на основе дистанции и _BRK_.
+    Для каждого вхождения таргета сканируем весь текст и считаем вес связи с каждой леммой, учитывая:
+- Дистанцию в словах (чем дальше, тем слабее связь)
+- Количество разрывов строк (_BRK_) на пути (каждый разрыв ослабляет связь)
+- Количество границ предложений (точек) на пути (каждая граница ослабляет связь)
+- Фильтрация по стоп-словам и не-буквенным токенам (типа _BRK_, которые мы обрабатываем отдельно)  
     """
     weights = Counter()
     
@@ -168,20 +178,20 @@ def get_proximity_index(text, target_norm, decay_distance, decay_brks, decay_sen
     return weights
 
 # 4. Главная координирующая функция
-def full_word_analysis(df, target_word, window_size=5, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None):
-    target_norm = target_word.lower()
+def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None):
     
-    # Шаг 1: База (контексты и вхождения)
-    total_occurrences, contexts, year_dist, raw_data = get_occurrence_data(df, target_norm)
+    # Шаг 1: Находим все вхождения слова и контексты
+    corpus_with_target = find_word_in_corpus(filtered_corpus, target_word)
+    total_occurrences, contexts, year_dist = get_occurrence_data(corpus_with_target, target_word)
     
-    if not raw_data:
+    if not filtered_corpus:
         return None
     
-    # Шаг 2: Классика (окно и POS)
-    window_neighbors, pos_dist = get_window_neighbors(raw_data, target_norm, window_size, stopwords)
+    # Шаг 2: Классическое окно контекстов
+    window_neighbors, pos_dist = get_window_neighbors(corpus_with_target, target_word, window_size, stopwords)
     
-    # Шаг 3: Индекс (связи)
-    proximity_weights = get_proximity_index(raw_data, target_norm, decay_distance, decay_brks, decay_sents, stopwords)
+    # Шаг 3: Динамический индекс для всех слов в тексте
+    proximity_weights = get_proximity_index_neighbors(corpus_with_target, target_word, decay_distance, decay_brks, decay_sents, stopwords)
     
     return {
         'total_occurrences': total_occurrences,
@@ -246,3 +256,82 @@ def filter_synonyms_by_corpus(synonyms, corpus_df):
     filtered_synonyms = [syn for syn, score in synonyms if syn in author_vocab]
     
     return filtered_synonyms
+
+# --- ФУНКЦИИ ДЛЯ ПОДГОТОВКИ ЛЛМ-ИНТЕРПРЕТАЦИИ ---
+
+def synonyms_proximity_index(target_word, synonyms_filtered, proximity_weights):
+    """
+    Создает словарь для LLM, который показывает вес связи каждого синонима с таргетом по кастомному индексу.
+    Это поможет модели понять, какие синонимы были более "близки" к таргету в корпусе.
+    """
+    syn_proximity = {}
+
+    for syn in synonyms_filtered:
+        syn_proximity[syn] = proximity_weights.get(syn, 0.0)
+    
+    syn_proximity_sorted = dict(sorted(syn_proximity.items(), key=lambda x: x[1], reverse=True))
+    
+    return syn_proximity_sorted
+
+def proximity_neighbours_for_synonyms(synonyms_filtered, raw_data, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None):
+    """
+    Для каждого отфильтрованного синонима считаем его соседей по "Индексу Маяка".
+    Позволяет LLM понять, какие слова были близки к каждому синониму, а не только к таргету.
+    """
+    neightbors_for_synonyms = {}
+
+    for syn in synonyms_filtered:
+        weights = get_proximity_index_neighbors(raw_data, syn, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=stopwords)
+        # Сортируем и берем топ-10 соседей для каждого синонима
+        neightbors_for_synonyms[syn] = weights.most_common(10)
+
+    return neightbors_for_synonyms
+
+def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, neighbors_for_synonyms):
+    """
+    Формирует расширенный текстовый промпт для LLM.
+
+    Включаем:
+    - Список синонимов с их весами связи
+    - Топ соседей для каждого синонима по "Индексу Маяка"
+    Это позволит модели делать более обоснованные выводы о том, какие синонимы были действительно релевантными в корпусе.
+    """
+    syn_blocks = []
+
+    syn_proximity = dict(sorted(syn_proximity.items(), key=lambda x: x[1], reverse=True))
+
+    for syn, neighbors in neighbors_for_synonyms.items():
+        neighbors_line = ", ".join([f"{n} ({w:.2f})" for n, w in neighbors])
+        syn_blocks.append(f"  - '{syn}': {neighbors_line}")
+    
+    neighbors_for_synonyms_str = "\n".join(syn_blocks)
+ 
+    for syn, prox in syn_proximity.items():
+        synonyms_str = ", ".join([f"{syn} ({prox:.4f})" for syn, prox in syn_proximity.items()])
+
+    # Сборка финального текста
+    prompt = f"""
+    Ты — ведущий эксперт по цифровой филологии и творчеству Владимира Маяковского.
+    Тебе нужно провести глубокий сравнительный анализ слова "{target_word.upper()}" на основе предоставленных данных для составления словарной статьи.
+
+    ДАННЫЕ ДЛЯ АНАЛИЗА:
+
+    1. Основное слово "{target_word}".
+
+    2. Синонимы этого слова из общего корпуса художественной русской литературы (расположены по убыванию близости): "{', '.join([syn for syn, score in synonyms])}".
+
+    3. Семантические лакуны (синонимы из общего языка, которые поэт ПОЛНОСТЬЮ игнорирует): "{', '.join([syn for syn, score in synonyms if syn not in synonyms_filtered])}".
+
+    4. Синонимы этого слова, которые реально встречаются в текстах Маяковского вместе с индексом их контекстуальной близости к основному слову: "{synonyms_str}".
+
+    5. Для каждого синонима из пункта 4 — топ-10 слов, которые были наиболее тесно связаны с этим синонимом в текстах (по динамическому индексу контекстуальной близости), вместе с их весами связи:
+    {neighbors_for_synonyms_str}.
+
+    ЗАДАНИЕ:
+    1. Сравни "гравитационные поля" таргета и его используемых синонимов. В чем их функциональное различие в текстах?
+    2. Проанализируй список использованных синонимов и сравни их близость в общем корпусе и индексы контекстуальной близости к таргету. В каких случаях поэт выбирает менее "близкие" синонимы или наоборот избегает "популярных", и почему?
+    3. Проанализируй список проигнорированных синонимов. Почему, на твой взгляд, Маяковский полностью избегает этих слов?
+
+    Напиши аналитическое заключение (5-8 предложений). Будь конкретен, опирайся на предоставленные веса и леммы.
+    """
+    return prompt
