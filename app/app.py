@@ -21,7 +21,7 @@ claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа
 
 @st.cache_data
 def load_data():
-    return pd.read_csv('data/database.csv')
+    return pd.read_csv(os.path.join('data', 'database.csv'))
 
 def prepare_full_corpus(df):
     """
@@ -31,15 +31,17 @@ def prepare_full_corpus(df):
     for _, row in df.iterrows():
         try:
             
-            sentences = ast.literal_eval(row['lemmas']) # Парсим леммы один раз для всей сессии
-
+            lemmatized_sentences = ast.literal_eval(row['lemmas']) # Парсим леммы один раз для всей сессии
+            formatted_sentences = ast.literal_eval(row['formatted_sentences']) # Парсим отформатированные предложения
             full_corpus.append({
-                'title': row['text_name'],
-                'year_finished': row['year_finished'],
-                'lemmas': sentences,
-                'formatted_text': row['formatted_text']
+                'title': str(row['title']),
+                'year_finished': int(row['year_finished']),
+                'lemmas': lemmatized_sentences,
+                'formatted_sentences': formatted_sentences,
+                'raw_text': str(row['raw_text'])
             })
-        except:
+        except Exception as e:
+            st.error(f"Ошибка при обработке строки с id: {e}")
             continue
     return full_corpus
 

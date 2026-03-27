@@ -4,7 +4,7 @@ import ast
 from collections import Counter
 from navec import Navec
 from src.file_utils import read_text_file
-from src.text_utils import morph, get_sentences, get_words
+from src.text_utils import morph, get_sentences, tokenizator
 
 
 path = os.path.join('models', 'navec_hudlit_v1_12B_500K_300d_100q.tar')
@@ -38,7 +38,8 @@ def find_word_in_corpus(corpus, target_norm):
             corpus_with_target.append({
                 'title': item['title'],
                 'year_finished': item['year_finished'],
-                'formatted_text': item['formatted_text'],
+                'raw_text': item['raw_text'],
+                'formatted_sentences': item['formatted_sentences'],
                 'lemmas': item['lemmas'], 
                 'positions': text_positions
             })
@@ -62,14 +63,27 @@ def get_occurrence_data(corpus_with_target, target_norm):
         total_occurrences += num_in_text
         year_dist[item['year_finished']] += num_in_text
 
-        sentences_raw = get_sentences(str(item['formatted_text']))
+        sentences_raw = get_sentences(str(item['raw_text']))
 
         for s_idx, indicies in item['positions']:
             if s_idx < len(sentences_raw):
-                raw_sentence = sentences_raw[s_idx].replace('_BRK_', ' / ').strip(' /–-—')
+                raw_sentence = sentences_raw[s_idx].replace('\n', ' / ').strip(' /–-—')
+                
+                # Проверка: содержит ли предложение целевое слово
+                has_target = False
+
+                tokens = list(tokenizator(raw_sentence))
+                for token in tokens:
+                    if any(c.isalpha() for c in token.text):
+                        p = morph.parse(token.text.lower())[0]
+                        if p.normal_form == target_norm:
+                            has_target = True
+                            break
+                
+                if not has_target:
+                    continue  # Пропускаем предложение, если оно не содержит целевое слово
                 
                 # Подсветка через reversed tokens
-                tokens = list(get_words(raw_sentence))
                 display_sentence = raw_sentence
                 
                 for token in reversed(tokens):
@@ -183,7 +197,7 @@ def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distan
     total_occurrences, contexts, year_dist = get_occurrence_data(corpus_with_target, target_word)
     
     if not filtered_corpus:
-        return None
+        return None  # Если в корпусе нет данных, возвращаем None или пустой результат
     
     # Шаг 2: Классическое окно контекстов
     window_neighbors, pos_dist = get_window_neighbors(corpus_with_target, target_word, window_size, stopwords)

@@ -89,22 +89,16 @@ def count_unique_lemmas(text, remove_punct=True):
     
     return len(lemmas)
 
-def get_words(text, remove_punct=True):
-    """
-    Подсчитывает количество слов в тексте.
+def tokenizator(text, remove_punct=False):
+    '''
+    Разбивает текст на токены (слова) и удаляет пунктуацию при необходимости.
+    '''
 
-    Args:
-        text (str): Текст для анализа
-        remove_punct (bool): Нужно ли очищать текст от знаков пунктуации.
+    tokens = list(tokenize(text))
 
-    Returns:
-        int: Количество слов
-    """
     clean_text = clean_punctuation(text) if remove_punct else text
 
-    words = tokenize(clean_text)
-
-    return words
+    return tokens
 
 def lemmatize(text, remove_punct=True):
     '''
@@ -366,7 +360,7 @@ def form_author_vocab(corpus_folder):
         filepath = os.path.join(filefolder, filename)
 
         text = read_text_file(filepath)
-        new_words = list(get_words(text))
+        new_words = list(tokenizator(text))
         new_lemmas = set(lemmatize(text))
 
         if year not in author_vocab:
@@ -382,11 +376,9 @@ def form_author_vocab(corpus_folder):
 
     return dict(sorted_by_years)
 
-def separate_poem(text):
+def format_separate_poem(text):
     '''
-    Docstring для process_separations
-    
-    :param text: Описание
+    Разделяет стихотворение на строки и строфы, используя символы переноса строки.
     '''
 
     formatted_text = text.strip()

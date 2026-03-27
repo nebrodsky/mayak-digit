@@ -6,8 +6,8 @@ import poetree # импортируем модуль для работы с ко
 import csv # импортируем модуль для работы с таблицами
 from razdel import sentenize, tokenize
 from pymorphy3 import MorphAnalyzer
-from src.file_utils import get_files_in_folder, read_text_file, write_text_file
-from src.text_utils import morph, lemmatize, separate_poem, write_csv_file
+from src.file_utils import get_files_in_folder, read_text_file, write_text_file, write_csv_file
+from src.text_utils import morph, lemmatize, format_separate_poem, get_sentences
 
 def import_poetree_corpora(author_id, author_name, directory, annual_limit=None, max_poems=None):
     '''
@@ -215,6 +215,7 @@ def process_poetry_corpus(raw_poetry_path, data_path):
     
     if os.path.exists(metadata_path):
         metadata_df = pd.read_csv(metadata_path)
+
     else:
         print(f'ОШИБКА! Файл с исходными метаданными не найден')
         return None
@@ -224,26 +225,34 @@ def process_poetry_corpus(raw_poetry_path, data_path):
         text = read_text_file(os.path.join(raw_poetry_path, f))
 
         # 1. ПРЕПРОЦЕССИНГ И ТОКЕНИЗАЦИЯ
-        # Заменяем слэши на наш технический токен
-        # prepared_text = text.replace(' / ', ' _BRK_ ')
         
         # Разбиваем на предложения (используем razdel)
-        sentences = list(sentenize(text))
+
+        formatted_text = format_separate_poem(text)
         
+        sentences = get_sentences(formatted_text)
+        
+        all_tokens_structured = []
         all_lemmas_structured = []
         
         for sent in sentences:
-            # Токенизируем каждое предложение
-            tokens = [t.text for t in tokenize(sent.text)]
 
+            # Токенизируем каждое предложение
+            tokens = list(tokenize(sent))
+
+            sent_tokens = []
             sent_lemmas = []
+
             for token in tokens:
 
-                if token == '/':
+                token_text = token.text
+                sent_tokens.append(token_text)
+
+                if token_text == '/':
                     sent_lemmas.append('_BRK_')
 
                 # Очищаем от пунктуации, но сохраняем наш токен
-                clean_token = re.sub(r'[^\w\s_]', '', token)
+                clean_token = re.sub(r'[^\w\s_]', '', token_text)
                 
                 if not clean_token:
                     continue
@@ -259,6 +268,7 @@ def process_poetry_corpus(raw_poetry_path, data_path):
                     sent_lemmas.append(p.normal_form)
             
             if sent_lemmas:
+                all_tokens_structured.append(sent_tokens)
                 all_lemmas_structured.append(sent_lemmas)
         
         row = metadata_df[metadata_df['filename'] == f]
@@ -274,7 +284,8 @@ def process_poetry_corpus(raw_poetry_path, data_path):
             'genre': text_metadata.get('genre'),
             'year_finished': text_metadata.get('year_finished'),
             'raw_text': text,
-            'formatted_text': separate_poem(text),
+            'formatted_sentences': sentences,
+            'tokens': all_tokens_structured,
             'lemmas': all_lemmas_structured
         })
 
@@ -307,6 +318,6 @@ def save_author_vocabulary(database_path):
     
     return vocab
 
-# if __name__ == '__main__':
-    # process_poetry_corpus(rf'corpus/poetry', 'data')
+if __name__ == '__main__':
+    process_poetry_corpus(rf'corpus/poetry', 'data')
     # save_author_vocabulary(rf'data/database.csv')
