@@ -47,12 +47,13 @@ mayak-digit/
 │   └── app.py              # Веб-интерфейс на Streamlit
 ├── src/
 │   ├── analyzer.py         # Ядро: расчет связей и работа с Navec
-│   ├── 
+│   ├── file_utils.py       # Вспомогательные функции для работы с файлами и путями
 │   └── text_utils.py       # Морфология и лемматизация
 ├── models/
 │   ├── navec_hudlit_...tar # Векторная модель Navec
 ├── data/
-│   └── processed_corpus.csv # База данных произведений
+│   ├── author_vocabulary.txt # Список всех уникальных слов в текстах автора 
+│   └── database.csv # База данных произведений
 └── README.md
 ```
 

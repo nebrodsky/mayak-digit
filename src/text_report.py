@@ -366,9 +366,9 @@ def get_all_words(author_vocab):
 
     return all_words_dict
 
-if __name__ == "__main__":
-    # main()
-    all_words_list = get_all_words(form_author_vocab('corpus'))
-    # get_most_common_words(' '.join(all_words_list['poetry']), n=25)
-    get_most_common_lemmas(' '.join(all_words_list['poetry']), n=200)
+# if __name__ == "__main__":
+#     # main()
+#     all_words_list = get_all_words(form_author_vocab('corpus'))
+#     # get_most_common_words(' '.join(all_words_list['poetry']), n=25)
+#     get_most_common_lemmas(' '.join(all_words_list['poetry']), n=200)
 

@@ -68,7 +68,7 @@ def get_occurrence_data(corpus_with_target, target_norm):
             if s_idx < len(sentences_raw):
                 raw_sentence = sentences_raw[s_idx].replace('_BRK_', ' / ').strip(' /–-—')
                 
-                # Подсветка через reversed tokens (как в твоем коде)
+                # Подсветка через reversed tokens
                 tokens = list(get_words(raw_sentence))
                 display_sentence = raw_sentence
                 
@@ -113,7 +113,7 @@ def get_window_neighbors(raw_data, target_norm, window_size, stopwords=None):
                         neighbor_pos[pos_name] += 1
     return neighbors, neighbor_pos
 
-# 3. Функция "Индекса Маяка" (всеобъемлющая связь)
+# 3. Функция "Индекса Маяка" (динамический индекс контекстуальной близости)
 def get_proximity_index_neighbors(text, target_norm, decay_distance, decay_brks, decay_sents, stopwords=None):
     """
     Для каждого вхождения таргета сканируем весь текст и считаем вес связи с каждой леммой, учитывая:
@@ -212,10 +212,8 @@ def get_unique_synonyms(target_word, top_n_to_return=20, search_depth=50):
     if target_word not in navec:
         return []
 
-    # 1. Получаем глубокий список (50 слов), чтобы было из чего выбирать после фильтрации
-    # Используем метод .sim(), который мы обсудили ранее
     raw_sims = []
-    for word in navec.vocab.words: # Ограничимся 100к самых частых для скорости
+    for word in navec.vocab.words:
         if not word.isalpha():
             continue
         score = navec.sim(target_word, word)
@@ -228,8 +226,8 @@ def get_unique_synonyms(target_word, top_n_to_return=20, search_depth=50):
     seen_lemmas = {target_word.lower()} # Сразу игнорируем само искомое слово
     
     for word, score in raw_sims:
-        # Лемматизируем кандидата (используй свой морфо-объект, тут пример с pymorphy)
-        # Если используешь Natasha, замени на свой вызов лемматизатора
+        # Лемматизируем кандидата
+
         lemma = morph.parse(word)[0].normal_form 
         
         if lemma not in seen_lemmas:

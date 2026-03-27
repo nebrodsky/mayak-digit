@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 load_dotenv()
 claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа к модели Claude от Anthropic 
 
-@st.cache_data # Чтобы не перегружать файл каждый раз
+@st.cache_data
 def load_data():
     return pd.read_csv('data/database.csv')
 
@@ -30,8 +30,8 @@ def prepare_full_corpus(df):
     full_corpus = []
     for _, row in df.iterrows():
         try:
-            # Парсим леммы один раз для всей сессии
-            sentences = ast.literal_eval(row['lemmas'])
+            
+            sentences = ast.literal_eval(row['lemmas']) # Парсим леммы один раз для всей сессии
 
             full_corpus.append({
                 'title': row['text_name'],
@@ -97,7 +97,7 @@ if search_word:
     ]
 
     results = full_word_analysis(
-        filtered_corpus=filtered_corpus, # Фильтруем корпус по году перед анализом
+        filtered_corpus=filtered_corpus,
         target_word=target_word, 
         window_size=window_size, 
         decay_distance=decay_distance, 
@@ -114,9 +114,9 @@ if search_word:
         total_occurrences = results['total_occurrences']
         contexts = results['contexts']
         year_dist = results['year_dist']
-        top_neighbors = results['window_neighbors'] # Для левой таблицы
+        top_neighbors = results['window_neighbors']
         pos_dist = results['pos_dist']
-        proximity_weights = results['proximity_weights'] # Для новой правой таблицы
+        proximity_weights = results['proximity_weights']
 
         # --- УРОВЕНЬ 1.1: Заголовок со словом ---
         st.markdown(f"## Анализ слова: `{search_word.lower()}`")
@@ -168,7 +168,7 @@ if search_word:
         tab_window, tab_index = st.tabs(["🔲 Классическое окно (Частота)", "🕸️ Индекс Маяка (Семантический вес)"])
         
         with tab_window:
-            # Твоя старая таблица (по частоте в окне)
+            
             n_df = pd.DataFrame(top_neighbors.most_common(10), columns=['Лемма', 'Частота'])
             n_df.index = range(1, len(n_df) + 1)
             st.table(n_df)
@@ -204,7 +204,7 @@ if search_word:
 
 # --- ТЕСТОВЫЙ БЛОК ДЛЯ ПРОВЕРКИ ПРОМПТА ---
 if st.button("🚀 Запустить интерпретацию через LLM"):
-    # Создаем пустой контейнер для статуса
+    
     status_text = st.empty()
     
     with st.spinner("Собираем статистику для промпта... Пожалуйста, подождите."):
@@ -213,11 +213,11 @@ if st.button("🚀 Запустить интерпретацию через LLM"
         status_text.text("📊 Рассчитываем семантическую близость синонимов...")
         syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
         
-        # Самый тяжелый — считаем "поля" для каждого синонима
+        # Считаем контекстуальные связи для каждого синонима
         status_text.text("🕸️ Анализирую гравитационные поля синонимов (это может занять время)...")
         neighbors_for_syns = proximity_neighbours_for_synonyms(
             synonyms_filtered, 
-            filtered_corpus, # Твой отфильтрованный по годам корпус
+            filtered_corpus,
             decay_distance, decay_brks, decay_sents, 
             stopwords=russian_stopwords
         )

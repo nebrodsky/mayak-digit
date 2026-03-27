@@ -147,10 +147,13 @@ def get_files_in_folder(folder_path, extension='.txt'):
 
 def get_text_metadata(filename, metadata_path):
     '''
-    Docstring для get_text_metadata
+    Получает метаданные текста из CSV-файла.
+    Args:
+        filename (str): Имя файла текста, для которого нужно получить метаданные (например, 'poem1.txt').
+        metadata_path (str): Путь к CSV-файлу с метаданными (например, 'metadata/text_metadata.csv').
     
-    :param filename: Описание
-    :param metadata_path: Описание
+    Returns:
+        dict: Словарь с метаданными (например, {'title': 'Название', 'year': 'Год', 'genre': 'Жанр'}). Если метаданные не найдены, возвращает словарь с "Unknown".
     '''
 
     if os.path.exists(metadata_path):
