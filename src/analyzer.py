@@ -4,7 +4,7 @@ import ast
 from collections import Counter
 from navec import Navec
 from src.file_utils import read_text_file
-from src.text_utils import morph, get_sentences, tokenizator
+from src.text_utils import morph, get_sentences, tokenizator, count_words
 
 
 path = os.path.join('models', 'navec_hudlit_v1_12B_500K_300d_100q.tar')
@@ -20,81 +20,123 @@ POS_MAP = {
 
 # --- ФУНКЦИИ ДЛЯ АНАЛИЗА СЛОВА ---
 
-def find_word_in_corpus(corpus, target_norm):
+def highlight_lemma_forms_in_text(raw_text, vocabulary_forms, case_insensitive=True):
     """
-    Ищет вхождения любого слова в уже подготовленном корпусе.
-    Возвращает структуру raw_data для Индекса Маяка.
+    Подсвечивает все встреченные словоформы целевой леммы в тексте.
+    Использует специальный маркер вместо звёздочек для совместимости со Streamlit.
+
+    Args:
+        raw_text: Исходный текст
+        vocabulary_forms: Список всех словоформ целевой леммы
+        case_insensitive: Игнорировать ли регистр при поиске
+
+    Returns:
+        Текст с маркированными формами (для последующей обработки в UI)
     """
-    corpus_with_target = []
+    if not vocabulary_forms:
+        return raw_text
 
-    for item in corpus:
-        text_positions = []
-        for s_idx, sentence in enumerate(item['lemmas']):
-            if target_norm in sentence:
-                indices = [i for i, l in enumerate([l for l in sentence if l != '_BRK_']) if l == target_norm]
-                text_positions.append((s_idx, indices))
-        
-        if text_positions:
-            corpus_with_target.append({
-                'title': item['title'],
-                'year_finished': item['year_finished'],
-                'raw_text': item['raw_text'],
-                'formatted_sentences': item['formatted_sentences'],
-                'lemmas': item['lemmas'], 
-                'positions': text_positions
-            })
+    # Сортируем по длине (длинные первыми) чтобы избежать partial matches
+    sorted_forms = sorted(set(vocabulary_forms), key=len, reverse=True)
+    result = raw_text
 
-    return corpus_with_target
+    for form in sorted_forms:
+        if case_insensitive:
+            # Case-insensitive search with word boundaries
+            pattern = r'\b' + re.escape(form) + r'\b'
+            # Используем специальный маркер для выделения
+            result = re.sub(pattern, f'<<<{form}>>>', result, flags=re.IGNORECASE)
+        else:
+            pattern = r'\b' + re.escape(form) + r'\b'
+            result = re.sub(pattern, f'<<<{form}>>>', result)
+
+    return result
+
 
 # 1. Функция контекста и общей статистики
-def get_occurrence_data(corpus_with_target, target_norm):
+def find_all_form_occurrences(text, forms):
     """
-    Возвращает: 
-    - contexts: список словарей для нижней таблицы
-    - year_dist: Counter для графика частотности
+    Находит все вхождения словоформ в тексте (case-insensitive).
+    Возвращает список кортежей (form, start_pos, end_pos, char_position)
+    в порядке появления в тексте.
+    """
+    occurrences = []
+    # Сортируем по длине (длинные первыми) чтобы избежать partial matches
+    sorted_forms = sorted(set(forms), key=len, reverse=True)
+
+    for form in sorted_forms:
+        pattern = r'\b' + re.escape(form) + r'\b'
+        for match in re.finditer(pattern, text, re.IGNORECASE):
+            occurrences.append((form, match.start(), match.end()))
+
+    # Сортируем по позиции в тексте
+    return sorted(occurrences, key=lambda x: x[1])
+
+
+def get_occurrence_data(filtered_corpus, target_norm, lemma_forms):
+    """
+    Ищет все вхождения словоформ целевой леммы в formatted_sentences.
+    Для каждого вхождения:
+    - Выводит предложение целиком как контекст
+    - Если < 3 слов, добавляет самое короткое соседнее предложение
+    - Подсвечивает все найденные формы
+    - Считает вхождения по годам
+
+    Возвращает:
+    - total_occurrences: total count
+    - contexts: список словарей для таблицы
+    - year_dist: Counter по годам
     """
     contexts = []
     year_dist = Counter()
     total_occurrences = 0
 
-    for item in corpus_with_target:
-        # Считаем вхождения для графика
-        num_in_text = sum(len(indices) for s_idx, indices in item['positions'])
-        total_occurrences += num_in_text
-        year_dist[item['year_finished']] += num_in_text
+    target_forms = lemma_forms.get(target_norm, [])
 
-        sentences_raw = get_sentences(str(item['raw_text']))
+    if not target_forms:
+        print(f"⚠️  Словоформы для '{target_norm}' не найдены в словаре")
+        return 0, [], year_dist
 
-        for s_idx, indicies in item['positions']:
-            if s_idx < len(sentences_raw):
-                raw_sentence = sentences_raw[s_idx].replace('\n', ' / ').strip(' /–-—')
-                
-                # Проверка: содержит ли предложение целевое слово
-                has_target = False
+    for item in filtered_corpus:
+        sentences = item['formatted_sentences']
 
-                tokens = list(tokenizator(raw_sentence))
-                for token in tokens:
-                    if any(c.isalpha() for c in token.text):
-                        p = morph.parse(token.text.lower())[0]
-                        if p.normal_form == target_norm:
-                            has_target = True
-                            break
-                
-                if not has_target:
-                    continue  # Пропускаем предложение, если оно не содержит целевое слово
-                
-                # Подсветка через reversed tokens
-                display_sentence = raw_sentence
-                
-                for token in reversed(tokens):
-                    if any(c.isalpha() for c in token.text):
-                        p = morph.parse(token.text.lower())[0]
-                        if p.normal_form == target_norm:
-                            start, end = token.start, token.stop
-                            display_sentence = display_sentence[:start] + f"**{token.text.upper()}**" + display_sentence[end:]
-                
+        # Для каждого предложения ищем вхождения
+        for sent_idx, sentence in enumerate(sentences):
+            occurrences = find_all_form_occurrences(sentence, target_forms)
+
+            if not occurrences:
+                continue
+
+            # Есть вхождения — добавляем контекст
+            # Если предложение < 3 слов, пытаемся добавить самое короткое соседнее
+            context_sentence = sentence.strip(' / —–-')
+
+            if count_words(context_sentence, remove_punct=False) < 3:
+                neighbor_sentences = []
+
+                if sent_idx > 0:
+                    prev_sentence = sentences[sent_idx - 1].strip().strip(' / —–-')
+                    neighbor_sentences.append((prev_sentence, count_words(prev_sentence, remove_punct=False)))
+
+                if sent_idx < len(sentences) - 1:
+                    next_sentence = sentences[sent_idx + 1].strip().strip(' / —–-')
+                    neighbor_sentences.append((next_sentence, count_words(next_sentence, remove_punct=False)))
+
+                if neighbor_sentences:
+                    # Берём самое короткое из соседних
+                    shortest_neighbor = min(neighbor_sentences, key=lambda x: x[1])[0]
+                    context_sentence = f"{context_sentence} {shortest_neighbor}".strip(' / —–-')
+
+            # Подсвечиваем все словоформы в контексте
+            display_context = highlight_lemma_forms_in_text(context_sentence, target_forms)
+
+            # Для каждого вхождения в этом предложении добавляем отдельную строку
+            for form, _, _ in occurrences:
+                total_occurrences += 1
+                year_dist[item['year_finished']] += 1
+
                 contexts.append({
-                    "Контекст": display_sentence,
+                    "Контекст": display_context,
                     "Произведение": item['title'],
                     "Год": item['year_finished']
                 })
@@ -104,31 +146,40 @@ def get_occurrence_data(corpus_with_target, target_norm):
 # 2. Функция классического окна (без индексов)
 def get_window_neighbors(raw_data, target_norm, window_size, stopwords=None):
     """
-    Считает соседей в жестком окне и их части речи.
+    Считает соседей в жестком окне и их части речи, используя lemmas_cleaned.
+    Находит позиции целевого слова в lemmas_cleaned.
     """
     neighbors = Counter()
     neighbor_pos = Counter()
 
     for text in raw_data:
-        sentences = text['lemmas']
-        for s_idx, t_indices in text['positions']:
-            lemmas = sentences[s_idx]
-            for t_idx in t_indices:
-                start = max(0, t_idx - window_size)
-                end = min(len(lemmas), t_idx + window_size + 1)
-                
-                for j in range(start, end):
-                    if j == t_idx: continue
-                    lemma = lemmas[j]
-                    if lemma != '_BRK_' and lemma not in (stopwords or []) and lemma[0].isalpha():
-                        neighbors[lemma] += 1
-                        p = morph.parse(lemma)[0]
-                        pos_name = POS_MAP.get(p.tag.POS, 'Другое')
-                        neighbor_pos[pos_name] += 1
+        # Формируем плоское представление lemmas_cleaned
+        flat_lemmas = []
+        for sent_lemmas in text['lemmas_cleaned']:
+            flat_lemmas.extend(sent_lemmas)
+
+        # Находим все позиции целевого слова
+        target_positions = [idx for idx, lemma in enumerate(flat_lemmas) if lemma == target_norm]
+
+        # Для каждого вхождения берём соседей в окне
+        for t_idx in target_positions:
+            start = max(0, t_idx - window_size)
+            end = min(len(flat_lemmas), t_idx + window_size + 1)
+
+            for j in range(start, end):
+                if j == t_idx:
+                    continue
+                lemma = flat_lemmas[j]
+                if lemma and lemma[0].isalpha() and lemma not in (stopwords or []):
+                    neighbors[lemma] += 1
+                    p = morph.parse(lemma)[0]
+                    pos_name = POS_MAP.get(p.tag.POS, 'Другое')
+                    neighbor_pos[pos_name] += 1
+
     return neighbors, neighbor_pos
 
 # 3. Функция "Индекса Маяка" (динамический индекс контекстуальной близости)
-def get_proximity_index_neighbors(text, target_norm, decay_distance, decay_brks, decay_sents, stopwords=None):
+def get_proximity_index_neighbors(filtered_corpus, target_norm, decay_distance, decay_brks, decay_sents, stopwords=None):
     """
     Для каждого вхождения таргета сканируем весь текст и считаем вес связи с каждой леммой, учитывая:
 - Дистанцию в словах (чем дальше, тем слабее связь)
@@ -137,74 +188,70 @@ def get_proximity_index_neighbors(text, target_norm, decay_distance, decay_brks,
 - Фильтрация по стоп-словам и не-буквенным токенам (типа _BRK_, которые мы обрабатываем отдельно)  
     """
     weights = Counter()
-    
-    for item in text:
-        # 1. Формируем "плоское" представление всего произведения
-        flat_lemmas = []
-        sent_boundaries = []  # Индексы, где заканчиваются предложения
-        
+
+    for item in filtered_corpus:
+        # 1. Формируем "плоское" представление из lemmas_cleaned (без _BRK_)
+        flat_lemmas_clean = []
+        flat_lemmas_orig = []  # Для подсчета _BRK_
+        sent_boundaries = []
+
         curr_idx = 0
-        for sent in item['lemmas']:
-            flat_lemmas.extend(sent)
-            curr_idx += len(sent)
+        for sent_clean, sent_orig in zip(item['lemmas_cleaned'], item['lemmas']):
+            flat_lemmas_clean.extend(sent_clean)
+            flat_lemmas_orig.extend(sent_orig)
+            curr_idx += len(sent_clean)
             sent_boundaries.append(curr_idx)
-            
-        # 2. Находим все позиции целевого слова (индексы в плоском списке)
-        target_positions = [idx for idx, lemma in enumerate(flat_lemmas) if lemma == target_norm]
-        
+
+        # 2. Находим все позиции целевого слова в clean версии
+        target_positions = [idx for idx, lemma in enumerate(flat_lemmas_clean) if lemma == target_norm]
+
         # 3. Для каждого вхождения таргета сканируем весь текст
         for t_idx in target_positions:
-            for s_idx, lemma in enumerate(flat_lemmas):
-                
-                # Пропускаем только строго ту же самую позицию (само себя)
-                # и не-буквенные токены (типа _BRK_, которые мы обработаем отдельно)
+            for s_idx, lemma in enumerate(flat_lemmas_clean):
+
                 if s_idx == t_idx or not lemma.isalpha():
                     continue
-                
-                # Проверка на стоп-слова
+
                 if stopwords and lemma in stopwords:
                     continue
-                
-                # --- МАТЕМАТИКА ДИСТАНЦИИ ---
-                # Физическое расстояние в словах
+
+                # Расстояние в словах (в clean версии - без _BRK_)
                 d = abs(s_idx - t_idx)
-                
-                # Определяем границы фрагмента между словами для поиска преград
+
                 start, end = min(t_idx, s_idx), max(t_idx, s_idx)
-                fragment = flat_lemmas[start:end]
-                
-                # --- СЧЕТЧИК ПРЕГРАД ---
-                # 1. Сколько разрывов строк (_BRK_) встретилось на пути
-                n_brks = fragment.count('_BRK_')
-                
-                # 2. Сколько границ предложений (точек) мы пересекли
+
+                # Сколько разрывов строк (_BRK_) встретилось в оригинальной версии
+                fragment_orig = flat_lemmas_orig[start:end]
+                n_brks = fragment_orig.count('_BRK_')
+
+                # Сколько границ предложений пересекли
                 n_sents = len([b for b in sent_boundaries if start < b <= end])
                 
                 # --- ИТОГОВЫЙ ВЕС СВЯЗИ ---
                 # Перемножаем затухания: Дистанция * Разрывы * Предложения
                 weight = (decay_distance ** d) * (decay_brks ** n_brks) * (decay_sents ** n_sents)
-                
-                # Накапливаем вес для этой леммы
                 weights[lemma] += weight
-                
+
     return weights
 
 # 4. Главная координирующая функция
-def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None):
-    
-    # Шаг 1: Находим все вхождения слова и контексты
-    corpus_with_target = find_word_in_corpus(filtered_corpus, target_word)
-    total_occurrences, contexts, year_dist = get_occurrence_data(corpus_with_target, target_word)
-    
-    if not filtered_corpus:
-        return None  # Если в корпусе нет данных, возвращаем None или пустой результат
-    
+def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None, lemma_forms=None):
+
+    if lemma_forms is None:
+        lemma_forms = {}
+
+    # Шаг 1: Находим все вхождения слова в formatted_sentences и собираем контексты
+    total_occurrences, contexts, year_dist = get_occurrence_data(filtered_corpus, target_word, lemma_forms)
+
+    if not filtered_corpus or not contexts:
+        return None  # Если в корпусе нет данных, возвращаем None
+
     # Шаг 2: Классическое окно контекстов
-    window_neighbors, pos_dist = get_window_neighbors(corpus_with_target, target_word, window_size, stopwords)
-    
+    window_neighbors, pos_dist = get_window_neighbors(filtered_corpus, target_word, window_size, stopwords)
+
     # Шаг 3: Динамический индекс для всех слов в тексте
-    proximity_weights = get_proximity_index_neighbors(corpus_with_target, target_word, decay_distance, decay_brks, decay_sents, stopwords)
-    
+    proximity_weights = get_proximity_index_neighbors(filtered_corpus, target_word, decay_distance, decay_brks, decay_sents, stopwords)
+
     return {
         'total_occurrences': total_occurrences,
         'contexts': contexts,
