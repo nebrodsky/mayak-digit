@@ -96,7 +96,10 @@ def tokenizator(text, remove_punct=False):
 
     tokens = list(tokenize(text))
 
-    clean_text = clean_punctuation(text) if remove_punct else text
+    if remove_punct:
+        clean_text = clean_punctuation(text)
+    else:
+        clean_text = text
 
     return tokens
 

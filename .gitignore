@@ -16,3 +16,7 @@ app/app_pretests/
 
 # secrets
 .env
+
+# technical file for text report generation
+# used for debugging and testing, but not needed in the repo
+src/text_report.py

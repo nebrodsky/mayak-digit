@@ -11,7 +11,7 @@ import ollama # Для взаимодействия с локальной Ollama
 import anthropic # Для взаимодействия с API Claude от Anthropic
 import streamlit as st
 import pandas as pd
-from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms
+from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, prepare_proximity_graph_data
 from src.text_utils import morph, russian_stopwords
 from dotenv import load_dotenv
 
@@ -114,6 +114,146 @@ def display_contexts_table_highlighted(contexts):
         markdown_table += f"| {i} | {formatted_text} | {title_escaped} | {ctx['Год']} |\n"
 
     st.markdown(markdown_table)
+
+# def display_proximity_graph(target_word, proximity_weights, top_n=15):
+#     """
+#     Отображает интерактивный граф семантических связей слова.
+#     Узлы = целевое слово + соседи
+#     Рёбра = веса из dynamdynamic proximity index
+#     """
+#     # Импортируем здесь, чтобы они загружались только при необходимости
+#     import plotly.graph_objects as go
+#     import networkx as nx
+
+#     # Подготавливаем данные для графа
+#     graph_data = prepare_proximity_graph_data(target_word, proximity_weights, top_n=top_n)
+
+#     if not graph_data['nodes']:
+#         st.warning("Нет данных для построения графа")
+#         return
+
+#     # Создаём NetworkX граф
+#     G = nx.Graph()
+
+#     # Добавляем узлы
+#     for node in graph_data['nodes']:
+#         G.add_node(node['id'],
+#                    label=node['label'],
+#                    size=node['size'],
+#                    color=node['color'],
+#                    title=node['title'])
+
+#     # Добавляем рёбра
+#     for edge in graph_data['edges']:
+#         G.add_edge(edge['source'], edge['target'],
+#                    weight=edge['weight'],
+#                    normalized=edge['normalized'])
+
+#     # Вычисляем позиции узлов с использованием spring layout
+#     pos = nx.spring_layout(G, k=2, iterations=50, seed=42)
+
+#     # Создаём Plotly граф
+#     edge_x = []
+#     edge_y = []
+#     edge_text = []
+#     edge_width = []
+
+#     for edge in G.edges(data=True):
+#         x0, y0 = pos[edge[0]]
+#         x1, y1 = pos[edge[1]]
+#         edge_x.extend([x0, x1, None])
+#         edge_y.extend([y0, y1, None])
+#         weight = edge[2].get('weight', 1)
+#         edge_text.append(f"Вес: {weight:.2f}")
+#         # Толщина линии зависит от веса
+#         normalized = edge[2].get('normalized', 0.5)
+#         edge_width.append(1 + normalized * 3)
+
+#     # Используем среднюю ширину для всех линий
+#     avg_width = sum(edge_width) / len(edge_width) if edge_width else 2
+
+#     edge_trace = go.Scatter(
+#         x=edge_x, y=edge_y,
+#         mode='lines',
+#         line=dict(width=avg_width, color='#888'),
+#         hoverinfo='none',
+#         showlegend=False
+#     )
+
+#     # Узлы
+#     node_x = []
+#     node_y = []
+#     node_text = []
+#     node_size = []
+#     node_color = []
+
+#     for node in G.nodes(data=True):
+#         x, y = pos[node[0]]
+#         node_x.append(x)
+#         node_y.append(y)
+#         node_text.append(node[1].get('title', node[0]))
+#         node_size.append(node[1].get('size', 20))
+#         node_color.append(node[1].get('color', '#4ECDC4'))
+
+#     node_trace = go.Scatter(
+#         x=node_x, y=node_y,
+#         mode='markers+text',
+#         hoverinfo='text',
+#         hovertext=node_text,
+#         text=[node[1].get('label', node[0]) for node in G.nodes(data=True)],
+#         textposition="top center",
+#         textfont=dict(size=10),
+#         showlegend=False,
+#         marker=dict(
+#             size=node_size,
+#             color=node_color,
+#             line=dict(width=2, color='white'),
+#             opacity=0.9
+#         )
+#     )
+
+#     # Создаём figure
+#     fig = go.Figure(data=[edge_trace, node_trace],
+#                     layout=go.Layout(
+#                         title=f'Семантические связи слова "{target_word.upper()}"<br><sub>Узлы = слова, Рёбра = вес связи из Индекса Маяка</sub>',
+#                         titlefont=dict(size=16),
+#                         showlegend=False,
+#                         hovermode='closest',
+#                         margin=dict(b=20, l=5, r=5, t=40),
+#                         annotations=[
+#                             dict(
+#                                 text="💡 Красный узел — целевое слово. Размер бирюзовых узлов — вес связи.",
+#                                 showarrow=False,
+#                                 xref="paper", yref="paper",
+#                                 x=0.0, y=-0.1,
+#                                 xanchor='left', yanchor='top',
+#                                 font=dict(size=11, color='#666')
+#                             )
+#                         ],
+#                         xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+#                         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+#                         plot_bgcolor='#f8f9fa',
+#                         height=600,
+#                         width=None
+#                     ))
+
+#     st.plotly_chart(fig, use_container_width=True)
+
+#     # Легенда и описание
+#     with st.expander("📊 Как читать этот граф?"):
+#         st.markdown("""
+#         - **Красный узел** — целевое слово (в центре)
+#         - **Бирюзовые узлы** — соседние слова (контекстные соседи)
+#         - **Размер узла** — сила связи (больше = сильнее)
+#         - **Толщина линии** — вес связи из Индекса Маяка
+#         - **Расстояние** — взаимная близость (ближе друг к другу = сильнее связаны)
+
+#         Граф рассчитан на основе **динамического индекса контекстуальной близости**,
+#         который учитывает:
+#         - Расстояние в словах
+#         - Границы предложений
+#         - Разрывы строк (_BRK_) в поэзии
+#         """)
 
 # --- Интерфейс Streamlit ---
 st.set_page_config(page_title="Mayak-2D Prototype", layout="wide")
@@ -237,10 +377,10 @@ if search_word:
 
         # --- УРОВЕНЬ 3: Сравнение методов (на всю ширину) ---
         st.subheader("Семантические связи")
-        
+
         # Создаем вкладки, чтобы не загромождать экран
-        tab_window, tab_index = st.tabs(["🔲 Классическое окно (Частота)", "🕸️ Индекс Маяка (Семантический вес)"])
-        
+        tab_window, tab_index, tab_graph = st.tabs(["🔲 Классическое окно (Частота)", "🕸️ Индекс Маяка (Таблица)", "📊 Интерактивный граф"])
+
         with tab_window:
             
             n_df = pd.DataFrame(top_neighbors.most_common(10), columns=['Лемма', 'Частота'])
@@ -266,6 +406,23 @@ if search_word:
                     width='stretch'
                 )
 
+        # with tab_graph:
+        #     st.markdown("### 📊 Интерактивный граф семантических связей")
+        #     st.markdown("""
+        #     Каждый узел представляет слово, цвет и размер узла показывают важность связи.
+        #     Наведите мышь на узлы и линии для просмотра подробностей.
+        #     """)
+
+        #     if len(proximity_weights) > 0:
+        #         # Слайдер для выбора количества соседей
+        #         top_n = st.slider(
+        #             "Количество соседей для отображения:",
+        #             min_value=5, max_value=50, value=15, step=5
+        #         )
+        #         display_proximity_graph(target_word, proximity_weights, top_n=top_n)
+        #     else:
+        #         st.info("Нет данных для построения графа")
+
         # Таблица контекстов
         st.write("### Контексты употребления")
 
@@ -284,83 +441,84 @@ if search_word:
                 display_contexts_table_highlighted(contexts)
 
 # --- ТЕСТОВЫЙ БЛОК ДЛЯ ПРОВЕРКИ ПРОМПТА ---
-if st.button("🚀 Запустить интерпретацию через LLM"):
-    
-    status_text = st.empty()
-    
-    with st.spinner("Собираем статистику для промпта... Пожалуйста, подождите."):
+if results:
+    if st.button("🚀 Запустить интерпретацию через LLM"):
         
-        # Считаем близость синонимов к таргету в этом периоде
-        status_text.text("📊 Рассчитываем семантическую близость синонимов...")
-        syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
+        status_text = st.empty()
         
-        # Считаем контекстуальные связи для каждого синонима
-        status_text.text("🕸️ Анализирую гравитационные поля синонимов (это может занять время)...")
-        neighbors_for_syns = proximity_neighbours_for_synonyms(
-            synonyms_filtered, 
-            filtered_corpus,
-            decay_distance, decay_brks, decay_sents, 
-            stopwords=russian_stopwords
-        )
+        with st.spinner("Собираем статистику для промпта... Пожалуйста, подождите."):
+            
+            # Считаем близость синонимов к таргету в этом периоде
+            status_text.text("📊 Рассчитываем семантическую близость синонимов...")
+            syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
+            
+            # Считаем контекстуальные связи для каждого синонима
+            status_text.text("🕸️ Анализирую гравитационные поля синонимов (это может занять время)...")
+            neighbors_for_syns = proximity_neighbours_for_synonyms(
+                synonyms_filtered, 
+                filtered_corpus,
+                decay_distance, decay_brks, decay_sents, 
+                stopwords=russian_stopwords
+            )
 
-        # Сборка промпта
-        status_text.text("✍️ Формирую аналитическое досье для ИИ...")
-        interpr_prompt = prepare_llm_prompt(
-            target_word=target_word,
-            synonyms=synonyms,
-            synonyms_filtered=synonyms_filtered,
-            syn_proximity=syn_prox_index,
-            neighbors_for_synonyms=neighbors_for_syns
-        )
+            # Сборка промпта
+            status_text.text("✍️ Формирую аналитическое досье для ИИ...")
+            interpr_prompt = prepare_llm_prompt(
+                target_word=target_word,
+                synonyms=synonyms,
+                synonyms_filtered=synonyms_filtered,
+                syn_proximity=syn_prox_index,
+                neighbors_for_synonyms=neighbors_for_syns
+            )
+            
+            # Убираем временный текст статуса перед выводом результата
+            status_text.empty()
+
+        # Наглядный вывод промпта для проверки
+        st.subheader("Сгенерированный промпт для ИИ:")
+        st.code(interpr_prompt, language="text")
         
-        # Убираем временный текст статуса перед выводом результата
-        status_text.empty()
+        st.divider()
+        st.subheader("📝 Филологический комментарий от LLM:")
 
-    # Наглядный вывод промпта для проверки
-    st.subheader("Сгенерированный промпт для ИИ:")
-    st.code(interpr_prompt, language="text")
-      
-    st.divider()
-    st.subheader("📝 Филологический комментарий от LLM:")
+        # --- ЛОГИКА ВЫБОРА МОДЕЛИ ---
 
-    # --- ЛОГИКА ВЫБОРА МОДЕЛИ ---
+        if model_source == "Локальная (Ollama)":
+            response_container = st.empty()
+            full_response = ""
 
-    if model_source == "Локальная (Ollama)":
-        response_container = st.empty()
-        full_response = ""
+            try:
+                stream = ollama.generate(model='llama3:8b', prompt=interpr_prompt, stream=True)
+                for chunk in stream:
+                    full_response += chunk['response']
+                    response_container.markdown(full_response + "▌")
+                response_container.markdown(full_response)
 
-        try:
-            stream = ollama.generate(model='llama3:8b', prompt=interpr_prompt, stream=True)
-            for chunk in stream:
-                full_response += chunk['response']
-                response_container.markdown(full_response + "▌")
-            response_container.markdown(full_response)
+            except Exception as e:
+                st.error(f"Ошибка при обращении к Ollama: {e}")
+                st.info("Убедитесь, что приложение Ollama запущено и модель llama3:8b скачана.")
 
-        except Exception as e:
-            st.error(f"Ошибка при обращении к Ollama: {e}")
-            st.info("Убедитесь, что приложение Ollama запущено и модель llama3:8b скачана.")
+        elif model_source == "API (Claude 3.5 Sonnet)":
+            if not claude_key:
+                st.error("Ключ Anthropic не найден в .env!")
+            else:
+                client = anthropic.Anthropic(api_key=claude_key)
 
-    elif model_source == "API (Claude 3.5 Sonnet)":
-        if not claude_key:
-            st.error("Ключ Anthropic не найден в .env!")
-        else:
-            client = anthropic.Anthropic(api_key=claude_key)
+                with st.spinner("Claude анализирует семантические поля..."):
 
-            with st.spinner("Claude анализирует семантические поля..."):
+                    try:
 
-                try:
+                        message = client.messages.create(
+                            model="claude-sonnet-4-6",
+                            max_tokens=1024,
+                            system="Ты — эксперт-филолог, специализирующийся на творчестве В. В. Маяковского. Ты работаешь над составлением цифрового словаря авторского языка",
+                            messages=[
+                                {
+                                    "role": "user",
+                                    "content": interpr_prompt}]
+                        )
+                        st.markdown(message.content[0].text)
 
-                    message = client.messages.create(
-                        model="claude-sonnet-4-6",
-                        max_tokens=1024,
-                        system="Ты — эксперт-филолог, специализирующийся на творчестве В. В. Маяковского. Ты рыботаешь над составлением цифрового словаря авторского языка",
-                        messages=[
-                            {
-                                "role": "user",
-                                "content": interpr_prompt}]
-                    )
-                    st.markdown(message.content[0].text)
-
-                except Exception as e:
-                    st.error(f"Ошибка API Claude: {e}")
-                    st.info("Убедитесь, что ключ Anthropic корректно настроен.")
+                    except Exception as e:
+                        st.error(f"Ошибка API Claude: {e}")
+                        st.info("Убедитесь, что ключ Anthropic корректно настроен.")

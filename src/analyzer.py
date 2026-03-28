@@ -363,8 +363,7 @@ def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, 
     
     neighbors_for_synonyms_str = "\n".join(syn_blocks)
  
-    for syn, prox in syn_proximity.items():
-        synonyms_str = ", ".join([f"{syn} ({prox:.4f})" for syn, prox in syn_proximity.items()])
+    synonyms_str = ", ".join([f"{syn} ({prox:.4f})" for syn, prox in syn_proximity.items()])
 
     # Сборка финального текста
     prompt = f"""
@@ -393,3 +392,82 @@ def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, 
     Напиши аналитическое заключение. Будь конкретен, опирайся на предоставленные веса и леммы. Язык должен быть понятен как специалисту, так и заинтересованным читателям, не погруженным в контекст.
     """
     return prompt
+
+
+# --- ФУНКЦИИ ДЛЯ ВИЗУАЛИЗАЦИИ ГРАФА СЕМАНТИЧЕСКИХ СВЯЗЕЙ ---
+
+def prepare_proximity_graph_data(target_word, proximity_weights, top_n=15):
+    """
+    Подготавливает данные для визуализации графа семантических связей.
+
+    Args:
+        target_word: целевое слово (центральный узел)
+        proximity_weights: Counter с весами связей {сосед: вес}
+        top_n: количество соседей для отображения
+
+    Returns:
+        dict с данными для networkx графа:
+        {
+            'nodes': [{'id': word, 'label': word, 'size': weight_normalized}, ...],
+            'edges': [{'source': target, 'target': neighbor, 'weight': w}, ...],
+            'max_weight': max_weight_value
+        }
+    """
+
+    if not proximity_weights:
+        return {'nodes': [], 'edges': [], 'max_weight': 0}
+
+    # Берём топ-N соседей
+    top_neighbors = proximity_weights.most_common(top_n)
+
+    if not top_neighbors:
+        return {'nodes': [], 'edges': [], 'max_weight': 0}
+
+    # Находим макс вес для нормализации размера узлов
+    max_weight = max(w for _, w in top_neighbors) if top_neighbors else 1
+    min_weight = min(w for _, w in top_neighbors) if top_neighbors else 1
+
+    # Создаём узлы
+    nodes = []
+
+    # Центральный узел (целевое слово)
+    nodes.append({
+        'id': target_word,
+        'label': target_word.upper(),
+        'size': 50,
+        'color': '#FF6B6B',  # Красный для целевого слова
+        'title': f'{target_word} (целевое слово)'
+    })
+
+    # Соседи
+    for neighbor, weight in top_neighbors:
+        normalized_weight = (weight - min_weight) / (max_weight - min_weight) if max_weight > min_weight else 0.5
+        size = 20 + normalized_weight * 30  # Размер от 20 до 50
+
+        nodes.append({
+            'id': neighbor,
+            'label': neighbor,
+            'size': size,
+            'color': '#4ECDC4',  # Бирюзовый для соседей
+            'title': f'{neighbor} (вес: {weight:.2f})'
+        })
+
+    # Создаём рёбра (связи)
+    edges = []
+    for neighbor, weight in top_neighbors:
+        normalized_weight = (weight - min_weight) / (max_weight - min_weight) if max_weight > min_weight else 0.5
+
+        edges.append({
+            'source': target_word,
+            'target': neighbor,
+            'weight': weight,
+            'normalized': normalized_weight,
+            'title': f'{weight:.2f}'
+        })
+
+    return {
+        'nodes': nodes,
+        'edges': edges,
+        'max_weight': max_weight,
+        'min_weight': min_weight
+    }
