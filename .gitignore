@@ -9,6 +9,7 @@ models/
 .DS_Store
 
 # raw corpora
+# will be published separately later
 corpus/
 
 # unpublic tests of the app
@@ -17,6 +18,6 @@ app/app_pretests/
 # secrets
 .env
 
-# technical file for text report generation
+# technical files which are not used in current project
 # used for debugging and testing, but not needed in the repo
-src/text_report.py
+archive/
