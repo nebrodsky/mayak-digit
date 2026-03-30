@@ -9,6 +9,8 @@ import ast
 import json
 import ollama # Для взаимодействия с локальной Ollama
 import anthropic # Для взаимодействия с API Claude от Anthropic
+from google import genai
+from google.genai import types # Для взаимодействия с Google AI (Gemini)
 import streamlit as st
 import pandas as pd
 from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, navec
@@ -18,7 +20,8 @@ from dotenv import load_dotenv
 # --------------------------------------------------------------
 
 load_dotenv()
-claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа к модели Claude от Anthropic 
+claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа к модели Claude от Anthropic
+google_ai_key = os.getenv("GOOGLE_API_KEY") # API-ключ для доступа к Google AI
 
 @st.cache_data
 def load_data():
@@ -144,7 +147,7 @@ year_range = st.sidebar.slider(
 with st.sidebar.expander("🤖 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
-    ["Локальная (Ollama)", "API (Claude 3.5 Sonnet)"],
+    ["Локальная (Ollama)", "API (Claude 3.5 Sonnet)", "GOOGLE AI"],
     help="Claude требует ключ в .env и интернет. Ollama работает локально."
     )
 
@@ -381,3 +384,21 @@ if results:
                     except Exception as e:
                         st.error(f"Ошибка API Claude: {e}")
                         st.info("Убедитесь, что ключ Anthropic корректно настроен.")
+        
+        elif model_source == 'GOOGLE AI':
+            if not google_ai_key:
+                st.error("Ключ Google AI не найден в .env!")
+            else:
+                client = genai.Client()
+            try:
+                response = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    config=types.GenerateContentConfig(
+                        system_instruction="Ты — эксперт-филолог по творчеству Маяковского. Ты работаешь над составлением цифрового словаря авторского языка"),
+                    contents=interpr_prompt
+                )
+                st.markdown(response.text)
+
+            except Exception as e:
+                st.error(f"Ошибка API Google AI: {e}")
+                st.info("Убедитесь, что ключ Google AI корректно настроен.")
