@@ -397,5 +397,5 @@ def build_lemma_forms_mapping(database_path):
     return lemma_forms_serializable
 
 if __name__ == '__main__':
-    process_poetry_corpus(rf'corpus/poetry', 'data', rewrite=True)
-    # save_author_vocabulary(rf'data/database.csv')
+    # process_poetry_corpus(rf'corpus/poetry', 'data', rewrite=True)
+    save_author_vocabulary(rf'data/database.csv')

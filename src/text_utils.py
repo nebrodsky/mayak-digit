@@ -212,7 +212,7 @@ def lemmatize_with_mystem(sentence):
                     part_info = part_result[0]
                     lemma_parts.append(part_info['lex'])
                 lemma = '-'.join(lemma_parts)
-                pos = 'DEFIX'
+                pos = 'HYPHCOMP'
             else:
                 lemma = token_text
                 pos = 'UNK'
