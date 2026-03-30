@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 venv/
-models/
+models/archive/
 
 # macOS system files
 .DS_Store
