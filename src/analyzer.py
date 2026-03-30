@@ -6,16 +6,17 @@ from navec import Navec
 from src.file_utils import read_text_file
 from src.text_utils import morph, get_sentences, tokenizator, count_words
 
-
 path = os.path.join('models', 'navec_hudlit_v1_12B_500K_300d_100q.tar')
 navec = Navec.load(path)
 
-POS_MAP = {
-    'NOUN': 'Существительное', 'VERB': 'Глагол', 'ADJF': 'Прилагательное',
-    'ADJS': 'Краткое прил.', 'COMP': 'Компаратив', 'INFN': 'Инфинитив',
-    'PRTF': 'Причастие', 'PRTS': 'Краткое прич.', 'GRND': 'Деепричастие',
-    'NUMR': 'Числительное', 'ADVB': 'Наречие', 'NPRO': 'Местоимение',
-    'PRED': 'Предикатив', 'PREP': 'Предлог', 'CONJ': 'Союз', 'PRCL': 'Частица'
+POS_MYSTEM = {
+    'A': 'Прилагательное', 'ADV': 'Наречие', 'ADVPRO': 'Местоименное наречие',
+    'ANUM': 'Числительное-прилагательное', 'APRO': 'Местоимение-прилагательное',
+    'COM': 'Часть композита - сложного слова', 'CONJ': 'Союз', 'INTJ': 'Междометие',
+    'NUM': 'Числительное', 'PART': 'Частица', 'PR': 'Предлог', 'S': 'Существительное',
+    'SPRO': 'Местоимение-существительное', 'V': 'Глагол',
+    #КАСТОМНЫЕ ТЕГИ
+    'HYPHCOMP': 'Сложносоставные слова', 'UNK': 'Неизвестно'
 }
 
 # --- ФУНКЦИИ ДЛЯ АНАЛИЗА СЛОВА ---
@@ -146,89 +147,157 @@ def get_occurrence_data(filtered_corpus, target_norm, lemma_forms):
 # 2. Функция классического окна (без индексов)
 def get_window_neighbors(raw_data, target_norm, window_size, stopwords=None):
     """
-    Считает соседей в жестком окне и их части речи, используя lemmas_cleaned.
-    Находит позиции целевого слова в lemmas_cleaned.
+    Считает соседей в жестком окне и их части речи, используя lemmas_pos_tagged.
+    Находит позиции целевого слова в lemmas_pos_tagged.
+    Парсит lemmas_pos_tagged в формате "lemma/POS" и используюет POS-теги от MyStem.
+
+    Возвращает два варианта:
+    - Без стопслов: neighbors, neighbor_pos
+    - Со стопсловами: neighbors_w_stwords, neighbors_pos_stwords
     """
     neighbors = Counter()
     neighbor_pos = Counter()
+    neighbors_w_stwords = Counter()
+    neighbors_pos_stwords = Counter()
 
     for text in raw_data:
-        # Формируем плоское представление lemmas_cleaned
+        # Формируем плоское представление из lemmas_pos_tagged
+        flat_lemmas_pos = []
+        for sent_lemmas_pos in text['lemmas_pos_tagged']:
+            flat_lemmas_pos.extend(sent_lemmas_pos)
+
+        # Парсим каждый элемент "lemma/POS" и отделяем леммы и POS-теги
         flat_lemmas = []
-        for sent_lemmas in text['lemmas_cleaned']:
-            flat_lemmas.extend(sent_lemmas)
+        flat_pos_tags = []
+        for lemma_pos_pair in flat_lemmas_pos:
+            if '/' in lemma_pos_pair:
+                lemma, pos_tag = lemma_pos_pair.rsplit('/', 1)
+                flat_lemmas.append(lemma)
+                flat_pos_tags.append(pos_tag)
+            else:
+                flat_lemmas.append(lemma_pos_pair)
+                flat_pos_tags.append('UNK')
 
         # Находим все позиции целевого слова
         target_positions = [idx for idx, lemma in enumerate(flat_lemmas) if lemma == target_norm]
 
         # Для каждого вхождения берём соседей в окне
-        for t_idx in target_positions:
-            start = max(0, t_idx - window_size)
-            end = min(len(flat_lemmas), t_idx + window_size + 1)
+        for targ_idx in target_positions:
+            start = max(0, targ_idx - window_size)
+            end = min(len(flat_lemmas), targ_idx + window_size + 1)
 
             for j in range(start, end):
-                if j == t_idx:
+                if j == targ_idx:
                     continue
                 lemma = flat_lemmas[j]
-                if lemma and lemma[0].isalpha() and lemma not in (stopwords or []):
-                    neighbors[lemma] += 1
-                    p = morph.parse(lemma)[0]
-                    pos_name = POS_MAP.get(p.tag.POS, 'Другое')
-                    neighbor_pos[pos_name] += 1
+                if lemma and lemma[0].isalpha():
+                    pos_tag = flat_pos_tags[j]
+                    pos_name = POS_MYSTEM.get(pos_tag, 'Другое')
 
-    return neighbors, neighbor_pos
+                    # Добавляем в версию со стопсловами (без фильтрации)
+                    neighbors_w_stwords[lemma] += 1
+                    neighbors_pos_stwords[pos_name] += 1
+
+                    # Добавляем в версию без стопслов (с фильтрацией)
+                    if lemma not in (stopwords or []):
+                        neighbors[lemma] += 1
+                        neighbor_pos[pos_name] += 1
+
+    return neighbors, neighbor_pos, neighbors_w_stwords, neighbors_pos_stwords
 
 # 3. Функция "Индекса Маяка" (динамический индекс контекстуальной близости)
 def get_proximity_index_neighbors(filtered_corpus, target_norm, decay_distance, decay_brks, decay_sents, stopwords=None):
     """
     Для каждого вхождения таргета сканируем весь текст и считаем вес связи с каждой леммой, учитывая:
-- Дистанцию в словах (чем дальше, тем слабее связь)
-- Количество разрывов строк (_BRK_) на пути (каждый разрыв ослабляет связь)
-- Количество границ предложений (точек) на пути (каждая граница ослабляет связь)
-- Фильтрация по стоп-словам и не-буквенным токенам (типа _BRK_, которые мы обрабатываем отдельно)  
+    - Дистанцию в словах (чем дальше, тем слабее связь)
+    - Количество разрывов строк (_BRK_) на пути (каждый разрыв ослабляет связь)
+    - Количество границ предложений (точек) на пути (каждая граница ослабляет связь)
+
+    СИНХРОНИЗАЦИЯ ИНДЕКСОВ:
+    - lemmas_pos_tagged: чистые леммы "lemma/POS" без маркеров (для анализа)
+    - lemmas_separated: леммы со счетом границ _BRK_ (для определения разрывов строк)
+
+    Оба массива парсятся параллельно для синхронизации позиций.
     """
     weights = Counter()
 
     for item in filtered_corpus:
-        # 1. Формируем "плоское" представление из lemmas_cleaned (без _BRK_)
-        flat_lemmas_clean = []
-        flat_lemmas_orig = []  # Для подсчета _BRK_
-        sent_boundaries = []
+        # 1. Парсим оба источника параллельно для синхронизации индексов
+        flat_lemmas = []
+        flat_lemmas_separated = []  # Отслеживаем _BRK_ маркеры
+        mapping_clean_to_separated = []  # Индекс: clean_idx -> separated_idx
+        sent_boundaries_clean = []
 
-        curr_idx = 0
-        for sent_clean, sent_orig in zip(item['lemmas_cleaned'], item['lemmas']):
-            flat_lemmas_clean.extend(sent_clean)
-            flat_lemmas_orig.extend(sent_orig)
-            curr_idx += len(sent_clean)
-            sent_boundaries.append(curr_idx)
+        curr_idx_clean = 0
+        curr_idx_separated = 0
 
-        # 2. Находим все позиции целевого слова в clean версии
-        target_positions = [idx for idx, lemma in enumerate(flat_lemmas_clean) if lemma == target_norm]
+        for sent_pos_tagged, sent_separated in zip(item['lemmas_pos_tagged'], item['lemmas_separated']):
+            sent_lemmas = []
+            sep_idx = 0  # Позиция в текущем предложении lemmas_separated
+
+            for lemma_pos_pair in sent_pos_tagged:
+                # Парсим "lemma/POS" для получения леммы
+                if '/' in lemma_pos_pair:
+                    lemma = lemma_pos_pair.rsplit('/', 1)[0]
+                else:
+                    lemma = lemma_pos_pair
+
+                sent_lemmas.append(lemma)
+                flat_lemmas.append(lemma)
+
+                # Синхронизируем с lemmas_separated (пропускаем _BRK_)
+                while sep_idx < len(sent_separated) and sent_separated[sep_idx] == '_BRK_':
+                    flat_lemmas_separated.append('_BRK_')
+                    sep_idx += 1
+
+                if sep_idx < len(sent_separated):
+                    flat_lemmas_separated.append(sent_separated[sep_idx])
+                    mapping_clean_to_separated.append(curr_idx_separated)
+                    curr_idx_separated += 1
+                    sep_idx += 1
+
+                curr_idx_clean += 1
+
+            # Добавляем оставшиеся _BRK_ в конце предложения
+            while sep_idx < len(sent_separated):
+                if sent_separated[sep_idx] == '_BRK_':
+                    flat_lemmas_separated.append('_BRK_')
+                curr_idx_separated += 1
+                sep_idx += 1
+
+            sent_boundaries_clean.append(curr_idx_clean)
+
+        # 2. Находим все позиции целевого слова в чистых леммах
+        target_positions = [idx for idx, lemma in enumerate(flat_lemmas) if lemma == target_norm]
 
         # 3. Для каждого вхождения таргета сканируем весь текст
         for t_idx in target_positions:
-            for s_idx, lemma in enumerate(flat_lemmas_clean):
+            for s_idx, lemma in enumerate(flat_lemmas):
 
-                if s_idx == t_idx or not lemma.isalpha():
+                if s_idx == t_idx or not lemma or not lemma[0].isalpha():
                     continue
 
                 if stopwords and lemma in stopwords:
                     continue
 
-                # Расстояние в словах (в clean версии - без _BRK_)
+                # Расстояние в словах (без маркеров)
                 d = abs(s_idx - t_idx)
 
-                start, end = min(t_idx, s_idx), max(t_idx, s_idx)
+                # Находим соответствующие индексы в flat_lemmas_separated
+                if s_idx < len(mapping_clean_to_separated) and t_idx < len(mapping_clean_to_separated):
+                    sep_start = mapping_clean_to_separated[min(t_idx, s_idx)]
+                    sep_end = mapping_clean_to_separated[max(t_idx, s_idx)]
 
-                # Сколько разрывов строк (_BRK_) встретилось в оригинальной версии
-                fragment_orig = flat_lemmas_orig[start:end]
-                n_brks = fragment_orig.count('_BRK_')
+                    # Сколько разрывов строк (_BRK_) встретилось на пути
+                    fragment_separated = flat_lemmas_separated[sep_start:sep_end + 1]
+                    n_brks = fragment_separated.count('_BRK_')
+                else:
+                    n_brks = 0
 
                 # Сколько границ предложений пересекли
-                n_sents = len([b for b in sent_boundaries if start < b <= end])
-                
+                n_sents = len([b for b in sent_boundaries_clean if min(t_idx, s_idx) < b <= max(t_idx, s_idx)])
+
                 # --- ИТОГОВЫЙ ВЕС СВЯЗИ ---
-                # Перемножаем затухания: Дистанция * Разрывы * Предложения
                 weight = (decay_distance ** d) * (decay_brks ** n_brks) * (decay_sents ** n_sents)
                 weights[lemma] += weight
 
@@ -247,7 +316,7 @@ def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distan
         return None  # Если в корпусе нет данных, возвращаем None
 
     # Шаг 2: Классическое окно контекстов
-    window_neighbors, pos_dist = get_window_neighbors(filtered_corpus, target_word, window_size, stopwords)
+    neighbors, neighbor_pos, neighbors_w_stwords, neighbors_pos_stwords = get_window_neighbors(filtered_corpus, target_word, window_size, stopwords)
 
     # Шаг 3: Динамический индекс для всех слов в тексте
     proximity_weights = get_proximity_index_neighbors(filtered_corpus, target_word, decay_distance, decay_brks, decay_sents, stopwords)
@@ -256,8 +325,14 @@ def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distan
         'total_occurrences': total_occurrences,
         'contexts': contexts,
         'year_dist': year_dist,
-        'window_neighbors': window_neighbors,
-        'pos_dist': pos_dist,
+        'window_neighbors': {
+            'filtered': neighbors,
+            'with_stopwords': neighbors_w_stwords
+        },
+        'pos_dist': {
+            'filtered': neighbor_pos,
+            'with_stopwords': neighbors_pos_stwords
+        },
         'proximity_weights': proximity_weights
     }
 
@@ -392,82 +467,3 @@ def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, 
     Напиши аналитическое заключение. Будь конкретен, опирайся на предоставленные веса и леммы. Язык должен быть понятен как специалисту, так и заинтересованным читателям, не погруженным в контекст.
     """
     return prompt
-
-
-# --- ФУНКЦИИ ДЛЯ ВИЗУАЛИЗАЦИИ ГРАФА СЕМАНТИЧЕСКИХ СВЯЗЕЙ ---
-
-def prepare_proximity_graph_data(target_word, proximity_weights, top_n=15):
-    """
-    Подготавливает данные для визуализации графа семантических связей.
-
-    Args:
-        target_word: целевое слово (центральный узел)
-        proximity_weights: Counter с весами связей {сосед: вес}
-        top_n: количество соседей для отображения
-
-    Returns:
-        dict с данными для networkx графа:
-        {
-            'nodes': [{'id': word, 'label': word, 'size': weight_normalized}, ...],
-            'edges': [{'source': target, 'target': neighbor, 'weight': w}, ...],
-            'max_weight': max_weight_value
-        }
-    """
-
-    if not proximity_weights:
-        return {'nodes': [], 'edges': [], 'max_weight': 0}
-
-    # Берём топ-N соседей
-    top_neighbors = proximity_weights.most_common(top_n)
-
-    if not top_neighbors:
-        return {'nodes': [], 'edges': [], 'max_weight': 0}
-
-    # Находим макс вес для нормализации размера узлов
-    max_weight = max(w for _, w in top_neighbors) if top_neighbors else 1
-    min_weight = min(w for _, w in top_neighbors) if top_neighbors else 1
-
-    # Создаём узлы
-    nodes = []
-
-    # Центральный узел (целевое слово)
-    nodes.append({
-        'id': target_word,
-        'label': target_word.upper(),
-        'size': 50,
-        'color': '#FF6B6B',  # Красный для целевого слова
-        'title': f'{target_word} (целевое слово)'
-    })
-
-    # Соседи
-    for neighbor, weight in top_neighbors:
-        normalized_weight = (weight - min_weight) / (max_weight - min_weight) if max_weight > min_weight else 0.5
-        size = 20 + normalized_weight * 30  # Размер от 20 до 50
-
-        nodes.append({
-            'id': neighbor,
-            'label': neighbor,
-            'size': size,
-            'color': '#4ECDC4',  # Бирюзовый для соседей
-            'title': f'{neighbor} (вес: {weight:.2f})'
-        })
-
-    # Создаём рёбра (связи)
-    edges = []
-    for neighbor, weight in top_neighbors:
-        normalized_weight = (weight - min_weight) / (max_weight - min_weight) if max_weight > min_weight else 0.5
-
-        edges.append({
-            'source': target_word,
-            'target': neighbor,
-            'weight': weight,
-            'normalized': normalized_weight,
-            'title': f'{weight:.2f}'
-        })
-
-    return {
-        'nodes': nodes,
-        'edges': edges,
-        'max_weight': max_weight,
-        'min_weight': min_weight
-    }

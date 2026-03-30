@@ -36,13 +36,16 @@ def prepare_full_corpus(df):
             formatted_sentences = ast.literal_eval(row['formatted_sentences']) if pd.notnull(row['formatted_sentences']) else []
             lemmatized_sents = ast.literal_eval(row['lemmas_separated']) if pd.notnull(row['lemmas_separated']) else []
             lemmatized_sents_cleaned = ast.literal_eval(row['lemmas_cleaned']) if pd.notnull(row['lemmas_cleaned']) else []
+            lemmatized_sents_pos_tagged = ast.literal_eval(row['lemmas_pos_tagged']) if pd.notnull(row['lemmas_pos_tagged']) else []
+
             full_corpus.append({
                 'title': str(row['title']),
                 'year_finished': int(row['year_finished']),
                 'raw_text': str(row['raw_text']),
                 'formatted_sentences': formatted_sentences,
-                'lemmas': lemmatized_sents,
+                'lemmas_separated': lemmatized_sents,
                 'lemmas_cleaned': lemmatized_sents_cleaned,
+                'lemmas_pos_tagged': lemmatized_sents_pos_tagged
                 })
         except Exception as e:
             st.warning("ОШИБКА при обработке корпуса: " + str(e))
@@ -128,6 +131,8 @@ lemmas_forms = load_lemma_forms()
 search_word = st.sidebar.text_input("Введите слово для анализа", "лошадь")
 window_size = st.sidebar.slider("Размер окна контекста", 1, 15, 7)
 
+count_stopwords = st.sidebar.checkbox('Учитывать служебные слова', value=False)
+
 min_year = int(df['year_finished'].min())
 max_year = int(df['year_finished'].max())
 
@@ -135,6 +140,7 @@ year_range = st.sidebar.slider(
     "Период написания",
     min_year, max_year, (min_year, max_year)
 )
+
 with st.sidebar.expander("🤖 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
@@ -171,7 +177,7 @@ if search_word:
 
     results = full_word_analysis(
         filtered_corpus=filtered_corpus,
-        target_word=target_word,
+        target_word=search_word,
         window_size=window_size,
         decay_distance=decay_distance,
         decay_brks=decay_brks,
@@ -193,7 +199,7 @@ if search_word:
         proximity_weights = results['proximity_weights']
 
         # --- УРОВЕНЬ 1.1: Заголовок со словом ---
-        st.markdown(f"## Анализ слова: `{search_word.lower()}`")
+        st.markdown(f"## Анализ слова: `{target_word}`")
         st.caption(f"Период поиска: {year_range[0]} — {year_range[1]}")
 
         # --- УРОВЕНЬ 1.2: Синонимы (из словаря и встречающиеся в корпусе) ---
@@ -208,7 +214,7 @@ if search_word:
                 st.write(f"Синонимы с коэффициентами близости: {synonyms_str}")
             else:
                 st.write(f"Синонимы (без коэффициентов): {', '.join([syn for syn, score in synonyms])}")
-            st.info("Список включает слова из общего векторного словаря, которые не встречаются в текстах Маяковского. Ниже — только те, что реально есть в корпусе.")
+            st.info("Список включает слова из общего векторного словаря, которые могут не встречаться в текстах Маяковского. Ниже — только те слова, которые действительно есть в корпусе")
             st.write(f"Синонимы, найденные в корпусе: {', '.join(synonyms_filtered)}")
         else:
             st.write("Синонимы не найдены или слово отсутствует в модели.")
@@ -224,8 +230,12 @@ if search_word:
             st.write("Метод расчета: сумма всех вхождений леммы в выбранном периоде.")
 
         with col_pos:
-            st.subheader("Части речи")
-            pos_df = pd.DataFrame(results['pos_dist'].items(), columns=['Часть речи', 'Кол-во'])
+            st.subheader("Частеречное окружение")
+            if count_stopwords:
+                pos_data = pos_dist['with_stopwords']
+            else:
+                pos_data = pos_dist['filtered']
+            pos_df = pd.DataFrame(pos_data.items(), columns=['Часть речи', 'Кол-во'])
             st.bar_chart(pos_df.set_index('Часть речи'))
 
         with col_years:
@@ -242,8 +252,10 @@ if search_word:
         tab_window, tab_index, tab_graph = st.tabs(["🔲 Классическое окно (Частота)", "🕸️ Индекс Маяка (Таблица)", "📊 Интерактивный граф"])
 
         with tab_window:
-            
-            n_df = pd.DataFrame(top_neighbors.most_common(10), columns=['Лемма', 'Частота'])
+            if count_stopwords:
+                n_df = pd.DataFrame(top_neighbors['with_stopwords'].most_common(10), columns=['Лемма', 'Частота'])
+            else:
+                n_df = pd.DataFrame(top_neighbors['filtered'].most_common(10), columns=['Лемма', 'Частота'])
             n_df.index = range(1, len(n_df) + 1)
             st.table(n_df)
             
