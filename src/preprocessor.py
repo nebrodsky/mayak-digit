@@ -1,13 +1,13 @@
 import os
 import re
 import ast
+import json
 import pandas as pd
 import poetree # импортируем модуль для работы с корпусом PoeTree
 import csv # импортируем модуль для работы с таблицами
 from razdel import sentenize, tokenize
-from pymorphy3 import MorphAnalyzer
 from src.file_utils import get_files_in_folder, read_text_file, write_text_file, write_csv_file
-from src.text_utils import morph, lemmatize, format_separate_poem, get_sentences
+from src.text_utils import morph, lemmatize, format_separate_poem, get_sentences, lemmatize_with_mystem
 
 def import_poetree_corpora(author_id, author_name, directory, annual_limit=None, max_poems=None):
     '''
@@ -200,6 +200,7 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
 4. Дополнительно: функция для извлечения всего словаря автора и сохранения его в отдельный текстовый файл (author_vocabulary.txt)   
     '''
     data = []
+    lemma_forms = {}
 
     metadata_path = os.path.join(data_path, 'metadata.csv')
     database_path = os.path.join(data_path, 'database.csv')
@@ -225,53 +226,47 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
         text = read_text_file(os.path.join(raw_poetry_path, f))
 
         # 1. ПРЕПРОЦЕССИНГ И ТОКЕНИЗАЦИЯ
-        
+
         # Разбиваем на предложения (используем razdel)
 
         formatted_text = format_separate_poem(text)
-        
+
         sentences = get_sentences(formatted_text)
-        
+
         all_tokens = []
         all_lemmas_separated = []
         all_lemmas_cleaned = []
-        
+        all_lemmas_pos_tagged = []
+
         for sent in sentences:
+            # Лемматизируем предложение с MyStem
+            sent_lemmatize = lemmatize_with_mystem(sent)
 
-            # Токенизируем каждое предложение
-            tokens = list(tokenize(sent))
+            sent_tokens = sent_lemmatize['tokens']
+            sent_lemmas = sent_lemmatize['lemmas']
+            sent_lemmas_clean = sent_lemmatize['lemmas_clean']
+            sent_lemmas_pos = sent_lemmatize['lemmas_pos_tagged']
 
-            sent_tokens = []
-            sent_lemmas = []
-            sent_lemmas_cleaned = []
+            # Накапливаем словарь лемма → словоформы
+            token_idx = 0
+            for lemma in sent_lemmas_clean:
+                while token_idx < len(sent_tokens):
+                    token_text = sent_tokens[token_idx]
+                    token_idx += 1
+                    clean_token = re.sub(r'[^\w\s]', '', token_text)
+                    if not clean_token:
+                        continue
+                    if lemma not in lemma_forms:
+                        lemma_forms[lemma] = set()
+                    lemma_forms[lemma].add(clean_token.lower())
+                    break
 
-            for token in tokens:
-
-                token_text = token.text
-                sent_tokens.append(token_text)
-
-                # Сначала проверяем наш спецсимвол
-                if token_text == '/':
-                    sent_lemmas.append('_BRK_')
-                    continue
-                
-                # Затем чистим всю остальную пунктуацию
-                clean_token = re.sub(r'[^\w\s]', '', token_text)
-                
-                if not clean_token:
-                    continue
-                
-                # Лемматизируем
-                clean_token_lower = clean_token.lower()
-                p = morph.parse(clean_token_lower)[0]
-                sent_lemmas.append(p.normal_form)
-                sent_lemmas_cleaned.append(p.normal_form)
-            
             if sent_lemmas:
                 all_tokens.append(sent_tokens)
                 all_lemmas_separated.append(sent_lemmas)
-                all_lemmas_cleaned.append(sent_lemmas_cleaned)
-        
+                all_lemmas_cleaned.append(sent_lemmas_clean)
+                all_lemmas_pos_tagged.append(sent_lemmas_pos)
+
         row = metadata_df[metadata_df['filename'] == f]
 
         if not row.empty:
@@ -288,7 +283,8 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
             'formatted_sentences': sentences,
             'tokens': all_tokens,
             'lemmas_separated': all_lemmas_separated,
-            'lemmas_cleaned': all_lemmas_cleaned
+            'lemmas_cleaned': all_lemmas_cleaned,
+            'lemmas_pos_tagged': all_lemmas_pos_tagged
         })
 
     df = pd.DataFrame(data)
@@ -300,9 +296,12 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
 
     print(f'Обработка завершена УСПЕШНО! База сохранена в {database_path}')
 
-    # Создаём словарь словоформ для оптимизации поиска контекстов
-    print('Создаю словарь словоформ...')
-    build_lemma_forms_mapping(database_path)
+    # Сохраняем словарь словоформ
+    lemma_forms_serializable = {lemma: list(forms) for lemma, forms in lemma_forms.items()}
+    forms_path = os.path.join(data_path, 'vocabulary_forms.json')
+    with open(forms_path, 'w', encoding='utf-8') as vf:
+        json.dump(lemma_forms_serializable, vf, ensure_ascii=False, indent=2)
+    print(f'Словарь словоформ создан! Сохранено {len(lemma_forms_serializable)} лемм в {forms_path}')
 
 def save_author_vocabulary(database_path):
     """
@@ -333,53 +332,70 @@ def build_lemma_forms_mapping(database_path):
     Матчит tokens с lemmas_cleaned (без разделителей) для получения реальных форм.
     Сохраняет результат в JSON.
     """
-    import json
-
     df = pd.read_csv(database_path)
     lemma_forms = {}
+    skipped = 0
 
-    for _, row in df.iterrows():
+    for idx, row in df.iterrows():
         try:
-            tokens_sents = ast.literal_eval(row['tokens']) if pd.notnull(row['tokens']) else []
-            lemmas_cleaned_sents = ast.literal_eval(row['lemmas_cleaned']) if pd.notnull(row['lemmas_cleaned']) else []
+            tokens_raw = row['tokens']
+            lemmas_raw = row['lemmas_cleaned']
 
-            # Матчим предложения
+            if not pd.notnull(tokens_raw) or not pd.notnull(lemmas_raw):
+                continue
+
+            try:
+                tokens_sents = ast.literal_eval(tokens_raw)
+            except Exception as e:
+                print(f"⚠️  Строка {idx}: не удалось разобрать 'tokens': {e}")
+                skipped += 1
+                continue
+
+            try:
+                lemmas_cleaned_sents = ast.literal_eval(lemmas_raw)
+            except Exception as e:
+                print(f"⚠️  Строка {idx}: не удалось разобрать 'lemmas_cleaned': {e}")
+                skipped += 1
+                continue
+
             for tokens, lemmas_clean in zip(tokens_sents, lemmas_cleaned_sents):
                 token_idx = 0
 
                 for lemma in lemmas_clean:
-                    # Ищем соответствующий токен (пропускаем пунктуацию в tokens)
+                    if lemma == '_BRK_':
+                        continue
+
                     while token_idx < len(tokens):
-                        token_text = tokens[token_idx]
+                        token_text = str(tokens[token_idx])
                         token_idx += 1
 
-                        # Очищаем от пунктуации
-                        clean_token = re.sub(r'[^\w\s]', '', token_text)
+                        clean_token = re.sub(r'[^\w\s]', '', token_text).strip()
 
-                        if not clean_token:
-                            continue  # Пропускаем чистую пунктуацию
+                        if not clean_token or clean_token == '_BRK_':
+                            continue
 
-                        # Добавляем словоform в набор
                         if lemma not in lemma_forms:
-                            lemma_forms[lemma] = []
-
-                        lemma_forms[lemma].append(clean_token.lower())
+                            lemma_forms[lemma] = set()
+                        lemma_forms[lemma].add(clean_token.lower())
                         break
 
         except Exception as e:
-            print(f"⚠️  Ошибка при обработке строки: {e}")
+            print(f"⚠️  Строка {idx}: неожиданная ошибка: {e}")
+            skipped += 1
             continue
 
-    # Преобразуем списки в sets для уникальности и сохраняем
-    lemma_forms_unique = {lemma: list(set(forms)) for lemma, forms in lemma_forms.items()}
+    if skipped:
+        print(f"⚠️  Пропущено строк из-за ошибок: {skipped}")
+
+    lemma_forms_serializable = {lemma: list(forms) for lemma, forms in lemma_forms.items()}
 
     forms_path = os.path.join(os.path.dirname(database_path), 'vocabulary_forms.json')
-    with open(forms_path, 'w', encoding='utf-8') as f:
-        json.dump(lemma_forms_unique, f, ensure_ascii=False, indent=2)
+    with open(forms_path, 'w', encoding='utf-8') as vf:
+        json.dump(lemma_forms_serializable, vf, ensure_ascii=False, indent=2)
 
-    print(f'✅ Словарь словоформ создан! Сохранено {len(lemma_forms_unique)} лемм в {forms_path}')
-    return lemma_forms_unique
+    print(f'Словарь словоформ создан! Сохранено {len(lemma_forms_serializable)} лемм в {forms_path}')
+    return lemma_forms_serializable
 
 if __name__ == '__main__':
-    process_poetry_corpus(rf'corpus/poetry', 'data')
+    process_poetry_corpus(rf'corpus/poetry', 'data', rewrite=True)
     # save_author_vocabulary(rf'data/database.csv')

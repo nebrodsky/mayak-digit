@@ -1,0 +1,6257 @@
+{
+  "statistics": {
+    "total_checked": 3518,
+    "total_bastards": 3518,
+    "matched": 2338,
+    "mismatched_unique": 1041,
+    "match_percentage": 66.46
+  },
+  "mismatches": [
+    {
+      "wordform": "АХРР",
+      "mystem": "ахрр",
+      "pymorphy": "ахрра",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Автодора",
+      "mystem": "автодор",
+      "pymorphy": "автодора",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Айланд",
+      "mystem": "айланд",
+      "pymorphy": "айланда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Алушка",
+      "mystem": "алушка",
+      "pymorphy": "алушко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Альсеевна",
+      "mystem": "альсеевна",
+      "pymorphy": "альсеевич",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Амадори",
+      "mystem": "амадори",
+      "pymorphy": "амадорь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Анатэм",
+      "mystem": "анатэм",
+      "pymorphy": "анатэма",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Анжелычи",
+      "mystem": "анжелыч",
+      "pymorphy": "анжелович",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Антантовы",
+      "mystem": "антантов",
+      "pymorphy": "антантовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Арватова",
+      "mystem": "арватова",
+      "pymorphy": "арватов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Аустерлица",
+      "mystem": "аустерлиц",
+      "pymorphy": "аустерлица",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Баарбань",
+      "mystem": "баарбань",
+      "pymorphy": "баарбанить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Бастилий",
+      "mystem": "бастилий",
+      "pymorphy": "бастилия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Бегня",
+      "mystem": "бегня",
+      "pymorphy": "бегнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Бенуями",
+      "mystem": "бенуя",
+      "pymorphy": "бенуй",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Брынским",
+      "mystem": "брынский",
+      "pymorphy": "брынским",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Бумажищи",
+      "mystem": "бумажищи",
+      "pymorphy": "бумажискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Буржуевы",
+      "mystem": "буржуев",
+      "pymorphy": "буржуева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Буржуйчиков",
+      "mystem": "буржуйчиков",
+      "pymorphy": "буржуйчик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вавилонищ",
+      "mystem": "вавилонища",
+      "pymorphy": "вавилонище",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вансяне",
+      "mystem": "вансянин",
+      "pymorphy": "вансян",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ведадо",
+      "mystem": "ведадо",
+      "pymorphy": "ведадый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Венерино",
+      "mystem": "венерино",
+      "pymorphy": "венерин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Венецуэле",
+      "mystem": "венецуэл",
+      "pymorphy": "венецуэль",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Венсене",
+      "mystem": "венсен",
+      "pymorphy": "венсена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Верхарна",
+      "mystem": "верхарный",
+      "pymorphy": "верхарна",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ветрилась",
+      "mystem": "ветриваться",
+      "pymorphy": "ветриться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вечорку",
+      "mystem": "вечорка",
+      "pymorphy": "вечорк",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вешнева",
+      "mystem": "вешнев",
+      "pymorphy": "вешнева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Взбу́бнилась",
+      "mystem": "взбубниться",
+      "pymorphy": "взбу́бниться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Виллон",
+      "mystem": "виллон",
+      "pymorphy": "виллоно",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Винчевою",
+      "mystem": "винчевый",
+      "pymorphy": "винчева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Владимыч",
+      "mystem": "владимыч",
+      "pymorphy": "владимович",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Волховстроев",
+      "mystem": "волховстроев",
+      "pymorphy": "волховстрой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Впречь",
+      "mystem": "впрегать",
+      "pymorphy": "впречь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Враспашку",
+      "mystem": "враспашку",
+      "pymorphy": "враспашка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вхутемас",
+      "mystem": "вхутемаса",
+      "pymorphy": "вхутемас",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вхутемаса",
+      "mystem": "вхутемаса",
+      "pymorphy": "вхутемас",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Вывертелся",
+      "mystem": "выверчиваться",
+      "pymorphy": "вывертеться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Выфлажено",
+      "mystem": "выфлажить",
+      "pymorphy": "выфладить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гандурин",
+      "mystem": "гандурин",
+      "pymorphy": "гандурина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гватемок",
+      "mystem": "гватемок",
+      "pymorphy": "гватёмкий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гевлок",
+      "mystem": "гевлок",
+      "pymorphy": "гевлка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гевлока",
+      "mystem": "гевлок",
+      "pymorphy": "гевлока",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гейнем",
+      "mystem": "гейнуть",
+      "pymorphy": "гейнемой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гиза",
+      "mystem": "гиз",
+      "pymorphy": "гиза",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Горшанова",
+      "mystem": "горшанов",
+      "pymorphy": "горшановый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Греди",
+      "mystem": "греди",
+      "pymorphy": "грести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Гутена",
+      "mystem": "гутен",
+      "pymorphy": "гутена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Дантова",
+      "mystem": "дантов",
+      "pymorphy": "дантовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Детердинг",
+      "mystem": "детердинг",
+      "pymorphy": "детердинга",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Детердинга",
+      "mystem": "детердинг",
+      "pymorphy": "детердинга",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Детердингу",
+      "mystem": "детердинг",
+      "pymorphy": "детердинга",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Джорджев",
+      "mystem": "джорджев",
+      "pymorphy": "джорджевый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Днепровье",
+      "mystem": "днепровье",
+      "pymorphy": "днепровие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Драгомилово",
+      "mystem": "драгомилово",
+      "pymorphy": "драгомиловый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Дубасов",
+      "mystem": "дубас",
+      "pymorphy": "дубасовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Духонин",
+      "mystem": "духонин",
+      "pymorphy": "духонина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Дымище",
+      "mystem": "дымище",
+      "pymorphy": "дымища",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ежеутренне",
+      "mystem": "ежеутренне",
+      "pymorphy": "ежеутренний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Жиллет",
+      "mystem": "жиллет",
+      "pymorphy": "жилгод",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ЗЕФЕКА",
+      "mystem": "зефека",
+      "pymorphy": "зефек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Захрапывали",
+      "mystem": "захрапывать",
+      "pymorphy": "захрапывалить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Звоночинки",
+      "mystem": "звоночинок",
+      "pymorphy": "звоночинка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Зеркалюсь",
+      "mystem": "зеркаливаться",
+      "pymorphy": "зеркалиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Зощенку",
+      "mystem": "зощенка",
+      "pymorphy": "зощенок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ивановье",
+      "mystem": "ивановье",
+      "pymorphy": "ивановья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Идемидем",
+      "mystem": "идемидь",
+      "pymorphy": "идемидти",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Избредился",
+      "mystem": "избреждаться",
+      "pymorphy": "избредиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Иззолочены",
+      "mystem": "иззолачивать",
+      "pymorphy": "иззолотить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ильичева",
+      "mystem": "ильичев",
+      "pymorphy": "ильичева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ильичево",
+      "mystem": "ильичев",
+      "pymorphy": "ильичево",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ильичевой",
+      "mystem": "ильичевой",
+      "pymorphy": "ильичева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ильичевых",
+      "mystem": "ильичевой",
+      "pymorphy": "ильичев",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Искрестившийся",
+      "mystem": "искрещиваться",
+      "pymorphy": "искреститься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Искрестилась",
+      "mystem": "искрещиваться",
+      "pymorphy": "искреститься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Испершив",
+      "mystem": "испершать",
+      "pymorphy": "испершить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Камарада",
+      "mystem": "камарада",
+      "pymorphy": "камарад",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Каноссу",
+      "mystem": "каносс",
+      "pymorphy": "каносса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Капиталовы",
+      "mystem": "капиталов",
+      "pymorphy": "капиталовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Капюси́н",
+      "mystem": "капюсин",
+      "pymorphy": "капюси́н",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Каторз",
+      "mystem": "каторзой",
+      "pymorphy": "каторз",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Каторза",
+      "mystem": "каторзый",
+      "pymorphy": "каторза",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Керзоновы",
+      "mystem": "керзонов",
+      "pymorphy": "керзоновый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Кетцаль",
+      "mystem": "кетцаль",
+      "pymorphy": "кетцаля",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Китаёзы",
+      "mystem": "китаез",
+      "pymorphy": "китаёз",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Коломб",
+      "mystem": "коломб",
+      "pymorphy": "коломба",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Коломба",
+      "mystem": "коломб",
+      "pymorphy": "коломба",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Коломбова",
+      "mystem": "коломбовый",
+      "pymorphy": "коломбова",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Колхозим",
+      "mystem": "колхозим",
+      "pymorphy": "колхозимый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Командав",
+      "mystem": "командава",
+      "pymorphy": "командать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Конешно",
+      "mystem": "конешное",
+      "pymorphy": "конешный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Коопсах",
+      "mystem": "коопс",
+      "pymorphy": "коопёс",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Корша",
+      "mystem": "корш",
+      "pymorphy": "корша",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Кра́пило",
+      "mystem": "крапливать",
+      "pymorphy": "кра́пить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Кротиха",
+      "mystem": "кротих",
+      "pymorphy": "кротихий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Круппики",
+      "mystem": "круппика",
+      "pymorphy": "круппик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Кутаисе",
+      "mystem": "кутаися",
+      "pymorphy": "кутаиса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лебит",
+      "mystem": "лебит",
+      "pymorphy": "лебитый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Левенбрей",
+      "mystem": "левенбрей",
+      "pymorphy": "левенбрить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Левенбрею",
+      "mystem": "левенбрей",
+      "pymorphy": "левенбрить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лефов",
+      "mystem": "лефов",
+      "pymorphy": "леф",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лефом",
+      "mystem": "леф",
+      "pymorphy": "лефома",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лихоборах",
+      "mystem": "лихобор",
+      "pymorphy": "лихобора",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лихорадюсь",
+      "mystem": "лихорадюсь",
+      "pymorphy": "лихорадться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лоэнгринычем",
+      "mystem": "лоэнгриныч",
+      "pymorphy": "лоэнгриныкать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Лузитании",
+      "mystem": "лузитание",
+      "pymorphy": "лузитаний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "МОПРа",
+      "mystem": "мопер",
+      "pymorphy": "мопра",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мааарррааала",
+      "mystem": "мааарррааал",
+      "pymorphy": "мааарррааать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Магги",
+      "mystem": "магги",
+      "pymorphy": "магга",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мадамью",
+      "mystem": "мадамья",
+      "pymorphy": "мадамьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Маларме",
+      "mystem": "маларм",
+      "pymorphy": "маларма",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Малашкин",
+      "mystem": "малашкин",
+      "pymorphy": "малашкина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Малашкина",
+      "mystem": "малашкин",
+      "pymorphy": "малашкина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мальмгрен",
+      "mystem": "мальмгрен",
+      "pymorphy": "мальмгрена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мангэтен",
+      "mystem": "мангэтный",
+      "pymorphy": "мангэтен",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Машиньё",
+      "mystem": "машинья",
+      "pymorphy": "машиньё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мерилизах",
+      "mystem": "мерилиз",
+      "pymorphy": "мерилиза",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Месопотамию",
+      "mystem": "месопотамий",
+      "pymorphy": "месопотамия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Многоэтажься",
+      "mystem": "многоэтажиться",
+      "pymorphy": "многоэтазаться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Монтигомо",
+      "mystem": "монтигомо",
+      "pymorphy": "монтигомый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мопра",
+      "mystem": "мопер",
+      "pymorphy": "мопра",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мопров",
+      "mystem": "мопер",
+      "pymorphy": "мопров",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мореет",
+      "mystem": "мореть",
+      "pymorphy": "мореять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мосоловой",
+      "mystem": "мосолова",
+      "pymorphy": "мосоловый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мукденской",
+      "mystem": "мукденская",
+      "pymorphy": "мукденский",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мурман",
+      "mystem": "мурманин",
+      "pymorphy": "мурман",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мусье",
+      "mystem": "мусья",
+      "pymorphy": "мусие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Мусью",
+      "mystem": "мусья",
+      "pymorphy": "мусь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Муууу",
+      "mystem": "муууу",
+      "pymorphy": "муууа",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Муциев",
+      "mystem": "муциев",
+      "pymorphy": "муций",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Наркоминдел",
+      "mystem": "наркоминдел",
+      "pymorphy": "наркоминдеть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Начканц",
+      "mystem": "начканц",
+      "pymorphy": "начканца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Начштаба",
+      "mystem": "начштаба",
+      "pymorphy": "начштаб",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Нетте",
+      "mystem": "нетта",
+      "pymorphy": "нетте",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ниагарой",
+      "mystem": "ниагара",
+      "pymorphy": "ниагарой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Нирензее",
+      "mystem": "нирензей",
+      "pymorphy": "нирензея",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Нордернее",
+      "mystem": "нордерный",
+      "pymorphy": "нордерней",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Нэпское",
+      "mystem": "нэпское",
+      "pymorphy": "нэпский",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Обрезовой",
+      "mystem": "обрезовый",
+      "pymorphy": "обрезов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Онания",
+      "mystem": "онание",
+      "pymorphy": "онаний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Опен",
+      "mystem": "опен",
+      "pymorphy": "опена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Осавиахима",
+      "mystem": "осавиахима",
+      "pymorphy": "осавиахим",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Осоавиахима",
+      "mystem": "осоавиахима",
+      "pymorphy": "осоавиахим",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Отземлились",
+      "mystem": "отземляться",
+      "pymorphy": "отземлиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Пакард",
+      "mystem": "пакард",
+      "pymorphy": "пакарда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Панёвы",
+      "mystem": "панев",
+      "pymorphy": "панёвы",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Петербурговы",
+      "mystem": "петербургов",
+      "pymorphy": "петербурговый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Пилей",
+      "mystem": "пиль",
+      "pymorphy": "пилей",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Пловучей",
+      "mystem": "пловуч",
+      "pymorphy": "пловучий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Плюшкин",
+      "mystem": "плюшкин",
+      "pymorphy": "плюшкина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Пожалуста",
+      "mystem": "пожалуст",
+      "pymorphy": "пожалуста",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Полунебоскребы",
+      "mystem": "полунебоскреб",
+      "pymorphy": "полунебоскрёб",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Помягше",
+      "mystem": "помягше",
+      "pymorphy": "помягш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Понаучив",
+      "mystem": "понаучать",
+      "pymorphy": "понаучить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Понтийстем",
+      "mystem": "понтийстем",
+      "pymorphy": "понтийстема",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Поооостой",
+      "mystem": "поооостой",
+      "pymorphy": "поооостоить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Поправьсь",
+      "mystem": "поправьсь",
+      "pymorphy": "поправьсить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Поссе",
+      "mystem": "поссе",
+      "pymorphy": "посса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Преснею",
+      "mystem": "преснеть",
+      "pymorphy": "преснея",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Пролеткультцы",
+      "mystem": "пролеткультца",
+      "pymorphy": "пролеткультец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Раздокажу",
+      "mystem": "раздоказывать",
+      "pymorphy": "раздоказать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Расином",
+      "mystem": "расиный",
+      "pymorphy": "расино",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Рассея",
+      "mystem": "рассей",
+      "pymorphy": "рассеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Расстелим",
+      "mystem": "расстлать",
+      "pymorphy": "расстелить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Религьозная",
+      "mystem": "религьозная",
+      "pymorphy": "религьознать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Риверсайде",
+      "mystem": "риверсайд",
+      "pymorphy": "риверсайда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ромеов",
+      "mystem": "ромеов",
+      "pymorphy": "роме",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ружичек",
+      "mystem": "ружичка",
+      "pymorphy": "ружичек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ручейковою",
+      "mystem": "ручейковый",
+      "pymorphy": "ручейкова",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Ручьища",
+      "mystem": "ручьище",
+      "pymorphy": "ручьискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Рыде",
+      "mystem": "рыд",
+      "pymorphy": "рыда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Савинковы",
+      "mystem": "савинковый",
+      "pymorphy": "савинкова",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Сакулины",
+      "mystem": "сакулина",
+      "pymorphy": "сакулин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Сглушило",
+      "mystem": "сглушать",
+      "pymorphy": "сглушить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Се́новой",
+      "mystem": "сенова",
+      "pymorphy": "се́новый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Скифию",
+      "mystem": "скифий",
+      "pymorphy": "скифия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Сконапель",
+      "mystem": "сконапля",
+      "pymorphy": "сконапель",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Скорейскорей",
+      "mystem": "скорейскоро",
+      "pymorphy": "скорейскорый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Сливеют",
+      "mystem": "сливеть",
+      "pymorphy": "сливеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Словопадов",
+      "mystem": "словопадов",
+      "pymorphy": "словопад",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Смер",
+      "mystem": "смер",
+      "pymorphy": "смера",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Собачьевой",
+      "mystem": "собачьевой",
+      "pymorphy": "собачьев",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Собинов",
+      "mystem": "собин",
+      "pymorphy": "собиновый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Совкино",
+      "mystem": "совкин",
+      "pymorphy": "совкино",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Старомозгий",
+      "mystem": "старомозгий",
+      "pymorphy": "старомозгия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Стейшен",
+      "mystem": "стейшен",
+      "pymorphy": "стейсить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Стеньки",
+      "mystem": "стенька",
+      "pymorphy": "стенёк",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Стеньку",
+      "mystem": "стенька",
+      "pymorphy": "стенёк",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Стлели",
+      "mystem": "стлевать",
+      "pymorphy": "стлеть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Стоцветное",
+      "mystem": "стоцветный",
+      "pymorphy": "стоцветной",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Суньтеся",
+      "mystem": "суньтеся",
+      "pymorphy": "суньтести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Сытин",
+      "mystem": "сытин",
+      "pymorphy": "сытина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Тады",
+      "mystem": "тада",
+      "pymorphy": "тады",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Тальони",
+      "mystem": "тальони",
+      "pymorphy": "тальонить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Татлин",
+      "mystem": "татлин",
+      "pymorphy": "татлина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Твер",
+      "mystem": "твер",
+      "pymorphy": "твера",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Телевокса",
+      "mystem": "телевокс",
+      "pymorphy": "телевокса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Телевоксом",
+      "mystem": "телевокс",
+      "pymorphy": "телевоксом",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Трансваль",
+      "mystem": "трансваль",
+      "pymorphy": "трансваля",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Тускарь",
+      "mystem": "тускарь",
+      "pymorphy": "тускарий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Уррра",
+      "mystem": "уррр",
+      "pymorphy": "уррра",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Фидию",
+      "mystem": "фидий",
+      "pymorphy": "фидия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Фийка",
+      "mystem": "фийк",
+      "pymorphy": "фийка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Фиш",
+      "mystem": "фиша",
+      "pymorphy": "фиш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Фоминая",
+      "mystem": "фоминать",
+      "pymorphy": "фоминай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Фош",
+      "mystem": "фоша",
+      "pymorphy": "фош",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Фридлянда",
+      "mystem": "фридлянд",
+      "pymorphy": "фридлянда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Хуэрт",
+      "mystem": "хуэрт",
+      "pymorphy": "хуэрта",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Чапультапеку",
+      "mystem": "чапультапек",
+      "pymorphy": "чапультапечь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Чертись",
+      "mystem": "черчиваться",
+      "pymorphy": "чертиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Чикаг",
+      "mystem": "чикага",
+      "pymorphy": "чикаг",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Чистей",
+      "mystem": "чисть",
+      "pymorphy": "чистый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Шаганья",
+      "mystem": "шагание",
+      "pymorphy": "шаганья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Шевченка",
+      "mystem": "шевченок",
+      "pymorphy": "шевченка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Шерстищу",
+      "mystem": "шерстища",
+      "pymorphy": "шерстискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Штеттине",
+      "mystem": "штеттин",
+      "pymorphy": "штеттина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Што",
+      "mystem": "што",
+      "pymorphy": "что",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Щеник",
+      "mystem": "щеник",
+      "pymorphy": "щеникнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Щепкин",
+      "mystem": "щепкин",
+      "pymorphy": "щепкина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Эйлерса",
+      "mystem": "эйлерс",
+      "pymorphy": "эйлёрса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Элладова",
+      "mystem": "элладов",
+      "pymorphy": "элладовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Эркаи",
+      "mystem": "эркаи",
+      "pymorphy": "эркай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Эрэсэфэсэрью",
+      "mystem": "эрэсэфэсэрь",
+      "pymorphy": "эрэсэфэсэрье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "Эспань",
+      "mystem": "эспань",
+      "pymorphy": "эспаня",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "автодорово",
+      "mystem": "автодорово",
+      "pymorphy": "автодоровый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "автодура",
+      "mystem": "автодур",
+      "pymorphy": "автодура",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "автомехановышибалу",
+      "mystem": "автомехановышибала",
+      "pymorphy": "автомехановышибал",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "апельсиний",
+      "mystem": "апельсиния",
+      "pymorphy": "апельсиний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "аппаратова",
+      "mystem": "аппаратова",
+      "pymorphy": "аппаратов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "аппетитцем",
+      "mystem": "аппетитец",
+      "pymorphy": "аппетитце",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ахровскую",
+      "mystem": "ахровский",
+      "pymorphy": "ахровсковать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "аэрокрылья",
+      "mystem": "аэрокрылья",
+      "pymorphy": "аэрокрыло",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "аэростоловые",
+      "mystem": "аэростоловый",
+      "pymorphy": "аэростоловая",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "баластом",
+      "mystem": "баластом",
+      "pymorphy": "баласт",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "баррикадина",
+      "mystem": "баррикадина",
+      "pymorphy": "баррикадин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "барышнин",
+      "mystem": "барышнин",
+      "pymorphy": "барышнина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "безлицого",
+      "mystem": "безлицого",
+      "pymorphy": "безлиций",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "безножье",
+      "mystem": "безножье",
+      "pymorphy": "безножие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "березная",
+      "mystem": "березный",
+      "pymorphy": "березной",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бескультурь",
+      "mystem": "бескультуривать",
+      "pymorphy": "бескультурить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бесшабашье",
+      "mystem": "бесшабашье",
+      "pymorphy": "бесшабаший",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "библейцем",
+      "mystem": "библейц",
+      "pymorphy": "библеец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "биясь",
+      "mystem": "бияся",
+      "pymorphy": "биясь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "блеется",
+      "mystem": "блеяться",
+      "pymorphy": "блеться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "блинорожия",
+      "mystem": "блинорожий",
+      "pymorphy": "блинорожие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "блюдищ",
+      "mystem": "блюдища",
+      "pymorphy": "блюдище",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "богово",
+      "mystem": "богово",
+      "pymorphy": "боговый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бомбищей",
+      "mystem": "бомбища",
+      "pymorphy": "бомбищи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бородьем",
+      "mystem": "бородие",
+      "pymorphy": "бородье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "братие",
+      "mystem": "братий",
+      "pymorphy": "братие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бригадовой",
+      "mystem": "бригадова",
+      "pymorphy": "бригадов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бровинки",
+      "mystem": "бровинка",
+      "pymorphy": "бровинк",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "брызго́й",
+      "mystem": "брызгой",
+      "pymorphy": "брызго́ть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "буден",
+      "mystem": "будный",
+      "pymorphy": "буден",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "будочниц",
+      "mystem": "будочница",
+      "pymorphy": "будочниц",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бульвардье",
+      "mystem": "бульвардие",
+      "pymorphy": "бульвардье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бульварника",
+      "mystem": "бульварник",
+      "pymorphy": "бульварника",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "буржуева",
+      "mystem": "буржуев",
+      "pymorphy": "буржуева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "буржуевы",
+      "mystem": "буржуев",
+      "pymorphy": "буржуева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "буржуеныши",
+      "mystem": "буржуеныш",
+      "pymorphy": "буржуёныш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "буржуят",
+      "mystem": "буржуят",
+      "pymorphy": "буржуить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "быстрились",
+      "mystem": "быстряться",
+      "pymorphy": "быстрилися",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "быстролётным",
+      "mystem": "быстролетный",
+      "pymorphy": "быстролётный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бытище",
+      "mystem": "бытище",
+      "pymorphy": "бытища",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "бяше",
+      "mystem": "бяш",
+      "pymorphy": "бяша",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "валютцей",
+      "mystem": "валютцей",
+      "pymorphy": "валютца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "варённей",
+      "mystem": "варенный",
+      "pymorphy": "варённый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вваля",
+      "mystem": "вваль",
+      "pymorphy": "ввалить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вглазелись",
+      "mystem": "вглазеться",
+      "pymorphy": "вглазесться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вграфил",
+      "mystem": "вграфлять",
+      "pymorphy": "вграфить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "великанье",
+      "mystem": "великаний",
+      "pymorphy": "великание",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "величь",
+      "mystem": "величивать",
+      "pymorphy": "величить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "верблюдиной",
+      "mystem": "верблюдина",
+      "pymorphy": "верблюдин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "верблюдокорабледраконьи",
+      "mystem": "верблюдокорабледраконий",
+      "pymorphy": "верблюдокорабледраконие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "верблюдьим",
+      "mystem": "верблюдьим",
+      "pymorphy": "верблюдий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вертай",
+      "mystem": "вертать",
+      "pymorphy": "вертая",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вершочку",
+      "mystem": "вершочек",
+      "pymorphy": "вершочко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ветрится",
+      "mystem": "ветриваться",
+      "pymorphy": "ветриться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вечереющем",
+      "mystem": "вечереть",
+      "pymorphy": "вечереять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вечерочками",
+      "mystem": "вечерочка",
+      "pymorphy": "вечерочек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взбежа",
+      "mystem": "взбеж",
+      "pymorphy": "взбежа",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взвались",
+      "mystem": "взваливаться",
+      "pymorphy": "взваться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взвеена",
+      "mystem": "взвеен",
+      "pymorphy": "взвеить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вздо",
+      "mystem": "вздо",
+      "pymorphy": "вздый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взлихораденно",
+      "mystem": "взлихораденно",
+      "pymorphy": "взлихорадённый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взметись",
+      "mystem": "взметаться",
+      "pymorphy": "взместись",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взмолены",
+      "mystem": "взмолять",
+      "pymorphy": "взмолить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взмонументят",
+      "mystem": "взмонументята",
+      "pymorphy": "взмонументить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взморщенный",
+      "mystem": "взморщенный",
+      "pymorphy": "взморщить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взорим",
+      "mystem": "взорить",
+      "pymorphy": "взорим",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "взрумянились",
+      "mystem": "взрумяниваться",
+      "pymorphy": "взрумяниться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "виолончелить",
+      "mystem": "виолончеливать",
+      "pymorphy": "виолончелить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вкуснятся",
+      "mystem": "вкусняться",
+      "pymorphy": "вкусниться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "во́рья",
+      "mystem": "ворье",
+      "pymorphy": "во́рье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "водищей",
+      "mystem": "водища",
+      "pymorphy": "водищи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "водищу",
+      "mystem": "водище",
+      "pymorphy": "водискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "водчонку",
+      "mystem": "водчонка",
+      "pymorphy": "водчонок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "воен",
+      "mystem": "воен",
+      "pymorphy": "воить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "волнища",
+      "mystem": "волнище",
+      "pymorphy": "волнищий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "волосища",
+      "mystem": "волосище",
+      "pymorphy": "волосискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "волосьев",
+      "mystem": "волос",
+      "pymorphy": "волосье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "волосья",
+      "mystem": "волосье",
+      "pymorphy": "волосий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "волосьями",
+      "mystem": "волос",
+      "pymorphy": "волосье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вопросищи",
+      "mystem": "вопросища",
+      "pymorphy": "вопросище",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "воспламеня",
+      "mystem": "воспламеня",
+      "pymorphy": "воспламенить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "восшедших",
+      "mystem": "восшедший",
+      "pymorphy": "восидти",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "восьмикрылка",
+      "mystem": "восьмикрылок",
+      "pymorphy": "восьмикрылка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "впеплен",
+      "mystem": "впеплен",
+      "pymorphy": "впеплена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "враспашку",
+      "mystem": "враспашку",
+      "pymorphy": "враспашка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вридзам",
+      "mystem": "вридза",
+      "pymorphy": "вридзам",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вросся",
+      "mystem": "вроссь",
+      "pymorphy": "вростись",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вросся",
+      "mystem": "вросся",
+      "pymorphy": "вростись",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "всвистал",
+      "mystem": "всвистывать",
+      "pymorphy": "всвистать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "всредоточены",
+      "mystem": "всредотачивать",
+      "pymorphy": "всредоточить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "встретя",
+      "mystem": "встретить",
+      "pymorphy": "встрести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "встретясь",
+      "mystem": "встрестись",
+      "pymorphy": "встретиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "въямясь",
+      "mystem": "въямиться",
+      "pymorphy": "въямясь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выблестила",
+      "mystem": "выблещивать",
+      "pymorphy": "выблестить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вывертелся",
+      "mystem": "выверчиваться",
+      "pymorphy": "вывертеться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выжглись",
+      "mystem": "выжглиться",
+      "pymorphy": "выжечься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выжуют",
+      "mystem": "выжуют",
+      "pymorphy": "выжевать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вызарила",
+      "mystem": "вызарять",
+      "pymorphy": "вызарил",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вызарю",
+      "mystem": "вызарить",
+      "pymorphy": "вызаря",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вызлена",
+      "mystem": "вызлить",
+      "pymorphy": "вызлен",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вызмеив",
+      "mystem": "вызмеив",
+      "pymorphy": "вызмеить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вызмей",
+      "mystem": "вызмей",
+      "pymorphy": "вызмея",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вызнакомь",
+      "mystem": "вызнакомлять",
+      "pymorphy": "вызнакомить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выйграл",
+      "mystem": "выйграл",
+      "pymorphy": "выйграло",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выкаймленный",
+      "mystem": "выкаймлять",
+      "pymorphy": "выкаймить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выкладай",
+      "mystem": "выкладать",
+      "pymorphy": "выкладай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вылегся",
+      "mystem": "вылегся",
+      "pymorphy": "вылечься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вылоснив",
+      "mystem": "вылоснить",
+      "pymorphy": "вылоснива",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вылья",
+      "mystem": "вылья",
+      "pymorphy": "выло",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вылюбил",
+      "mystem": "вылюблять",
+      "pymorphy": "вылюбить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вымань",
+      "mystem": "вымань",
+      "pymorphy": "выманя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вымах",
+      "mystem": "вым",
+      "pymorphy": "вымах",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выник",
+      "mystem": "выник",
+      "pymorphy": "выникнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выпестренный",
+      "mystem": "выпестрять",
+      "pymorphy": "выпестрить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выпимши",
+      "mystem": "выпимша",
+      "pymorphy": "выпимшить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выреву",
+      "mystem": "вырев",
+      "pymorphy": "выреветь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вырычут",
+      "mystem": "вырычут",
+      "pymorphy": "вырыкать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "высил",
+      "mystem": "высить",
+      "pymorphy": "высила",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "высиня",
+      "mystem": "высиня",
+      "pymorphy": "высиний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "высотищи",
+      "mystem": "высотища",
+      "pymorphy": "высотискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вытая",
+      "mystem": "вытать",
+      "pymorphy": "вытая",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вытолпила",
+      "mystem": "вытолпить",
+      "pymorphy": "вытолпил",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вытомлен",
+      "mystem": "вытомлять",
+      "pymorphy": "вытомлёный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "вытрубить",
+      "mystem": "вытрубать",
+      "pymorphy": "вытрубить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выхмуренном",
+      "mystem": "выхмуренный",
+      "pymorphy": "выхмурить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "выхоля",
+      "mystem": "выхоль",
+      "pymorphy": "выхолить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "газетин",
+      "mystem": "газетин",
+      "pymorphy": "газетина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "газетина",
+      "mystem": "газетин",
+      "pymorphy": "газетина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "газетину",
+      "mystem": "газетин",
+      "pymorphy": "газетина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "галифища",
+      "mystem": "галифище",
+      "pymorphy": "галифискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "галошинах",
+      "mystem": "галошино",
+      "pymorphy": "галошина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "галстух",
+      "mystem": "галстуха",
+      "pymorphy": "галстухнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гармонька",
+      "mystem": "гармонька",
+      "pymorphy": "гармонький",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гарьку",
+      "mystem": "гарька",
+      "pymorphy": "гарёк",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гачупины",
+      "mystem": "гачупина",
+      "pymorphy": "гачупин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гвоздишка",
+      "mystem": "гвоздишка",
+      "pymorphy": "гвоздишко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гвоздишки",
+      "mystem": "гвоздишки",
+      "pymorphy": "гвоздишко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гимназистик",
+      "mystem": "гимназистика",
+      "pymorphy": "гимназистик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гимназистики",
+      "mystem": "гимназистика",
+      "pymorphy": "гимназистик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гимназистиков",
+      "mystem": "гимназистиков",
+      "pymorphy": "гимназистик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "главнебзаведующий",
+      "mystem": "главнебзаведующий",
+      "pymorphy": "главнебзаведовать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "глубятся",
+      "mystem": "глубляться",
+      "pymorphy": "глубиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гневайте",
+      "mystem": "гневать",
+      "pymorphy": "гневайте",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "головат",
+      "mystem": "головатый",
+      "pymorphy": "головата",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "горланной",
+      "mystem": "горланная",
+      "pymorphy": "горланна",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "горланья",
+      "mystem": "горланий",
+      "pymorphy": "горланья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "горле́ц",
+      "mystem": "горлец",
+      "pymorphy": "горле́ца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "грандиозье",
+      "mystem": "грандиозье",
+      "pymorphy": "грандиозий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "греючи",
+      "mystem": "греючи",
+      "pymorphy": "греючить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "грозобуквом",
+      "mystem": "грозобуквом",
+      "pymorphy": "грозобуквый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "громадили",
+      "mystem": "громадить",
+      "pymorphy": "громадиля",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "громадьё",
+      "mystem": "громадья",
+      "pymorphy": "громадьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "громовий",
+      "mystem": "громовий",
+      "pymorphy": "громовье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гроссбухнем",
+      "mystem": "гроссбухать",
+      "pymorphy": "гроссбухнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "грудище",
+      "mystem": "грудище",
+      "pymorphy": "грудищий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "грузовичищи",
+      "mystem": "грузовичище",
+      "pymorphy": "грузовичищи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гря́зненьке",
+      "mystem": "грязненька",
+      "pymorphy": "гря́зненька",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "губатой",
+      "mystem": "губатый",
+      "pymorphy": "губата",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "губком",
+      "mystem": "губок",
+      "pymorphy": "губкома",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гудут",
+      "mystem": "гудут",
+      "pymorphy": "густи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гудёт",
+      "mystem": "гудет",
+      "pymorphy": "густи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гулево",
+      "mystem": "гулево",
+      "pymorphy": "гулевый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гусельках",
+      "mystem": "гуселек",
+      "pymorphy": "гуселька",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гуталинится",
+      "mystem": "гуталиниваться",
+      "pymorphy": "гуталиниться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "гёрл",
+      "mystem": "герл",
+      "pymorphy": "гёрло",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дадена",
+      "mystem": "дадена",
+      "pymorphy": "даден",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дадены",
+      "mystem": "дадена",
+      "pymorphy": "даден",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "далекость",
+      "mystem": "далекость",
+      "pymorphy": "далекостя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дамье",
+      "mystem": "дамья",
+      "pymorphy": "дамьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "двухместки",
+      "mystem": "двухместка",
+      "pymorphy": "двухместкать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "двухметроворостую",
+      "mystem": "двухметроворостой",
+      "pymorphy": "двухметроворостуй",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "двухспальным",
+      "mystem": "двухспальный",
+      "pymorphy": "двухспальная",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "декабрик",
+      "mystem": "декабрика",
+      "pymorphy": "декабрик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "диве́с",
+      "mystem": "дивес",
+      "pymorphy": "диве́с",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "динаму",
+      "mystem": "динама",
+      "pymorphy": "динаму",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дисканточком",
+      "mystem": "дисканточек",
+      "pymorphy": "дисканточко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дискоболша",
+      "mystem": "дискоболша",
+      "pymorphy": "дискоболш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "длинит",
+      "mystem": "длинять",
+      "pymorphy": "длинит",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "днишки",
+      "mystem": "днишки",
+      "pymorphy": "днишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "доисторичьем",
+      "mystem": "доисторичье",
+      "pymorphy": "доисторичий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "донесть",
+      "mystem": "донесть",
+      "pymorphy": "донбыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "допра",
+      "mystem": "допер",
+      "pymorphy": "допра",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дровинки",
+      "mystem": "дровинка",
+      "pymorphy": "дровинк",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дымище",
+      "mystem": "дымище",
+      "pymorphy": "дымища",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "дядьё",
+      "mystem": "дядье",
+      "pymorphy": "дядьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "евангелишек",
+      "mystem": "евангелишки",
+      "pymorphy": "евангелишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "евпаторёнки",
+      "mystem": "евпаторенок",
+      "pymorphy": "евпаторёнка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "евреева",
+      "mystem": "евреев",
+      "pymorphy": "евреева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "едении",
+      "mystem": "едение",
+      "pymorphy": "едения",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "едется",
+      "mystem": "едется",
+      "pymorphy": "есться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "едово",
+      "mystem": "едово",
+      "pymorphy": "едовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ейные",
+      "mystem": "ейная",
+      "pymorphy": "ейный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ерал",
+      "mystem": "ерал",
+      "pymorphy": "ерало",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жалеючи",
+      "mystem": "жалеючи",
+      "pymorphy": "жалеючить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жарчи",
+      "mystem": "жарчить",
+      "pymorphy": "жарча",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жданий",
+      "mystem": "ждание",
+      "pymorphy": "жданий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жданьи",
+      "mystem": "ждание",
+      "pymorphy": "жданья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жданья",
+      "mystem": "ждание",
+      "pymorphy": "жданья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "железнодоро́жит",
+      "mystem": "железнодорожить",
+      "pymorphy": "железнодоро́жить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "желтолистая",
+      "mystem": "желтолистый",
+      "pymorphy": "желтолистать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "женераль",
+      "mystem": "женераль",
+      "pymorphy": "женераля",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "животище",
+      "mystem": "животище",
+      "pymorphy": "животища",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жиденка",
+      "mystem": "жиденка",
+      "pymorphy": "жидёнка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жилкоп",
+      "mystem": "жилкоп",
+      "pymorphy": "жилкопа",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жирафёнку",
+      "mystem": "жирафенка",
+      "pymorphy": "жирафёнок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "жиркость",
+      "mystem": "жиркость",
+      "pymorphy": "жиркостя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "забензинено",
+      "mystem": "забензинивать",
+      "pymorphy": "забензинить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заверша",
+      "mystem": "завершить",
+      "pymorphy": "заверша",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "завирает",
+      "mystem": "завираться",
+      "pymorphy": "завираета",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заводовым",
+      "mystem": "заводовый",
+      "pymorphy": "заводов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заводьям",
+      "mystem": "завод",
+      "pymorphy": "заводье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "загоня",
+      "mystem": "загонь",
+      "pymorphy": "загнать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заграли",
+      "mystem": "загрывать",
+      "pymorphy": "заграли",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "загретый",
+      "mystem": "загретый",
+      "pymorphy": "загреть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "задеря",
+      "mystem": "задерь",
+      "pymorphy": "задрать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "задолицая",
+      "mystem": "задолицый",
+      "pymorphy": "задолицай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "зажгешь",
+      "mystem": "зажгешь",
+      "pymorphy": "зажгесть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "закатище",
+      "mystem": "закатище",
+      "pymorphy": "закатища",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заклеп",
+      "mystem": "заклеп",
+      "pymorphy": "заклёп",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "закудахтают",
+      "mystem": "закудахтать",
+      "pymorphy": "закудахтаять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "залежанные",
+      "mystem": "залеживать",
+      "pymorphy": "залежать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "залускали",
+      "mystem": "залускать",
+      "pymorphy": "залускали",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заляскали",
+      "mystem": "заляскать",
+      "pymorphy": "заляскали",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заменя",
+      "mystem": "заменя",
+      "pymorphy": "заменить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заметиться",
+      "mystem": "замечаться",
+      "pymorphy": "заметиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "замоля",
+      "mystem": "замоля",
+      "pymorphy": "замоль",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "замоча",
+      "mystem": "замотать",
+      "pymorphy": "замоча",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "замча",
+      "mystem": "замча",
+      "pymorphy": "замчать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "запейся",
+      "mystem": "запиваться",
+      "pymorphy": "запиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "запыханного",
+      "mystem": "запыхать",
+      "pymorphy": "запыханный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "запятни́тся",
+      "mystem": "запятниться",
+      "pymorphy": "запятни́ться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заранье",
+      "mystem": "зараний",
+      "pymorphy": "заранье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "заталмужена",
+      "mystem": "заталмуживать",
+      "pymorphy": "заталмудить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "затрубадури́ла",
+      "mystem": "затрубадурить",
+      "pymorphy": "затрубадури́ть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "затруднел",
+      "mystem": "затруднеть",
+      "pymorphy": "затруднела",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "звездищах",
+      "mystem": "звездища",
+      "pymorphy": "звездище",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "звездностью",
+      "mystem": "звездность",
+      "pymorphy": "звёздность",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "зверьей",
+      "mystem": "зверий",
+      "pymorphy": "зверья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "зверьими",
+      "mystem": "зверьимь",
+      "pymorphy": "зверий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "звоно́чище",
+      "mystem": "звоночище",
+      "pymorphy": "звоно́чище",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "звоночной",
+      "mystem": "звоночный",
+      "pymorphy": "звоночной",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "здрасите",
+      "mystem": "здрасить",
+      "pymorphy": "здрасит",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "землемерино",
+      "mystem": "землемерино",
+      "pymorphy": "землемерин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "златоустейший",
+      "mystem": "златоустейший",
+      "pymorphy": "златоустый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "зловодым",
+      "mystem": "зловода",
+      "pymorphy": "зловодым",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "злюни",
+      "mystem": "злюни",
+      "pymorphy": "злюня",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "змейнула",
+      "mystem": "змейнула",
+      "pymorphy": "змейнул",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "золот",
+      "mystem": "золота",
+      "pymorphy": "золот",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "зоологовых",
+      "mystem": "зоологов",
+      "pymorphy": "зоологовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "зудеж",
+      "mystem": "зудеж",
+      "pymorphy": "зудёжа",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "иглясь",
+      "mystem": "иглиться",
+      "pymorphy": "иглясь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "иголит",
+      "mystem": "иголит",
+      "pymorphy": "иголита",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "играние",
+      "mystem": "играний",
+      "pymorphy": "играние",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "издыбленного",
+      "mystem": "издыбливать",
+      "pymorphy": "издыбленный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "измами",
+      "mystem": "изма",
+      "pymorphy": "измами",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "изогрей",
+      "mystem": "изогревать",
+      "pymorphy": "изогреть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "изоранных",
+      "mystem": "изоранный",
+      "pymorphy": "изорать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "изоржав",
+      "mystem": "изоржать",
+      "pymorphy": "изоржавый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "изостлались",
+      "mystem": "изостилаться",
+      "pymorphy": "изостлаться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "изоханному",
+      "mystem": "изоханный",
+      "pymorphy": "изоханнома",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "израдиило",
+      "mystem": "израдиило",
+      "pymorphy": "израдиить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "изросшие",
+      "mystem": "израстать",
+      "pymorphy": "израсти",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "имут",
+      "mystem": "имут",
+      "pymorphy": "ять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "инфлуэнца",
+      "mystem": "инфлуэнца",
+      "pymorphy": "инфлуэнец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "испленен",
+      "mystem": "испленять",
+      "pymorphy": "испленный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "иссечась",
+      "mystem": "иссечиться",
+      "pymorphy": "иссечася",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "исслезенные",
+      "mystem": "исслезать",
+      "pymorphy": "исслезенный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "истемнила",
+      "mystem": "истемнять",
+      "pymorphy": "истемнить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ихнье",
+      "mystem": "ихнье",
+      "pymorphy": "ихние",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ишет",
+      "mystem": "ишет",
+      "pymorphy": "исать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "йереи",
+      "mystem": "йерея",
+      "pymorphy": "йерей",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кадрованный",
+      "mystem": "кадровать",
+      "pymorphy": "кадрованный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "калекши",
+      "mystem": "калекнуть",
+      "pymorphy": "калечь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кался",
+      "mystem": "кался",
+      "pymorphy": "каться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "капиталистовых",
+      "mystem": "капиталистовой",
+      "pymorphy": "капиталистовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "капиталова",
+      "mystem": "капиталов",
+      "pymorphy": "капиталовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "капиталова",
+      "mystem": "капиталова",
+      "pymorphy": "капиталовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "капиталовой",
+      "mystem": "капиталова",
+      "pymorphy": "капиталовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "каплища",
+      "mystem": "каплище",
+      "pymorphy": "каплискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "каплищей",
+      "mystem": "каплища",
+      "pymorphy": "каплищи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "карабкал",
+      "mystem": "карабкать",
+      "pymorphy": "карабкал",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "карежит",
+      "mystem": "карежить",
+      "pymorphy": "карёжить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "карнавалово",
+      "mystem": "карнавалово",
+      "pymorphy": "карнаваловый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кафедрале",
+      "mystem": "кафедрал",
+      "pymorphy": "кафедрало",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "квартиренок",
+      "mystem": "квартиренок",
+      "pymorphy": "квартирёнок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кепчонку",
+      "mystem": "кепчонка",
+      "pymorphy": "кепчонок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кло́чики",
+      "mystem": "клочики",
+      "pymorphy": "кло́чик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "клёшить",
+      "mystem": "клешивать",
+      "pymorphy": "клёшить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ковёрчиками",
+      "mystem": "коверчик",
+      "pymorphy": "ковёрчик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "козлицы",
+      "mystem": "козлицы",
+      "pymorphy": "козлица",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "коммуновым",
+      "mystem": "коммуновый",
+      "pymorphy": "коммуновое",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "компани",
+      "mystem": "компань",
+      "pymorphy": "компани",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "комсомо",
+      "mystem": "комсомо",
+      "pymorphy": "комсомый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кондуктриссу",
+      "mystem": "кондуктрисс",
+      "pymorphy": "кондуктрисса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "коневый",
+      "mystem": "коневый",
+      "pymorphy": "коневыя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "конешно",
+      "mystem": "конешное",
+      "pymorphy": "конешный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "коридоровой",
+      "mystem": "коридорова",
+      "pymorphy": "коридоров",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "королихи",
+      "mystem": "королиха",
+      "pymorphy": "королихой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "коронище",
+      "mystem": "коронища",
+      "pymorphy": "коронищий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кровянея",
+      "mystem": "кровянеть",
+      "pymorphy": "кровянея",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "крупичатая",
+      "mystem": "крупичатать",
+      "pymorphy": "крупичатый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "крышищу",
+      "mystem": "крышище",
+      "pymorphy": "крышискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кудрею",
+      "mystem": "кудреть",
+      "pymorphy": "кудрей",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кудроголовым",
+      "mystem": "кудроголовый",
+      "pymorphy": "кудроголов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кулачи́на",
+      "mystem": "кулачин",
+      "pymorphy": "кулачи́ич",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кулачонке",
+      "mystem": "кулачонка",
+      "pymorphy": "кулачонок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кулачьи",
+      "mystem": "кулачьи",
+      "pymorphy": "кулачий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "культуришке",
+      "mystem": "культуришко",
+      "pymorphy": "культуришка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "культуришки",
+      "mystem": "культуришок",
+      "pymorphy": "культуришка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "курьершины",
+      "mystem": "курьершина",
+      "pymorphy": "курьершин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "кухарочьи",
+      "mystem": "кухарочие",
+      "pymorphy": "кухарочий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лаврьи",
+      "mystem": "лаврья",
+      "pymorphy": "лаврие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лавь",
+      "mystem": "лавь",
+      "pymorphy": "лавить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ладков",
+      "mystem": "ладок",
+      "pymorphy": "ладковы",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лазоревосинесквозное",
+      "mystem": "лазоревосинесквозной",
+      "pymorphy": "лазоревосинесквозный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лазорья",
+      "mystem": "лазорий",
+      "pymorphy": "лазорье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лайцем",
+      "mystem": "лайц",
+      "pymorphy": "лаец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ландия",
+      "mystem": "ландия",
+      "pymorphy": "ландий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лапили",
+      "mystem": "лапливать",
+      "pymorphy": "лапить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лапя",
+      "mystem": "лапя",
+      "pymorphy": "лапить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лацкает",
+      "mystem": "лацкать",
+      "pymorphy": "лацкаета",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лацкая",
+      "mystem": "лацкий",
+      "pymorphy": "лацкай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лбенками",
+      "mystem": "лбенка",
+      "pymorphy": "лбенками",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "легкомыслой",
+      "mystem": "легкомыслой",
+      "pymorphy": "легкомыслый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "легочь",
+      "mystem": "легочь",
+      "pymorphy": "легочить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "легше",
+      "mystem": "легше",
+      "pymorphy": "легш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "леевой",
+      "mystem": "леевой",
+      "pymorphy": "леева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лефовца",
+      "mystem": "лефовец",
+      "pymorphy": "лефовца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ликбезит",
+      "mystem": "ликбезить",
+      "pymorphy": "ликбезита",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ликет",
+      "mystem": "ликет",
+      "pymorphy": "ликета",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лирово",
+      "mystem": "лирово",
+      "pymorphy": "лировый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лировой",
+      "mystem": "лировый",
+      "pymorphy": "лировой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "личью",
+      "mystem": "личий",
+      "pymorphy": "личие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ломовий",
+      "mystem": "ломовий",
+      "pymorphy": "ломовье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лоскуточек",
+      "mystem": "лоскуточек",
+      "pymorphy": "лоскуточка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лошадишка",
+      "mystem": "лошадишка",
+      "pymorphy": "лошадишко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лошажье",
+      "mystem": "лошажье",
+      "pymorphy": "лошажий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лошажью",
+      "mystem": "лошажь",
+      "pymorphy": "лошажий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лужищи",
+      "mystem": "лужище",
+      "pymorphy": "лужискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "луновы",
+      "mystem": "лунов",
+      "pymorphy": "луновый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лучища",
+      "mystem": "лучища",
+      "pymorphy": "лучискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лучище",
+      "mystem": "лучища",
+      "pymorphy": "лучистый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лысинном",
+      "mystem": "лысинный",
+      "pymorphy": "лысинном",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "любовищу",
+      "mystem": "любовища",
+      "pymorphy": "любовискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "людьё",
+      "mystem": "людье",
+      "pymorphy": "людьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ляскают",
+      "mystem": "ляскать",
+      "pymorphy": "ляскаюта",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ляская",
+      "mystem": "ляский",
+      "pymorphy": "ляскай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "лётонедели",
+      "mystem": "летонеделя",
+      "pymorphy": "лётонеделя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "маглидган",
+      "mystem": "маглидган",
+      "pymorphy": "маглидгать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мадамье",
+      "mystem": "мадамья",
+      "pymorphy": "мадамьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мадчари",
+      "mystem": "мадчарь",
+      "pymorphy": "мадчари",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мандолинят",
+      "mystem": "мандолинять",
+      "pymorphy": "мандолинить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "манифестин",
+      "mystem": "манифестины",
+      "pymorphy": "манифестина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "марксовой",
+      "mystem": "марксовый",
+      "pymorphy": "марксова",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "марксову",
+      "mystem": "марксов",
+      "pymorphy": "марксова",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "марсияне",
+      "mystem": "марсиянин",
+      "pymorphy": "марсиян",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "машинушку",
+      "mystem": "машинушка",
+      "pymorphy": "машинушко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "медв",
+      "mystem": "медва",
+      "pymorphy": "медть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мелочи́нным",
+      "mystem": "мелочинный",
+      "pymorphy": "мелочи́нный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "меняньем",
+      "mystem": "менянье",
+      "pymorphy": "меняние",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мертвизной",
+      "mystem": "мертвизный",
+      "pymorphy": "мертвизныть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "метранпажины",
+      "mystem": "метранпажина",
+      "pymorphy": "метранпажин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "метрополитанию",
+      "mystem": "метрополитания",
+      "pymorphy": "метрополитаний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "метрошку",
+      "mystem": "метрошка",
+      "pymorphy": "метрошку",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мещанья",
+      "mystem": "мещание",
+      "pymorphy": "мещанья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мещичек",
+      "mystem": "мещичка",
+      "pymorphy": "мещичек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "милюковски",
+      "mystem": "милюковский",
+      "pymorphy": "милюковск",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "миноносином",
+      "mystem": "миноносин",
+      "pymorphy": "миноносиный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "миссисипится",
+      "mystem": "миссисипаться",
+      "pymorphy": "миссисипиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "многолобой",
+      "mystem": "многолобый",
+      "pymorphy": "многолобой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "многопудье",
+      "mystem": "многопудье",
+      "pymorphy": "многопудие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мову",
+      "mystem": "мова",
+      "pymorphy": "мов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мокассин",
+      "mystem": "мокассин",
+      "pymorphy": "мокассина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "моктецумье",
+      "mystem": "моктецумье",
+      "pymorphy": "моктецумие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "молньимся",
+      "mystem": "молньимся",
+      "pymorphy": "молньиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мопсиков",
+      "mystem": "мопсик",
+      "pymorphy": "мопсиковы",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мордищи",
+      "mystem": "мордище",
+      "pymorphy": "мордискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мостища",
+      "mystem": "мостища",
+      "pymorphy": "мостискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мужиковствующих",
+      "mystem": "мужиковствующий",
+      "pymorphy": "мужиковствовать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мускулья",
+      "mystem": "мускулий",
+      "pymorphy": "мускулья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "муссолинится",
+      "mystem": "муссолиниваться",
+      "pymorphy": "муссолиниться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мусьи",
+      "mystem": "мусья",
+      "pymorphy": "мусие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мя́сами",
+      "mystem": "мяс",
+      "pymorphy": "мя́сами",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мягше",
+      "mystem": "мягше",
+      "pymorphy": "мягш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "мячище",
+      "mystem": "мячище",
+      "pymorphy": "мячистый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "наводня",
+      "mystem": "наводня",
+      "pymorphy": "наводнить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "накрамолил",
+      "mystem": "накрамаливать",
+      "pymorphy": "накрамолить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "намаранней",
+      "mystem": "намаранный",
+      "pymorphy": "намаранний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нанесть",
+      "mystem": "нанесть",
+      "pymorphy": "нанбыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "наркомше",
+      "mystem": "наркомша",
+      "pymorphy": "наркомше",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "насытясь",
+      "mystem": "насытясь",
+      "pymorphy": "насытиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нахлобуча",
+      "mystem": "нахлобуч",
+      "pymorphy": "нахлобучить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "начальствов",
+      "mystem": "начальствов",
+      "pymorphy": "начальств",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "начканц",
+      "mystem": "начканц",
+      "pymorphy": "начканца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "начу́дено",
+      "mystem": "начудено",
+      "pymorphy": "начу́сть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "небьей",
+      "mystem": "небьей",
+      "pymorphy": "небий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "небьим",
+      "mystem": "небьим",
+      "pymorphy": "небий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "неверы",
+      "mystem": "невер",
+      "pymorphy": "невера",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "невыбитой",
+      "mystem": "невыбивать",
+      "pymorphy": "невыбить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "негритья",
+      "mystem": "негритье",
+      "pymorphy": "негритие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "недодавленных",
+      "mystem": "недодавлять",
+      "pymorphy": "недодавить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "недопахано",
+      "mystem": "недопахивать",
+      "pymorphy": "недопаханый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "недорасстрелянных",
+      "mystem": "недорасстрелянный",
+      "pymorphy": "недорасстрелять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "недосеянный",
+      "mystem": "недосеивать",
+      "pymorphy": "недосеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "недочищенный",
+      "mystem": "недочищать",
+      "pymorphy": "недочистить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "недурненько",
+      "mystem": "недурненько",
+      "pymorphy": "недурненький",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "незабудищей",
+      "mystem": "незабудищий",
+      "pymorphy": "незабудищи",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нездешен",
+      "mystem": "нездешить",
+      "pymorphy": "нездесить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "неиссыхаемая",
+      "mystem": "неиссыхать",
+      "pymorphy": "неиссыхаять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "неисцветшую",
+      "mystem": "неисцветать",
+      "pymorphy": "неисцвести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "неконченную",
+      "mystem": "неконченный",
+      "pymorphy": "некончить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "неписанная",
+      "mystem": "неписывать",
+      "pymorphy": "неписать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "непревзойдимо",
+      "mystem": "непревзойдимо",
+      "pymorphy": "непревзойдить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "несмытой",
+      "mystem": "несмывать",
+      "pymorphy": "несмыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нетроганой",
+      "mystem": "нетроганый",
+      "pymorphy": "нетрогана",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нечеловече",
+      "mystem": "нечеловеч",
+      "pymorphy": "нечеловек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нижись",
+      "mystem": "нижаться",
+      "pymorphy": "низаться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ноблес",
+      "mystem": "ноблес",
+      "pymorphy": "ноблеса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "новостишкой",
+      "mystem": "новостишко",
+      "pymorphy": "новостишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нуво",
+      "mystem": "нуво",
+      "pymorphy": "нувый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нутр",
+      "mystem": "нутр",
+      "pymorphy": "нутро",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ньюйоркистей",
+      "mystem": "ньюйоркисть",
+      "pymorphy": "ньюйоркистый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нэйшенал",
+      "mystem": "нэйшенал",
+      "pymorphy": "нэйшенать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нэпачиха",
+      "mystem": "нэпачиха",
+      "pymorphy": "нэпачих",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нэпачка",
+      "mystem": "нэпачок",
+      "pymorphy": "нэпачка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нэпачки",
+      "mystem": "нэпачок",
+      "pymorphy": "нэпачка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "нят",
+      "mystem": "нята",
+      "pymorphy": "нят",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "о́голь",
+      "mystem": "оголь",
+      "pymorphy": "о́голь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обволокнутых",
+      "mystem": "обволокнутый",
+      "pymorphy": "обволокнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обвываний",
+      "mystem": "обвывание",
+      "pymorphy": "обвывания",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обвыл",
+      "mystem": "обвыл",
+      "pymorphy": "обвыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обвыли",
+      "mystem": "обвыль",
+      "pymorphy": "обвыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обдорская",
+      "mystem": "обдорская",
+      "pymorphy": "обдорский",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обезлюбленной",
+      "mystem": "обезлюбленный",
+      "pymorphy": "обезлюбить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обезумлюсь",
+      "mystem": "обезумливаться",
+      "pymorphy": "обезумиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "облакову",
+      "mystem": "облаков",
+      "pymorphy": "облакова",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "облошаделой",
+      "mystem": "облошаделый",
+      "pymorphy": "облошадела",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ободрану",
+      "mystem": "ободран",
+      "pymorphy": "ободрана",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "обфестонить",
+      "mystem": "обфестонять",
+      "pymorphy": "обфестонить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "овихрены",
+      "mystem": "овихренный",
+      "pymorphy": "овихрен",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "оглядцей",
+      "mystem": "оглядцей",
+      "pymorphy": "оглядца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "огнедымые",
+      "mystem": "огнедымые",
+      "pymorphy": "огнедымый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "огнел",
+      "mystem": "огнетать",
+      "pymorphy": "огнел",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "огнеперым",
+      "mystem": "огнеперый",
+      "pymorphy": "огнепёрый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "огро́мив",
+      "mystem": "огромить",
+      "pymorphy": "огро́мить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "одеялово",
+      "mystem": "одеялово",
+      "pymorphy": "одеяловый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "одиннадцатигодовой",
+      "mystem": "одиннадцатигодовой",
+      "pymorphy": "одиннадцатигодов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "одноглазье",
+      "mystem": "одноглазие",
+      "pymorphy": "одноглазье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "озарённей",
+      "mystem": "озаренный",
+      "pymorphy": "озарённый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "озноенный",
+      "mystem": "озноить",
+      "pymorphy": "озноенный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "окаркан",
+      "mystem": "окаркать",
+      "pymorphy": "окаркан",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "окромя",
+      "mystem": "окромить",
+      "pymorphy": "окромя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "омиллионенный",
+      "mystem": "омиллионить",
+      "pymorphy": "омиллионенный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "омолниили",
+      "mystem": "омолнииль",
+      "pymorphy": "омолниить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "опен",
+      "mystem": "опен",
+      "pymorphy": "опена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "опетом",
+      "mystem": "опет",
+      "pymorphy": "опеть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "опромети",
+      "mystem": "опрометать",
+      "pymorphy": "опромести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "орабочен",
+      "mystem": "орабочивать",
+      "pymorphy": "орабочный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "орамив",
+      "mystem": "орамлять",
+      "pymorphy": "орамить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "орло́",
+      "mystem": "орло",
+      "pymorphy": "орло́",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "орля",
+      "mystem": "орль",
+      "pymorphy": "орлить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "орыт",
+      "mystem": "орыто",
+      "pymorphy": "орытый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "освиневших",
+      "mystem": "освинеть",
+      "pymorphy": "освинесть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "осеня",
+      "mystem": "осень",
+      "pymorphy": "осенить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "осетринищу",
+      "mystem": "осетринища",
+      "pymorphy": "осетринище",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "особнячишки",
+      "mystem": "особнячишко",
+      "pymorphy": "особнячишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "осочка",
+      "mystem": "осочка",
+      "pymorphy": "осочок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "островочка",
+      "mystem": "островочка",
+      "pymorphy": "островочек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "отверзнете",
+      "mystem": "отверзать",
+      "pymorphy": "отверзнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "отдельце",
+      "mystem": "отдельце",
+      "pymorphy": "отделец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "откутав",
+      "mystem": "откутывать",
+      "pymorphy": "откутать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "отпущаеши",
+      "mystem": "отпущаешить",
+      "pymorphy": "отпущаесать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "оттеня",
+      "mystem": "оттень",
+      "pymorphy": "оттенить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "оченно",
+      "mystem": "оченно",
+      "pymorphy": "очённо",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пантерины",
+      "mystem": "пантерина",
+      "pymorphy": "пантерин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "патриарше",
+      "mystem": "патриарш",
+      "pymorphy": "патриарша",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "паучит",
+      "mystem": "паучать",
+      "pymorphy": "паучить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пахотцей",
+      "mystem": "пахотцей",
+      "pymorphy": "пахотца",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пекловых",
+      "mystem": "пекловой",
+      "pymorphy": "пеклов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пенснишки",
+      "mystem": "пенснишки",
+      "pymorphy": "пенснишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "первей",
+      "mystem": "первь",
+      "pymorphy": "первеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "перевесть",
+      "mystem": "перевесть",
+      "pymorphy": "переведать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "перевызубривши",
+      "mystem": "перевызубривать",
+      "pymorphy": "перевызубрить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "перееханную",
+      "mystem": "перееханный",
+      "pymorphy": "переехать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "перекоре",
+      "mystem": "перекор",
+      "pymorphy": "перекора",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "перержавленным",
+      "mystem": "перержавленный",
+      "pymorphy": "перержавить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "персиане",
+      "mystem": "персианин",
+      "pymorphy": "персиана",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "песенноесененный",
+      "mystem": "песенноесенять",
+      "pymorphy": "песенноесененный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пещрит",
+      "mystem": "пещрять",
+      "pymorphy": "пещрита",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пещрят",
+      "mystem": "пещрять",
+      "pymorphy": "пещрить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пианинить",
+      "mystem": "пианинивать",
+      "pymorphy": "пианинить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пивник",
+      "mystem": "пивник",
+      "pymorphy": "пивникнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пилсудчина",
+      "mystem": "пилсудчин",
+      "pymorphy": "пилсудчина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пимши",
+      "mystem": "пимша",
+      "pymorphy": "пимшить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "писнёт",
+      "mystem": "писнять",
+      "pymorphy": "писнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пишмаши",
+      "mystem": "пишмаши",
+      "pymorphy": "пишмахать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "планно",
+      "mystem": "планный",
+      "pymorphy": "планно",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "платий",
+      "mystem": "платий",
+      "pymorphy": "платия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "плевочки",
+      "mystem": "плевочка",
+      "pymorphy": "плёвочка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "плетищи",
+      "mystem": "плетища",
+      "pymorphy": "плетискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пло́щить",
+      "mystem": "площить",
+      "pymorphy": "пло́щить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "плоше",
+      "mystem": "плоша",
+      "pymorphy": "плош",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "побелелой",
+      "mystem": "побелелый",
+      "pymorphy": "побелела",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "побережит",
+      "mystem": "побереживать",
+      "pymorphy": "поберёжить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поверилось",
+      "mystem": "поверяться",
+      "pymorphy": "повериться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "повзвесьте",
+      "mystem": "повзвешивать",
+      "pymorphy": "повзвесить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "повылезли",
+      "mystem": "повылезать",
+      "pymorphy": "повылезти",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "повыломил",
+      "mystem": "повыламывать",
+      "pymorphy": "повыломить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "подваловой",
+      "mystem": "подвалова",
+      "pymorphy": "подваловый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "подзаймёте",
+      "mystem": "подзанимать",
+      "pymorphy": "подзанять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "подземельи",
+      "mystem": "подземелье",
+      "pymorphy": "подземелие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "подмахнитесь",
+      "mystem": "подмахиваться",
+      "pymorphy": "подмахнуться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "подпольи",
+      "mystem": "подполья",
+      "pymorphy": "подполие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "подрамниковой",
+      "mystem": "подрамниковый",
+      "pymorphy": "подрамников",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "позаломала",
+      "mystem": "позаламывать",
+      "pymorphy": "позаломать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "позатесался",
+      "mystem": "позатесываться",
+      "pymorphy": "позатесаться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поистасканного",
+      "mystem": "поистасканный",
+      "pymorphy": "поистаскать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "покорненько",
+      "mystem": "покорненько",
+      "pymorphy": "покорненький",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "покоря",
+      "mystem": "покорь",
+      "pymorphy": "покорить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полазий",
+      "mystem": "полазие",
+      "pymorphy": "полазия",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полглаза",
+      "mystem": "полглаза",
+      "pymorphy": "полглаз",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "политучебе",
+      "mystem": "политучеба",
+      "pymorphy": "политучёба",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полоборотца",
+      "mystem": "полоборотца",
+      "pymorphy": "полоборотец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "половчан",
+      "mystem": "половчанин",
+      "pymorphy": "половчан",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "положь",
+      "mystem": "полаживать",
+      "pymorphy": "положь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полсела",
+      "mystem": "полсел",
+      "pymorphy": "полсесть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полсотней",
+      "mystem": "полсотный",
+      "pymorphy": "полсотня",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полувылезшим",
+      "mystem": "полувылезать",
+      "pymorphy": "полувылезти",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полурабочему",
+      "mystem": "полурабочему",
+      "pymorphy": "полурабочий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "полуста",
+      "mystem": "полуст",
+      "pymorphy": "полста",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "помягше",
+      "mystem": "помягше",
+      "pymorphy": "помягш",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "понакуплю",
+      "mystem": "понакупать",
+      "pymorphy": "понакупить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пообстричь",
+      "mystem": "пообстригать",
+      "pymorphy": "пообстричь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поооостой",
+      "mystem": "поооостоять",
+      "pymorphy": "поооостоить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пооттяпали",
+      "mystem": "пооттяпывать",
+      "pymorphy": "пооттяпать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поповья",
+      "mystem": "поповье",
+      "pymorphy": "поповие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "попрежнему",
+      "mystem": "попрежнему",
+      "pymorphy": "попрежний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "попьей",
+      "mystem": "попий",
+      "pymorphy": "пьый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поразвинтились",
+      "mystem": "поразвинчиваться",
+      "pymorphy": "поразвинтиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поразлетится",
+      "mystem": "поразлетаться",
+      "pymorphy": "поразлететься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пораспустили",
+      "mystem": "пораспускать",
+      "pymorphy": "пораспустить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "портняжей",
+      "mystem": "портняж",
+      "pymorphy": "ртняжий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поскресть",
+      "mystem": "поскресть",
+      "pymorphy": "поскрбыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "посмелится",
+      "mystem": "посмеливаться",
+      "pymorphy": "посмелиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "посократили",
+      "mystem": "посокращать",
+      "pymorphy": "посократить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "потноживотые",
+      "mystem": "потноживотой",
+      "pymorphy": "потноживоть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "потолочка",
+      "mystem": "потолочка",
+      "pymorphy": "потолочко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поцветет",
+      "mystem": "поцветать",
+      "pymorphy": "поцвести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поэзи́",
+      "mystem": "поэзи",
+      "pymorphy": "поэзи́",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поэлладистей",
+      "mystem": "поэлладистый",
+      "pymorphy": "элладистый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поэтиного",
+      "mystem": "поэтиный",
+      "pymorphy": "поэтин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поэтово",
+      "mystem": "поэтово",
+      "pymorphy": "поэтовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "поэтовых",
+      "mystem": "поэтов",
+      "pymorphy": "поэтовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "появются",
+      "mystem": "появются",
+      "pymorphy": "появться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "превоспитанные",
+      "mystem": "превоспитывать",
+      "pymorphy": "превоспитанный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "преда",
+      "mystem": "пред",
+      "pymorphy": "преда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "предом",
+      "mystem": "пред",
+      "pymorphy": "предом",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "преду",
+      "mystem": "пред",
+      "pymorphy": "преда",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пригоршнью",
+      "mystem": "пригоршнью",
+      "pymorphy": "пригоршние",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прижаблен",
+      "mystem": "прижаблять",
+      "pymorphy": "прижабить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прикусились",
+      "mystem": "прикушаться",
+      "pymorphy": "прикуситься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прилампадя",
+      "mystem": "прилампадя",
+      "pymorphy": "прилампадить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "принесть",
+      "mystem": "принесть",
+      "pymorphy": "принбыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "припарадясь",
+      "mystem": "припарасться",
+      "pymorphy": "припарадиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "приснит",
+      "mystem": "приснять",
+      "pymorphy": "приснит",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "приценься",
+      "mystem": "прицениваться",
+      "pymorphy": "прицениться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пришипился",
+      "mystem": "пришипился",
+      "pymorphy": "пришипиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пришипься",
+      "mystem": "пришипься",
+      "pymorphy": "пришипаться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прогибишен",
+      "mystem": "прогибишенный",
+      "pymorphy": "прогибишный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прогрызанной",
+      "mystem": "прогрызанный",
+      "pymorphy": "прогрызать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прождя",
+      "mystem": "прождь",
+      "pymorphy": "прождать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пролеткультца",
+      "mystem": "пролеткультц",
+      "pymorphy": "пролеткультец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пролеткультцы",
+      "mystem": "пролеткультца",
+      "pymorphy": "пролеткультец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "простонародии",
+      "mystem": "простонародия",
+      "pymorphy": "простонародие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "прохожен",
+      "mystem": "проходить",
+      "pymorphy": "прохожена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пузы",
+      "mystem": "пуз",
+      "pymorphy": "пуза",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пулеметовой",
+      "mystem": "пулеметова",
+      "pymorphy": "пулеметовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пумовой",
+      "mystem": "пумовый",
+      "pymorphy": "пумовой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пустырьная",
+      "mystem": "пустырьная",
+      "pymorphy": "пустырьный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пышится",
+      "mystem": "пышаться",
+      "pymorphy": "пышиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "пятиминутье",
+      "mystem": "пятиминутье",
+      "pymorphy": "пятиминутьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "работёшку",
+      "mystem": "работешка",
+      "pymorphy": "работёшка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рабочье",
+      "mystem": "рабочье",
+      "pymorphy": "рабочие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рабочьи",
+      "mystem": "рабочьи",
+      "pymorphy": "рабочие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рабочью",
+      "mystem": "рабочью",
+      "pymorphy": "рабочие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "радиороста",
+      "mystem": "радиороста",
+      "pymorphy": "радиорост",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "радиоухо",
+      "mystem": "радиоухий",
+      "pymorphy": "радиоухо",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разбаси́в",
+      "mystem": "разбасить",
+      "pymorphy": "разбаси́ть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разберясь",
+      "mystem": "разбериться",
+      "pymorphy": "разбраться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развеерился",
+      "mystem": "развеериваться",
+      "pymorphy": "развеериться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развезувился",
+      "mystem": "развезувиваться",
+      "pymorphy": "развезувиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разверг",
+      "mystem": "разверг",
+      "pymorphy": "развергнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развея",
+      "mystem": "разветь",
+      "pymorphy": "развеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развеясь",
+      "mystem": "развеясь",
+      "pymorphy": "развеяться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развихрь",
+      "mystem": "развихрить",
+      "pymorphy": "развихрь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развоздушенным",
+      "mystem": "развоздушивать",
+      "pymorphy": "развоздушенный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развоскресенена",
+      "mystem": "развоскресенять",
+      "pymorphy": "развоскресенить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "развызубренный",
+      "mystem": "развызубривать",
+      "pymorphy": "развызубрить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разглазей",
+      "mystem": "разглазый",
+      "pymorphy": "разглазеть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разжемчуженной",
+      "mystem": "разжемчудить",
+      "pymorphy": "разжемчуженный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разжижели",
+      "mystem": "разжижель",
+      "pymorphy": "разжижеть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разжужженным",
+      "mystem": "разжужженный",
+      "pymorphy": "разжужечь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "раззолотоне́бело",
+      "mystem": "раззолотонебелый",
+      "pymorphy": "раззолотоне́беть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "раззор",
+      "mystem": "раззоры",
+      "pymorphy": "раззора",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разлетит",
+      "mystem": "разлетать",
+      "pymorphy": "разлететь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "размаши",
+      "mystem": "размаши",
+      "pymorphy": "размахать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "размедведил",
+      "mystem": "размедведило",
+      "pymorphy": "размедведить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "размозолев",
+      "mystem": "размозолев",
+      "pymorphy": "размозолевый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "размягший",
+      "mystem": "размягший",
+      "pymorphy": "размячь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разногласый",
+      "mystem": "разногласый",
+      "pymorphy": "разногласыя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разну́лится",
+      "mystem": "разнулиться",
+      "pymorphy": "разну́литься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разотзовись",
+      "mystem": "разотзываться",
+      "pymorphy": "разотозваться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разутроенною",
+      "mystem": "разутроенный",
+      "pymorphy": "разутроить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "разызысканной",
+      "mystem": "разызысканный",
+      "pymorphy": "разызыскать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рамьте",
+      "mystem": "рамьте",
+      "pymorphy": "рамить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расказёньте",
+      "mystem": "расказенивать",
+      "pymorphy": "расказёнить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расканарейте",
+      "mystem": "расканаревать",
+      "pymorphy": "расканареть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "раскиселится",
+      "mystem": "раскиселяться",
+      "pymorphy": "раскиселиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "раскрылилась",
+      "mystem": "раскрыляться",
+      "pymorphy": "раскрылиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "распенивши",
+      "mystem": "распенивать",
+      "pymorphy": "распенить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расперсонится",
+      "mystem": "расперсониваться",
+      "pymorphy": "расперсониться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "распостелилась",
+      "mystem": "распостилаться",
+      "pymorphy": "распостелиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "распрозаявиться",
+      "mystem": "распрозаявляться",
+      "pymorphy": "распрозаявиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "распроститучье",
+      "mystem": "распроститучье",
+      "pymorphy": "распроститучие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "распространя",
+      "mystem": "распространя",
+      "pymorphy": "распространить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рассея",
+      "mystem": "рассея",
+      "pymorphy": "рассеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рассиявшись",
+      "mystem": "рассиявшись",
+      "pymorphy": "рассияться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рассиялся",
+      "mystem": "рассиялся",
+      "pymorphy": "рассияться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рассоплено",
+      "mystem": "рассопеть",
+      "pymorphy": "рассопить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расфее́ривался",
+      "mystem": "расфеериваться",
+      "pymorphy": "расфее́риваться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расфеерили",
+      "mystem": "расфеерять",
+      "pymorphy": "расфеерить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расцветоченного",
+      "mystem": "расцветочить",
+      "pymorphy": "расцветоченный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расцветоченной",
+      "mystem": "расцветочить",
+      "pymorphy": "расцветоченный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "расчернее",
+      "mystem": "расчерный",
+      "pymorphy": "расчёрный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ратованию",
+      "mystem": "ратование",
+      "pymorphy": "ратования",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рваль",
+      "mystem": "рваль",
+      "pymorphy": "рваля",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рваты",
+      "mystem": "рват",
+      "pymorphy": "рвата",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "реди",
+      "mystem": "редь",
+      "pymorphy": "рести",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "реемой",
+      "mystem": "реемой",
+      "pymorphy": "реемыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "реквизнули",
+      "mystem": "реквизнуть",
+      "pymorphy": "реквизнуль",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рельсой",
+      "mystem": "рельсой",
+      "pymorphy": "рельсоя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ремесл",
+      "mystem": "ремесла",
+      "pymorphy": "ремеслый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рефаук",
+      "mystem": "рефаук",
+      "pymorphy": "рефаука",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ринем",
+      "mystem": "ринь",
+      "pymorphy": "ринемой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рифмочек",
+      "mystem": "рифмочек",
+      "pymorphy": "рифмочка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рная",
+      "mystem": "рнай",
+      "pymorphy": "рный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рожений",
+      "mystem": "рожение",
+      "pymorphy": "рожения",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рожья",
+      "mystem": "рожье",
+      "pymorphy": "рожий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "роздышка",
+      "mystem": "роздышко",
+      "pymorphy": "роздышка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рококо́вый",
+      "mystem": "рококовый",
+      "pymorphy": "рококо́вый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ропщется",
+      "mystem": "ропщется",
+      "pymorphy": "ропскаться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "роялина",
+      "mystem": "роялин",
+      "pymorphy": "роялина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ругашь",
+      "mystem": "ругашь",
+      "pymorphy": "ругать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "руглив",
+      "mystem": "руглять",
+      "pymorphy": "руглив",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "румянушка",
+      "mystem": "румянушка",
+      "pymorphy": "румянушко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рыни",
+      "mystem": "рынь",
+      "pymorphy": "рыня",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "рёволицые",
+      "mystem": "револицый",
+      "pymorphy": "рёволицый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "самокатчина",
+      "mystem": "самокатчина",
+      "pymorphy": "самокатчин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "самолетовы",
+      "mystem": "самолетовый",
+      "pymorphy": "самолетов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сандалишки",
+      "mystem": "сандалишка",
+      "pymorphy": "сандалишек",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сарагоссовой",
+      "mystem": "сарагоссова",
+      "pymorphy": "сарагоссовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сберешь",
+      "mystem": "сберешь",
+      "pymorphy": "сбрать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сбросся",
+      "mystem": "сбросся",
+      "pymorphy": "сбростись",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свежезараженным",
+      "mystem": "свежезараженный",
+      "pymorphy": "свежезаразить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сверхставками",
+      "mystem": "сверхставки",
+      "pymorphy": "сверхставка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "светаю",
+      "mystem": "светать",
+      "pymorphy": "светая",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свин",
+      "mystem": "свина",
+      "pymorphy": "свино",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свинищей",
+      "mystem": "свинища",
+      "pymorphy": "свинищий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свинищи",
+      "mystem": "свинища",
+      "pymorphy": "свинищий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свинцовоночие",
+      "mystem": "свинцовоночий",
+      "pymorphy": "свинцовоночие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свистоголосием",
+      "mystem": "свистоголосие",
+      "pymorphy": "свистоголосий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свисшиеся",
+      "mystem": "свисаться",
+      "pymorphy": "свисшийся",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сворищи",
+      "mystem": "сворище",
+      "pymorphy": "сворискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свояси",
+      "mystem": "свояси",
+      "pymorphy": "своясь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "свылись",
+      "mystem": "свылиться",
+      "pymorphy": "свыться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "се́ево",
+      "mystem": "сеево",
+      "pymorphy": "се́евый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "севен",
+      "mystem": "севна",
+      "pymorphy": "севено",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сегоня",
+      "mystem": "сегоня",
+      "pymorphy": "сегнать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "селедкин",
+      "mystem": "селедкин",
+      "pymorphy": "селедкина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сельде",
+      "mystem": "сельда",
+      "pymorphy": "селёд",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "семнадцтого",
+      "mystem": "семнадцтого",
+      "pymorphy": "семнадцтый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сенчери",
+      "mystem": "сенчеря",
+      "pymorphy": "сенчерь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сечью",
+      "mystem": "сечь",
+      "pymorphy": "сечие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сжаревший",
+      "mystem": "сжареть",
+      "pymorphy": "сжаресть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "синевели",
+      "mystem": "синеветь",
+      "pymorphy": "синевели",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сипаевы",
+      "mystem": "сипаев",
+      "pymorphy": "сипаева",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "скарежен",
+      "mystem": "скарежать",
+      "pymorphy": "скарежена",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "скаче",
+      "mystem": "скач",
+      "pymorphy": "скача",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "складбищась",
+      "mystem": "складбищась",
+      "pymorphy": "складбищиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "склонясь",
+      "mystem": "склонясь",
+      "pymorphy": "склониться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "склянь",
+      "mystem": "склянь",
+      "pymorphy": "склянуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "скулья",
+      "mystem": "скулий",
+      "pymorphy": "скулья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "скутан",
+      "mystem": "скутывать",
+      "pymorphy": "скутаный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "скушных",
+      "mystem": "скушный",
+      "pymorphy": "скушной",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "слаже",
+      "mystem": "сладко",
+      "pymorphy": "слажа",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "слезищу",
+      "mystem": "слезища",
+      "pymorphy": "слезискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "слезовой",
+      "mystem": "слезова",
+      "pymorphy": "слезовой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "словоцветы",
+      "mystem": "словоцвет",
+      "pymorphy": "словоцвета",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "словянами",
+      "mystem": "словянин",
+      "pymorphy": "словян",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "слонячей",
+      "mystem": "слонячи",
+      "pymorphy": "слонячея",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "смаху",
+      "mystem": "смаха",
+      "pymorphy": "смах",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "смеля",
+      "mystem": "смель",
+      "pymorphy": "смелить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сморя",
+      "mystem": "сморе",
+      "pymorphy": "сморить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "собвей",
+      "mystem": "собвевать",
+      "pymorphy": "собвить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "содрогая",
+      "mystem": "содрогий",
+      "pymorphy": "содрогай",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "солнцеглазье",
+      "mystem": "солнцеглазие",
+      "pymorphy": "солнцеглазье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "соскресть",
+      "mystem": "соскресть",
+      "pymorphy": "соскрбыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "соста",
+      "mystem": "соста",
+      "pymorphy": "сост",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сострена",
+      "mystem": "сострять",
+      "pymorphy": "сострить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сосуночек",
+      "mystem": "сосуночек",
+      "pymorphy": "сосуночка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "соцьал",
+      "mystem": "соцьал",
+      "pymorphy": "соцьать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ставенек",
+      "mystem": "ставенький",
+      "pymorphy": "ставенька",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "становил",
+      "mystem": "станавливать",
+      "pymorphy": "становить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "старушье",
+      "mystem": "старушье",
+      "pymorphy": "старушие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "старшино",
+      "mystem": "старшино",
+      "pymorphy": "старшиный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "старящ",
+      "mystem": "старящ",
+      "pymorphy": "старящий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стекляннейший",
+      "mystem": "стеклянной",
+      "pymorphy": "стеклянный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стелятся",
+      "mystem": "стеливаться",
+      "pymorphy": "стелиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стеня",
+      "mystem": "стень",
+      "pymorphy": "стенить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стишонок",
+      "mystem": "стишонка",
+      "pymorphy": "стишонок",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стоперой",
+      "mystem": "стоперый",
+      "pymorphy": "стопера",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сторо́гой",
+      "mystem": "сторогий",
+      "pymorphy": "сторо́га",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сторотый",
+      "mystem": "сторотый",
+      "pymorphy": "стороть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сторотым",
+      "mystem": "сторотый",
+      "pymorphy": "сторотым",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стоют",
+      "mystem": "стоют",
+      "pymorphy": "стыть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стрекозлом",
+      "mystem": "стрекозел",
+      "pymorphy": "стрекозёл",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стреленка",
+      "mystem": "стреленок",
+      "pymorphy": "стреленка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стриткара",
+      "mystem": "стриткар",
+      "pymorphy": "стриткара",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "стриты",
+      "mystem": "стрит",
+      "pymorphy": "стрита",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ступлены",
+      "mystem": "ступать",
+      "pymorphy": "ступить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сшатался",
+      "mystem": "сшатываться",
+      "pymorphy": "сшататься",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сычье",
+      "mystem": "сычий",
+      "pymorphy": "сычие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "сюжетьтесь",
+      "mystem": "сюжетьтесь",
+      "pymorphy": "сюжетиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "табачишке",
+      "mystem": "табачишко",
+      "pymorphy": "табачишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "таборник",
+      "mystem": "таборник",
+      "pymorphy": "таборникнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тайпистки",
+      "mystem": "тайпистка",
+      "pymorphy": "тайписткать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "таксей",
+      "mystem": "такся",
+      "pymorphy": "таксеять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "танго́во",
+      "mystem": "танговый",
+      "pymorphy": "танго́вый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тарелины",
+      "mystem": "тарелина",
+      "pymorphy": "тарелин",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тачьца",
+      "mystem": "тачьц",
+      "pymorphy": "тачец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "телеграммищу",
+      "mystem": "телеграммища",
+      "pymorphy": "телеграммискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "телефонит",
+      "mystem": "телефонить",
+      "pymorphy": "телефонит",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тикет",
+      "mystem": "тикет",
+      "pymorphy": "тикета",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ткнута",
+      "mystem": "ткнуть",
+      "pymorphy": "ткнут",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тово",
+      "mystem": "тово",
+      "pymorphy": "товый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "толчите",
+      "mystem": "толчать",
+      "pymorphy": "толчита",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тошнят",
+      "mystem": "тошнивать",
+      "pymorphy": "тошнить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тралер",
+      "mystem": "тралер",
+      "pymorphy": "тралера",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "трезвонится",
+      "mystem": "трезваниваться",
+      "pymorphy": "трезвониться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "трелёру",
+      "mystem": "трелер",
+      "pymorphy": "трелёра",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "трепешься",
+      "mystem": "трепешиваться",
+      "pymorphy": "трепесться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "третее",
+      "mystem": "третый",
+      "pymorphy": "третея",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "трехгорное",
+      "mystem": "трехгорное",
+      "pymorphy": "трехгорный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тронище",
+      "mystem": "тронища",
+      "pymorphy": "тронищий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тунели",
+      "mystem": "тунеля",
+      "pymorphy": "тунель",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "тят",
+      "mystem": "тята",
+      "pymorphy": "тят",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ударя",
+      "mystem": "ударь",
+      "pymorphy": "ударить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "узнашь",
+      "mystem": "узнашь",
+      "pymorphy": "узнать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "улитье",
+      "mystem": "улитье",
+      "pymorphy": "улитьё",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "урожаится",
+      "mystem": "урожаится",
+      "pymorphy": "урожаиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "усвоял",
+      "mystem": "усвоялый",
+      "pymorphy": "усвоять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "усопли",
+      "mystem": "усопли",
+      "pymorphy": "усопля",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "утопла",
+      "mystem": "утопло",
+      "pymorphy": "утопнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "утопшими",
+      "mystem": "утопший",
+      "pymorphy": "утопнуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "уютца",
+      "mystem": "уютц",
+      "pymorphy": "уютец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фабрикантова",
+      "mystem": "фабрикантов",
+      "pymorphy": "фабрикантовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фактцы",
+      "mystem": "фактца",
+      "pymorphy": "фактец",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фамилья",
+      "mystem": "фамилье",
+      "pymorphy": "фамилья",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фантастят",
+      "mystem": "фантастенок",
+      "pymorphy": "фантастить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "феймус",
+      "mystem": "феймус",
+      "pymorphy": "феймуса",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фиаска",
+      "mystem": "фиаска",
+      "pymorphy": "фиаск",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фиаски",
+      "mystem": "фиаски",
+      "pymorphy": "фиаск",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "философеет",
+      "mystem": "философеет",
+      "pymorphy": "философеть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фокстротит",
+      "mystem": "фокстротит",
+      "pymorphy": "фокстротить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фордзон",
+      "mystem": "фордзон",
+      "pymorphy": "фордзона",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "фордзоне",
+      "mystem": "фордзон",
+      "pymorphy": "фордзона",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "формясь",
+      "mystem": "формиться",
+      "pymorphy": "формясь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "футуристики",
+      "mystem": "футуристик",
+      "pymorphy": "футуристика",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "хвистик",
+      "mystem": "хвистика",
+      "pymorphy": "хвистик",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "хламовые",
+      "mystem": "хламовый",
+      "pymorphy": "хламовыя",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "хлебища",
+      "mystem": "хлебище",
+      "pymorphy": "хлебискать",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "хмуреют",
+      "mystem": "хмуреть",
+      "pymorphy": "хмуреять",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "хоша",
+      "mystem": "хоша",
+      "pymorphy": "хош",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "цыпленки",
+      "mystem": "цыпленка",
+      "pymorphy": "цыплёнка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чадь",
+      "mystem": "чадь",
+      "pymorphy": "чадить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чайнее",
+      "mystem": "чайний",
+      "pymorphy": "чайный",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чахотит",
+      "mystem": "чахотить",
+      "pymorphy": "чахотит",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чахоткины",
+      "mystem": "чахоткин",
+      "pymorphy": "чахоткина",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чемтвис",
+      "mystem": "чемтвисать",
+      "pymorphy": "чемтвиснуть",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "червятся",
+      "mystem": "червятся",
+      "pymorphy": "червиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чернобелые",
+      "mystem": "чернобелый",
+      "pymorphy": "чернобелые",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чехардят",
+      "mystem": "чехардят",
+      "pymorphy": "чехардить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чжанцзолинову",
+      "mystem": "чжанцзолиново",
+      "pymorphy": "чжанцзолинов",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "числ",
+      "mystem": "числ",
+      "pymorphy": "числый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чистописаниев",
+      "mystem": "чистописаниев",
+      "pymorphy": "чистописаний",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чком",
+      "mystem": "чком",
+      "pymorphy": "чкома",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чужо",
+      "mystem": "чужо",
+      "pymorphy": "чужой",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "чуингам",
+      "mystem": "чуинг",
+      "pymorphy": "чуинга",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шаганье",
+      "mystem": "шагание",
+      "pymorphy": "шаганье",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шашен",
+      "mystem": "шашивать",
+      "pymorphy": "шасить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шашлы",
+      "mystem": "шашла",
+      "pymorphy": "шашлый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шепоточком",
+      "mystem": "шепоточек",
+      "pymorphy": "шепоточко",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шестнадцатичасовой",
+      "mystem": "шестнадцатичасовой",
+      "pymorphy": "шестнадцатичасовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шесточек",
+      "mystem": "шесточек",
+      "pymorphy": "шесточка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шоферия",
+      "mystem": "шоферия",
+      "pymorphy": "шоферий",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "шпилим",
+      "mystem": "шпиливать",
+      "pymorphy": "шпилить",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "штатишкам",
+      "mystem": "штатишка",
+      "pymorphy": "штатишки",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "што",
+      "mystem": "што",
+      "pymorphy": "что",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "щелясь",
+      "mystem": "щелиться",
+      "pymorphy": "щелясь",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "электрощетка",
+      "mystem": "электрощетка",
+      "pymorphy": "электрощётка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "эполетово",
+      "mystem": "эполетов",
+      "pymorphy": "эполетовый",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "этажишек",
+      "mystem": "этажишки",
+      "pymorphy": "этажишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "этажия",
+      "mystem": "этажия",
+      "pymorphy": "этажие",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "явясь",
+      "mystem": "явясь",
+      "pymorphy": "явиться",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "язычишки",
+      "mystem": "язычишко",
+      "pymorphy": "язычишка",
+      "status": "❌ МISMATCH"
+    },
+    {
+      "wordform": "ящерьи",
+      "mystem": "ящерья",
+      "pymorphy": "ящерие",
+      "status": "❌ МISMATCH"
+    }
+  ]
+}
