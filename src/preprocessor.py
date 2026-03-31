@@ -253,7 +253,8 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
                 while token_idx < len(sent_tokens):
                     token_text = sent_tokens[token_idx]
                     token_idx += 1
-                    clean_token = re.sub(r'[^\w\s]', '', token_text)
+                    # Сохраняем дефис, чтобы словоформы совпадали с исходным текстом
+                    clean_token = re.sub(r'[^\w\s-]', '', token_text)
                     if not clean_token:
                         continue
                     if lemma not in lemma_forms:
@@ -369,7 +370,8 @@ def build_lemma_forms_mapping(database_path):
                         token_text = str(tokens[token_idx])
                         token_idx += 1
 
-                        clean_token = re.sub(r'[^\w\s]', '', token_text).strip()
+                        # Сохраняем дефис, чтобы словоформы совпадали с исходным текстом
+                        clean_token = re.sub(r'[^\w\s-]', '', token_text).strip()
 
                         if not clean_token or clean_token == '_BRK_':
                             continue

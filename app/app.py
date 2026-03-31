@@ -23,35 +23,20 @@ claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа
 
 @st.cache_data
 def load_data():
-    return pd.read_csv(os.path.join('data', 'database.csv'))
+    converters = {
+        'title': str,
+        'year_finished': int,
+        'raw_text': str,
+        'formatted_sentences': ast.literal_eval,
+        'lemmas_separated': ast.literal_eval,
+        'lemmas_cleaned': ast.literal_eval,
+        'lemmas_pos_tagged': ast.literal_eval,
+        'tokens': ast.literal_eval,
+    }
+    df = pd.read_csv('data/database.csv', converters=converters)
+    return df.to_dict('records')  # Список словарей
 
-@st.cache_data
-def prepare_full_corpus(df):
-    """
-    Превращает весь DF в список текстов, готовых для поиска.
-    """
-    full_corpus = []
-    for _, row in df.iterrows():
-        try:
 
-            formatted_sentences = ast.literal_eval(row['formatted_sentences']) if pd.notnull(row['formatted_sentences']) else []
-            lemmatized_sents = ast.literal_eval(row['lemmas_separated']) if pd.notnull(row['lemmas_separated']) else []
-            lemmatized_sents_cleaned = ast.literal_eval(row['lemmas_cleaned']) if pd.notnull(row['lemmas_cleaned']) else []
-            lemmatized_sents_pos_tagged = ast.literal_eval(row['lemmas_pos_tagged']) if pd.notnull(row['lemmas_pos_tagged']) else []
-
-            full_corpus.append({
-                'title': str(row['title']),
-                'year_finished': int(row['year_finished']),
-                'raw_text': str(row['raw_text']),
-                'formatted_sentences': formatted_sentences,
-                'lemmas_separated': lemmatized_sents,
-                'lemmas_cleaned': lemmatized_sents_cleaned,
-                'lemmas_pos_tagged': lemmatized_sents_pos_tagged
-                })
-        except Exception as e:
-            st.warning("ОШИБКА при обработке корпуса: " + str(e))
-
-    return full_corpus
 
 @st.cache_data
 def load_lemma_forms():
@@ -125,8 +110,7 @@ st.set_page_config(page_title="Mayak-2D Prototype", layout="wide")
 st.title("Mayak-2D")
 st.subheader("Прототип цифрового словаря В. В. Маяковского")
 
-df = load_data()
-full_corpus = prepare_full_corpus(df)
+full_corpus = load_data()
 lemmas_forms = load_lemma_forms()
 
 search_word = st.sidebar.text_input("Введите слово для анализа", "лошадь")
@@ -134,8 +118,11 @@ window_size = st.sidebar.slider("Размер окна контекста", 1, 1
 
 count_stopwords = st.sidebar.checkbox('Учитывать служебные слова', value=False)
 
-min_year = int(df['year_finished'].min())
-max_year = int(df['year_finished'].max())
+if full_corpus:
+    min_year = min(item['year_finished'] for item in full_corpus)
+    max_year = max(item['year_finished'] for item in full_corpus)
+else:
+    min_year = max_year = 0  # Вставить сюда предпреждение
 
 year_range = st.sidebar.slider(
     "Период написания",
@@ -290,12 +277,12 @@ if search_word:
             # Переключатель формата отображения
             context_format = st.radio(
                 "Формат отображения:",
-                ["📋 Таблица (базовая)", "🎨 Таблица (с выделением)"],
+                ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
                 horizontal=True,
                 help="Выберите удобный способ просмотра контекстов"
             )
 
-            if context_format == "📋 Таблица (базовая)":
+            if context_format == "📝 Таблица (базовая)":
                 display_contexts_table_simple(contexts)
             else:
                 display_contexts_table_highlighted(contexts)
