@@ -850,6 +850,6 @@ with tab_corpus:
             )
             st.altair_chart(
                 (points + labels).properties(height=600).configure_view(strokeWidth=0),
-                use_container_width=True,
+                width='stretch',
             )
         
