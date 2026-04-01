@@ -1,6 +1,5 @@
 import os
 import re
-import ast
 import json
 import pandas as pd
 import poetree # импортируем модуль для работы с корпусом PoeTree
@@ -203,7 +202,7 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
     lemma_forms = {}
 
     metadata_path = os.path.join(data_path, 'metadata.csv')
-    database_path = os.path.join(data_path, 'database.csv')
+    database_path = os.path.join(data_path, 'database.parquet')
     database_exists = os.path.isfile(database_path)
 
     files_list = get_files_in_folder(raw_poetry_path)
@@ -291,9 +290,12 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
     df = pd.DataFrame(data)
 
     if rewrite:
-        df.to_csv(database_path, mode='w', index=False, header=True, encoding='utf-8')
+        df.to_parquet(database_path, index=False)
     else:
-        df.to_csv(database_path, mode='a', index=False, header=not database_exists, encoding='utf-8')
+        if database_exists:
+            existing_df = pd.read_parquet(database_path)
+            df = pd.concat([existing_df, df], ignore_index=True)
+        df.to_parquet(database_path, index=False)
 
     print(f'Обработка завершена УСПЕШНО! База сохранена в {database_path}')
 
@@ -308,13 +310,12 @@ def save_author_vocabulary(database_path):
     """
     Извлекает все уникальные леммы из колонки 'lemmas_separated' и сохраняет в текстовый файл.
     """
-    df = pd.read_csv(database_path)
-    df['lemmas_separated'] = df['lemmas_separated'].apply(lambda x: ast.literal_eval(x) if pd.notnull(x) else [])
+    df = pd.read_parquet(database_path)
 
     vocab = set()
 
     for doc in df['lemmas_separated']:
-        # doc — это список списков (предложений)
+        # doc — это список списков (предложений), уже десериализованный из parquet
         for sentence in doc:
             for word in sentence:
                 if word.isalpha(): # Берем только слова, игнорируем _BRK_
@@ -333,30 +334,16 @@ def build_lemma_forms_mapping(database_path):
     Матчит tokens с lemmas_cleaned (без разделителей) для получения реальных форм.
     Сохраняет результат в JSON.
     """
-    df = pd.read_csv(database_path)
+    df = pd.read_parquet(database_path)
     lemma_forms = {}
     skipped = 0
 
     for idx, row in df.iterrows():
         try:
-            tokens_raw = row['tokens']
-            lemmas_raw = row['lemmas_cleaned']
+            tokens_sents = row['tokens']
+            lemmas_cleaned_sents = row['lemmas_cleaned']
 
-            if not pd.notnull(tokens_raw) or not pd.notnull(lemmas_raw):
-                continue
-
-            try:
-                tokens_sents = ast.literal_eval(tokens_raw)
-            except Exception as e:
-                print(f"⚠️  Строка {idx}: не удалось разобрать 'tokens': {e}")
-                skipped += 1
-                continue
-
-            try:
-                lemmas_cleaned_sents = ast.literal_eval(lemmas_raw)
-            except Exception as e:
-                print(f"⚠️  Строка {idx}: не удалось разобрать 'lemmas_cleaned': {e}")
-                skipped += 1
+            if not tokens_sents or not lemmas_cleaned_sents:
                 continue
 
             for tokens, lemmas_clean in zip(tokens_sents, lemmas_cleaned_sents):
@@ -400,4 +387,4 @@ def build_lemma_forms_mapping(database_path):
 
 if __name__ == '__main__':
     # process_poetry_corpus(rf'corpus/poetry', 'data', rewrite=True)
-    save_author_vocabulary(rf'data/database.csv')
+    save_author_vocabulary(rf'data/database.parquet')

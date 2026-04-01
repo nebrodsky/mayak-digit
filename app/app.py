@@ -6,7 +6,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # --------------------------------------------------------------
-import ast
 import json
 import ollama # Для взаимодействия с локальной Ollama
 import anthropic # Для взаимодействия с API Claude от Anthropic
@@ -25,17 +24,7 @@ claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа
 
 @st.cache_data
 def load_data():
-    converters = {
-        'title': str,
-        'year_finished': int,
-        'raw_text': str,
-        'formatted_sentences': ast.literal_eval,
-        'lemmas_separated': ast.literal_eval,
-        'lemmas_cleaned': ast.literal_eval,
-        'lemmas_pos_tagged': ast.literal_eval,
-        'tokens': ast.literal_eval,
-    }
-    df = pd.read_csv('data/database.csv', converters=converters)
+    df = pd.read_parquet('data/database.parquet')
     return df.to_dict('records')  # Список словарей
 
 @st.cache_data
@@ -183,10 +172,12 @@ lemmas_forms = load_lemma_forms()
 @st.cache_data
 def cached_full_word_analysis(search_word, year_range, window_size,
                                decay_distance, decay_brks, decay_sents):
+    
     filtered = [
         item for item in full_corpus
         if year_range[0] <= item['year_finished'] <= year_range[1]
     ]
+
     return full_word_analysis(
         filtered_corpus=filtered,
         target_word=search_word,
