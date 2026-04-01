@@ -303,7 +303,109 @@ def get_proximity_index_neighbors(filtered_corpus, target_norm, decay_distance, 
 
     return weights
 
-# 4. Главная координирующая функция
+# 4. Анализ дельты между двумя периодами
+def calculate_delta_analysis(results_1, results_2, count_stopwords=False):
+    """
+    Сравнивает два периода по ДИНАМИЧЕСКОМУ ИНДЕКСУ контекстуальной близости.
+    Анализирует только proximity_weights — статистику контекстного окна игнорирует.
+
+    Возвращает словарь:
+    {
+        'occurrences_delta': int,
+        'occurrences_pct': float,
+        'appeared_words': [(word, index_2), ...],  # Слова, появившиеся во втором периоде
+        'disappeared_words': [(word, index_1), ...],  # Слова, исчезнувшие
+        'changed_words': [
+            {
+                'word': str,
+                'index_1': float, 'index_2': float, 'index_delta': float, 'index_pct': float,
+                'status': str  # 'growing', 'declining', 'stable'
+            },
+            ...
+        ],
+        'top_rising': [...],     # Топ-5 растущих слов по индексу
+        'top_declining': [...]   # Топ-5 падающих слов по индексу
+    }
+    """
+    if not results_1 or not results_2:
+        return None
+
+    weights_1 = results_1['proximity_weights']
+    weights_2 = results_2['proximity_weights']
+
+    occurrences_1 = results_1['total_occurrences']
+    occurrences_2 = results_2['total_occurrences']
+    occurrences_delta = occurrences_2 - occurrences_1
+    occurrences_pct = (occurrences_delta / max(occurrences_1, 1)) * 100
+
+    # Словари слов в каждом периоде
+    words_1 = set(weights_1.keys())
+    words_2 = set(weights_2.keys())
+
+    # Категоризация
+    appeared = words_2 - words_1
+    disappeared = words_1 - words_2
+    both_periods = words_1 & words_2
+
+    appeared_words = [
+        (word, weights_2.get(word, 0.0))
+        for word in sorted(appeared, key=lambda w: weights_2.get(w, 0.0), reverse=True)
+    ]
+
+    disappeared_words = [
+        (word, weights_1.get(word, 0.0))
+        for word in sorted(disappeared, key=lambda w: weights_1.get(w, 0.0), reverse=True)
+    ]
+
+    # Слова, которые были в обоих периодах — анализируем дельту
+    changed_words = []
+    for word in both_periods:
+        index_1 = weights_1.get(word, 0.0)
+        index_2 = weights_2.get(word, 0.0)
+
+        index_delta = index_2 - index_1
+        index_pct = (index_delta / max(index_1, 0.001)) * 100 if index_1 > 0 else (100 if index_2 > 0 else 0)
+
+        # Определяем статус
+        if index_delta > 0:
+            status = 'growing'
+        elif index_delta < 0:
+            status = 'declining'
+        else:
+            status = 'stable'
+
+        changed_words.append({
+            'word': word,
+            'index_1': index_1,
+            'index_2': index_2,
+            'index_delta': index_delta,
+            'index_pct': index_pct,
+            'status': status,
+        })
+
+    # Сортируем и подбираем топ
+    changed_by_index_growth = sorted(
+        [w for w in changed_words if w['index_delta'] > 0],
+        key=lambda x: x['index_delta'],
+        reverse=True
+    )[:5]
+
+    changed_by_index_decline = sorted(
+        [w for w in changed_words if w['index_delta'] < 0],
+        key=lambda x: x['index_delta']
+    )[:5]
+
+    return {
+        'occurrences_delta': occurrences_delta,
+        'occurrences_pct': occurrences_pct,
+        'appeared_words': appeared_words[:10],
+        'disappeared_words': disappeared_words[:10],
+        'changed_words': sorted(changed_words, key=lambda x: abs(x['index_delta']), reverse=True)[:15],
+        'top_rising': changed_by_index_growth,
+        'top_declining': changed_by_index_decline
+    }
+
+# 5. Главная координирующая функция
 def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None, lemma_forms=None):
 
     if lemma_forms is None:
@@ -405,7 +507,7 @@ def synonyms_proximity_index(target_word, synonyms_filtered, proximity_weights):
     
     return syn_proximity_sorted
 
-def proximity_neighbours_for_synonyms(synonyms_filtered, raw_data, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None):
+def proximity_neighbours_for_synonyms(synonyms_filtered, raw_data, decay_distance=0.95, decay_brks=0.85, decay_sents=0.9, stopwords=None):
     """
     Для каждого отфильтрованного синонима считаем его соседей по "Индексу Маяка".
     Позволяет LLM понять, какие слова были близки к каждому синониму, а не только к таргету.
@@ -413,7 +515,7 @@ def proximity_neighbours_for_synonyms(synonyms_filtered, raw_data, decay_distanc
     neightbors_for_synonyms = {}
 
     for syn in synonyms_filtered:
-        weights = get_proximity_index_neighbors(raw_data, syn, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=stopwords)
+        weights = get_proximity_index_neighbors(raw_data, syn, decay_distance=decay_distance, decay_brks=decay_brks, decay_sents=decay_sents, stopwords=stopwords)
         # Сортируем и берем топ-10 соседей для каждого синонима
         neightbors_for_synonyms[syn] = weights.most_common(10)
 

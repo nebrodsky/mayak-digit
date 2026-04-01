@@ -12,7 +12,7 @@ import ollama # Для взаимодействия с локальной Ollama
 import anthropic # Для взаимодействия с API Claude от Anthropic
 import streamlit as st
 import pandas as pd
-from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, navec
+from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, navec, calculate_delta_analysis
 from src.text_utils import morph, russian_stopwords
 from dotenv import load_dotenv
 
@@ -129,18 +129,26 @@ year_range = st.sidebar.slider(
     min_year, max_year, (min_year, max_year)
 )
 
+compare_periods = st.sidebar.checkbox("Добавить второй период для сравнения контекстов (beta)", value=False)
+
+if compare_periods:
+    year_range_2 = st.sidebar.slider(
+        "Период написания (для сравнения)",
+        min_year, max_year, (min_year, max_year)
+    )
+
 with st.sidebar.expander("🤖 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
     ["Локальная (Ollama)", "API (Claude 3.5 Sonnet)"],
-    help="Claude требует ключ в .env и интернет. Ollama работает локально."
+    help="Claude требует ключ в .env и интернет. Ollama требует скачивания модели локально."
     )
 
 with st.sidebar.expander("⚙️ Настройки весов (Индекс Маяка)"):
     decay_distance = st.slider(
         "Затухание от расстояния", 
         min_value=0.5, max_value=1.0, value=0.95, step=0.01,
-        help="Коэффициент затухания для слов, находящихся дальше от целевого."
+        help="Коэффициент затухания для слов, находящихся дальше от таргета."
     )
     decay_sents = st.slider(
         "Между предложениями", 
@@ -173,7 +181,26 @@ if search_word:
         stopwords=russian_stopwords,
         lemma_forms=lemmas_forms
     )
-    
+
+    # Анализ второго периода для сравнения (если включено)
+    results_2 = None
+    if compare_periods:
+        filtered_corpus_2 = [
+            item for item in full_corpus
+            if year_range_2[0] <= item['year_finished'] <= year_range_2[1]
+        ]
+
+        results_2 = full_word_analysis(
+            filtered_corpus=filtered_corpus_2,
+            target_word=search_word,
+            window_size=window_size,
+            decay_distance=decay_distance,
+            decay_brks=decay_brks,
+            decay_sents=decay_sents,
+            stopwords=russian_stopwords,
+            lemma_forms=lemmas_forms
+        )
+
     if not results:
         st.warning("Слово не найдено в корпусе.")
 
@@ -188,7 +215,10 @@ if search_word:
 
         # --- УРОВЕНЬ 1.1: Заголовок со словом ---
         st.markdown(f"## Анализ слова: `{target_word}`")
-        st.caption(f"Период поиска: {year_range[0]} — {year_range[1]}")
+        if compare_periods:
+            st.caption(f"📊 Сравнение периодов: {year_range[0]} — {year_range[1]} vs {year_range_2[0]} — {year_range_2[1]}")
+        else:
+            st.caption(f"Период поиска: {year_range[0]} — {year_range[1]}")
 
         # --- УРОВЕНЬ 1.2: Синонимы (из словаря и встречающиеся в корпусе) ---
         st.subheader("Синонимы")
@@ -196,6 +226,8 @@ if search_word:
         synonyms_filtered = filter_synonyms_by_corpus(synonyms, filtered_corpus) # Фильтруем по корпусу
 
         if synonyms:
+            if compare_periods:
+                st.info("Подсчет списка синонимов происходит без привязки к периоду (на основе общего векторного словаря и полного корпуса Маяковского)")
             show_coefficients = st.checkbox('Показать коэффициенты близости', value=True)
             if show_coefficients:
                 synonyms_str = ', '.join([f"{syn} ({score:.4f})" for syn, score in synonyms])
@@ -209,83 +241,307 @@ if search_word:
 
         st.divider()
 
-        # --- УРОВЕНЬ 2: Три колонки (Метрика, POS, График) ---
-        col_metric, col_pos, col_years = st.columns(3)
+        # --- УРОВЕНЬ 2: Метрики и графики (один период или сравнение) ---
+        if compare_periods and results_2:
+            # Извлекаем данные для обоих периодов
+            total_occurrences_2 = results_2['total_occurrences']
+            year_dist_2 = results_2['year_dist']
+            pos_dist_2 = results_2['pos_dist']
 
-        with col_metric:
-            st.subheader("Статистика")
-            st.metric("Всего употреблений", total_occurrences)
-            st.write("Метод расчета: сумма всех вхождений леммы в выбранном периоде.")
+            # === ПЕРИОД 1 ===
+            st.subheader(f"📍 Период {year_range[0]} — {year_range[1]}")
+            col1_metric, col1_pos, col1_years = st.columns([1, 1.2, 1.2])
 
-        with col_pos:
-            st.subheader("Частеречное окружение")
-            if count_stopwords:
-                pos_data = pos_dist['with_stopwords']
-            else:
-                pos_data = pos_dist['filtered']
-            pos_df = pd.DataFrame(pos_data.items(), columns=['Часть речи', 'Кол-во'])
-            st.bar_chart(pos_df.set_index('Часть речи'))
+            with col1_metric:
+                st.metric("Всего употреблений", total_occurrences)
 
-        with col_years:
-            st.subheader("Динамика")
-            year_df = pd.DataFrame(results['year_dist'].items(), columns=['Год', 'Частота']).sort_values('Год')
-            st.line_chart(year_df.set_index('Год'))
+            with col1_pos:
+                st.caption("Частеречное окружение")
+                if count_stopwords:
+                    pos_data = pos_dist['with_stopwords']
+                else:
+                    pos_data = pos_dist['filtered']
+                pos_df = pd.DataFrame(pos_data.items(), columns=['Часть речи', 'Кол-во'])
+                st.bar_chart(pos_df.set_index('Часть речи'), height=200)
+
+            with col1_years:
+                st.caption("Динамика")
+                year_df = pd.DataFrame(year_dist.items(), columns=['Год', 'Частота']).sort_values('Год')
+                st.line_chart(year_df.set_index('Год'), height=200)
+
+            # === ПЕРИОД 2 ===
+            st.subheader(f"📍 Период {year_range_2[0]} — {year_range_2[1]}")
+            col2_metric, col2_pos, col2_years = st.columns([1, 1.2, 1.2])
+
+            with col2_metric:
+                st.metric("Всего употреблений", total_occurrences_2)
+
+            with col2_pos:
+                st.caption("Частеречное окружение")
+                if count_stopwords:
+                    pos_data_2 = pos_dist_2['with_stopwords']
+                else:
+                    pos_data_2 = pos_dist_2['filtered']
+                pos_df_2 = pd.DataFrame(pos_data_2.items(), columns=['Часть речи', 'Кол-во'])
+                st.bar_chart(pos_df_2.set_index('Часть речи'), height=200)
+
+            with col2_years:
+                st.caption("Динамика")
+                year_df_2 = pd.DataFrame(year_dist_2.items(), columns=['Год', 'Частота']).sort_values('Год')
+                st.line_chart(year_df_2.set_index('Год'), height=200)
+
+            # Дельта-метрики
+            st.divider()
+            occ_delta = total_occurrences_2 - total_occurrences
+            occ_pct = occ_delta / max(total_occurrences, 1) * 100
+            col_delta, _, _ = st.columns(3)
+            with col_delta:
+                st.metric("Δ Употреблений", f"{occ_delta:+d}", f"{occ_pct:+.1f}%")
+        else:
+            # Режим одного периода: три колонки как было
+            col_metric, col_pos, col_years = st.columns(3)
+
+            with col_metric:
+                st.subheader("Статистика")
+                st.metric("Всего употреблений", total_occurrences)
+                st.write("Метод расчета: сумма всех вхождений леммы в выбранном периоде.")
+
+            with col_pos:
+                st.subheader("Частеречное окружение")
+                if count_stopwords:
+                    pos_data = pos_dist['with_stopwords']
+                else:
+                    pos_data = pos_dist['filtered']
+                pos_df = pd.DataFrame(pos_data.items(), columns=['Часть речи', 'Кол-во'])
+                st.bar_chart(pos_df.set_index('Часть речи'))
+
+            with col_years:
+                st.subheader("Динамика")
+                year_df = pd.DataFrame(results['year_dist'].items(), columns=['Год', 'Частота']).sort_values('Год')
+                st.line_chart(year_df.set_index('Год'))
 
         st.divider()
 
         # --- УРОВЕНЬ 3: Сравнение методов (на всю ширину) ---
         st.subheader("Семантические связи")
 
-        # Создаем вкладки, чтобы не загромождать экран
-        tab_window, tab_index, tab_graph = st.tabs(["🔲 Классическое окно (Частота)", "🕸️ Индекс Маяка (Таблица)", "📊 Интерактивный граф"])
+        if compare_periods and results_2:
+            # Режим сравнения: семантические связи для обоих периодов
+            top_neighbors_2 = results_2['window_neighbors']
+            proximity_weights_2 = results_2['proximity_weights']
 
-        with tab_window:
-            if count_stopwords:
-                n_df = pd.DataFrame(top_neighbors['with_stopwords'].most_common(10), columns=['Лемма', 'Частота'])
-            else:
-                n_df = pd.DataFrame(top_neighbors['filtered'].most_common(10), columns=['Лемма', 'Частота'])
-            n_df.index = range(1, len(n_df) + 1)
-            st.table(n_df)
-            
-        with tab_index:
-            
-            weights_df = pd.DataFrame(proximity_weights.most_common(10), columns=['Лемма', 'Индекс'])
+            # Рассчитываем дельта-анализ
+            delta_analysis = calculate_delta_analysis(results, results_2, count_stopwords=count_stopwords)
 
-            if not weights_df.empty:
-                max_val = weights_df['Индекс'].max()
-                weights_df['Сила связи'] = weights_df['Индекс'] / max_val
-                weights_df.index = range(1, len(weights_df) + 1)
-            
-                st.dataframe(
-                    weights_df[['Лемма', 'Сила связи']],
-                    column_config={
-                        "Сила связи": st.column_config.ProgressColumn(
-                            "Контекстуальная близость", format="%.2f", min_value=0, max_value=1
+            tab_window, tab_index, tab_graph, tab_delta = st.tabs(["🔲 Классическое окно", "🕸️ Индекс Маяка", "📊 Интерактивный граф", "📈 Дельта-анализ"])
+
+            with tab_window:
+                # Классическое окно для обоих периодов
+                col_wnd_1, col_wnd_2 = st.columns(2)
+
+                with col_wnd_1:
+                    st.caption(f"Период {year_range[0]}—{year_range[1]}")
+                    if count_stopwords:
+                        n_df = pd.DataFrame(top_neighbors['with_stopwords'].most_common(10), columns=['Лемма', 'Частота'])
+                    else:
+                        n_df = pd.DataFrame(top_neighbors['filtered'].most_common(10), columns=['Лемма', 'Частота'])
+                    n_df.index = range(1, len(n_df) + 1)
+                    st.table(n_df)
+
+                with col_wnd_2:
+                    st.caption(f"Период {year_range_2[0]}—{year_range_2[1]}")
+                    if count_stopwords:
+                        n_df_2 = pd.DataFrame(top_neighbors_2['with_stopwords'].most_common(10), columns=['Лемма', 'Частота'])
+                    else:
+                        n_df_2 = pd.DataFrame(top_neighbors_2['filtered'].most_common(10), columns=['Лемма', 'Частота'])
+                    n_df_2.index = range(1, len(n_df_2) + 1)
+                    st.table(n_df_2)
+
+            with tab_index:
+                # Индекс контекстуальной близости для обоих периодов
+                col_idx_1, col_idx_2 = st.columns(2)
+
+                with col_idx_1:
+                    st.caption(f"Период {year_range[0]}—{year_range[1]}")
+                    weights_df = pd.DataFrame(proximity_weights.most_common(10), columns=['Лемма', 'Индекс'])
+                    if not weights_df.empty:
+                        max_val = weights_df['Индекс'].max()
+                        weights_df['Сила связи'] = weights_df['Индекс'] / max_val
+                        weights_df.index = range(1, len(weights_df) + 1)
+                        st.dataframe(
+                            weights_df[['Лемма', 'Сила связи']],
+                            column_config={
+                                "Сила связи": st.column_config.ProgressColumn(
+                                    "Контекстуальная близость", format="%.2f", min_value=0, max_value=1
+                                )
+                            },
+                            width='stretch'
                         )
-                    },
-                    width='stretch'
-                )
 
-        with tab_graph:
-            st.markdown("### 📊 Интерактивный граф семантических связей")
-            st.info("Отображение интерактивного графа будет реализовано в ближайших версиях.")
+                with col_idx_2:
+                    st.caption(f"Период {year_range_2[0]}—{year_range_2[1]}")
+                    weights_df_2 = pd.DataFrame(proximity_weights_2.most_common(10), columns=['Лемма', 'Индекс'])
+                    if not weights_df_2.empty:
+                        max_val_2 = weights_df_2['Индекс'].max()
+                        weights_df_2['Сила связи'] = weights_df_2['Индекс'] / max_val_2
+                        weights_df_2.index = range(1, len(weights_df_2) + 1)
+                        st.dataframe(
+                            weights_df_2[['Лемма', 'Сила связи']],
+                            column_config={
+                                "Сила связи": st.column_config.ProgressColumn(
+                                    "Контекстуальная близость", format="%.2f", min_value=0, max_value=1
+                                )
+                            },
+                            width='stretch'
+                        )
+
+            with tab_graph:
+                st.markdown("### 📊 Интерактивный граф семантических связей")
+                st.info("Отображение интерактивного графа будет реализовано в ближайших версиях.")
+
+            with tab_delta:
+                st.markdown("### 📈 Анализ изменений семантического поля")
+
+                if delta_analysis is None:
+                    st.warning("Нет данных для дельта-анализа.")
+                else:
+                    # Появившиеся слова
+                    col_app, col_dis = st.columns(2)
+
+                    with col_app:
+                        st.subheader("🟢 Топ появившихся слов")
+                        if delta_analysis['appeared_words']:
+                            app_df = pd.DataFrame(
+                                delta_analysis['appeared_words'],
+                                columns=['Слово', 'Индекс']
+                            )
+                            app_df.index = range(1, len(app_df) + 1)
+                            st.dataframe(app_df.head(10), width='stretch')
+                        else:
+                            st.info("Нет новых слов.")
+
+                    with col_dis:
+                        st.subheader("🔴 Топ исчезнувших слов")
+                        if delta_analysis['disappeared_words']:
+                            dis_df = pd.DataFrame(
+                                delta_analysis['disappeared_words'],
+                                columns=['Слово', 'Индекс']
+                            )
+                            dis_df.index = range(1, len(dis_df) + 1)
+                            st.dataframe(dis_df.head(10), width='stretch')
+                        else:
+                            st.info("Нет исчезнувших слов.")
+
+                    st.divider()
+
+                    # Изменяющиеся слова
+                    st.subheader("🔄 Самые существенные изменения индекса контекстуальной близости")
+
+                    if delta_analysis['changed_words']:
+                        changed_viz_data = []
+                        for item in delta_analysis['changed_words'][:10]:
+                            changed_viz_data.append({
+                                'Слово': item['word'],
+                                'Индекс период 1': f"{item['index_1']:.3f}",
+                                'Индекс период 2': f"{item['index_2']:.3f}",
+                                'Δ Индекс': f"{item['index_delta']:+.3f}",
+                                'Δ %': f"{item['index_pct']:+.1f}%",
+                                'Статус': '📈' if item['status'] == 'growing' else ('📉' if item['status'] == 'declining' else '➡️')
+                            })
+
+                        changed_df = pd.DataFrame(changed_viz_data)
+                        changed_df.index = range(1, len(changed_df) + 1)
+                        st.dataframe(changed_df, width='stretch', hide_index=False)
+                    else:
+                        st.info("Нет изменяющихся слов.")
+        else:
+            # Режим одного периода
+            tab_window, tab_index, tab_graph = st.tabs(["🔲 Классическое окно (Частота)", "🕸️ Индекс Маяка (Таблица)", "📊 Интерактивный граф"])
+
+            with tab_window:
+                if count_stopwords:
+                    n_df = pd.DataFrame(top_neighbors['with_stopwords'].most_common(10), columns=['Лемма', 'Частота'])
+                else:
+                    n_df = pd.DataFrame(top_neighbors['filtered'].most_common(10), columns=['Лемма', 'Частота'])
+                n_df.index = range(1, len(n_df) + 1)
+                st.table(n_df)
+
+            with tab_index:
+                weights_df = pd.DataFrame(proximity_weights.most_common(10), columns=['Лемма', 'Индекс'])
+
+                if not weights_df.empty:
+                    max_val = weights_df['Индекс'].max()
+                    weights_df['Сила связи'] = weights_df['Индекс'] / max_val
+                    weights_df.index = range(1, len(weights_df) + 1)
+
+                    st.dataframe(
+                        weights_df[['Лемма', 'Сила связи']],
+                        column_config={
+                            "Сила связи": st.column_config.ProgressColumn(
+                                "Контекстуальная близость", format="%.2f", min_value=0, max_value=1
+                            )
+                        },
+                        width='stretch'
+                    )
+
+            with tab_graph:
+                st.markdown("### 📊 Интерактивный граф семантических связей")
+                st.info("Отображение интерактивного графа будет реализовано в ближайших версиях.")
 
         # Таблица контекстов
         st.write("### Контексты употребления")
 
-        if contexts:
-            # Переключатель формата отображения
-            context_format = st.radio(
-                "Формат отображения:",
-                ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
-                horizontal=True,
-                help="Выберите удобный способ просмотра контекстов"
-            )
+        if compare_periods and results_2:
+            # Режим сравнения: контексты для обоих периодов
+            contexts_2 = results_2['contexts']
 
-            if context_format == "📝 Таблица (базовая)":
-                display_contexts_table_simple(contexts)
-            else:
-                display_contexts_table_highlighted(contexts)
+            col_ctx_1, col_ctx_2 = st.columns(2)
+
+            with col_ctx_1:
+                st.subheader(f"Период {year_range[0]} — {year_range[1]} ({len(contexts)} контекстов)")
+                if contexts:
+                    context_format = st.radio(
+                        "Формат отображения (период 1):",
+                        ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
+                        horizontal=True,
+                        help="Выберите удобный способ просмотра контекстов",
+                        key="ctx_fmt_1"
+                    )
+                    if context_format == "📝 Таблица (базовая)":
+                        display_contexts_table_simple(contexts)
+                    else:
+                        display_contexts_table_highlighted(contexts)
+
+            with col_ctx_2:
+                st.subheader(f"Период {year_range_2[0]} — {year_range_2[1]} ({len(contexts_2)} контекстов)")
+                if contexts_2:
+                    context_format_2 = st.radio(
+                        "Формат отображения (период 2):",
+                        ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
+                        horizontal=True,
+                        help="Выберите удобный способ просмотра контекстов",
+                        key="ctx_fmt_2"
+                    )
+                    if context_format_2 == "📝 Таблица (базовая)":
+                        display_contexts_table_simple(contexts_2)
+                    else:
+                        display_contexts_table_highlighted(contexts_2)
+                else:
+                    st.info("Контексты не найдены в этом периоде.")
+        else:
+            # Режим одного периода
+            if contexts:
+                context_format = st.radio(
+                    "Формат отображения:",
+                    ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
+                    horizontal=True,
+                    help="Выберите удобный способ просмотра контекстов"
+                )
+
+                if context_format == "📝 Таблица (базовая)":
+                    display_contexts_table_simple(contexts)
+                else:
+                    display_contexts_table_highlighted(contexts)
 
 # --- БЛОК ИНТЕРПРЕТАЦИИ ЧЕРЕЗ LLM ---
 if results:
