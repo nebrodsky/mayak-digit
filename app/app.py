@@ -7,6 +7,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # --------------------------------------------------------------
 import json
+import re
+import numpy as np
+import altair as alt
 import ollama # Для взаимодействия с локальной Ollama
 import anthropic # Для взаимодействия с API Claude от Anthropic
 import streamlit as st
@@ -113,11 +116,35 @@ def compute_vocabulary_growth(corpus_records):
 def cached_get_unique_synonyms(word, top_n=20, depth=50):
     return get_unique_synonyms(word, top_n_to_return=top_n, search_depth=depth)
 
+@st.cache_data
+def compute_vector_map(corpus_records, top_n=100, exclude_stopwords=True):
+    """Возвращает DataFrame с 2D-координатами (PCA) для топ-N лемм корпуса."""
+    freq_counter = compute_frequency_dict(corpus_records, exclude_stopwords=exclude_stopwords)
+    top_words = [word for word, _ in freq_counter.most_common(top_n)]
+
+    words_in_navec = [(word, freq_counter[word]) for word in top_words if word in navec]
+    if len(words_in_navec) < 3:
+        return None
+
+    words, freqs = zip(*words_in_navec)
+    matrix = np.array([navec[w] for w in words])
+
+    # PCA через numpy
+    centered = matrix - matrix.mean(axis=0)
+    _, _, Vt = np.linalg.svd(centered, full_matrices=False)
+    coords = centered @ Vt[:2].T
+
+    return pd.DataFrame({
+        'Слово': list(words),
+        'x': coords[:, 0],
+        'y': coords[:, 1],
+        'Частота': list(freqs),
+    })
+
 def format_context_with_highlight(text):
     """
     Преобразует маркеры <<<form>>> в красивую подсветку для Streamlit (:red[]).
     """
-    import re
     text = re.sub(r'<<<([^>]+)>>>', r':red[\1]', text)
     return text
 
@@ -792,3 +819,37 @@ with tab_corpus:
                 st.subheader("Type-Token Ratio")
                 st.caption("Отношение уникальных лемм к общему числу лемм в году")
                 st.line_chart(growth_df[['Type-Token Ratio']])
+
+        st.divider()
+
+        st.title("Векторная карта самых частотных слов")
+
+        col_vm_sw, col_vm_n = st.columns([1, 2])
+        with col_vm_sw:
+            vm_exclude_sw = st.checkbox("Исключить стоп-слова", value=True, key="vm_exclude_sw")
+        with col_vm_n:
+            vm_top_n = st.slider("Количество слов", 20, 300, 100, key="vm_top_n")
+
+        map_df = compute_vector_map(filtered_corpus_stats, top_n=vm_top_n, exclude_stopwords=vm_exclude_sw)
+
+        if map_df is None:
+            st.warning("Недостаточно слов с векторными представлениями для построения карты.")
+        else:
+            points = alt.Chart(map_df).mark_circle(opacity=0.7).encode(
+                x=alt.X('x:Q', axis=alt.Axis(labels=False, ticks=False, title=None, grid=False)),
+                y=alt.Y('y:Q', axis=alt.Axis(labels=False, ticks=False, title=None, grid=False)),
+                size=alt.Size('Частота:Q', scale=alt.Scale(range=[40, 400]), legend=None),
+                color=alt.Color('Частота:Q', scale=alt.Scale(scheme='viridis'), legend=None),
+                tooltip=['Слово:N', 'Частота:Q'],
+            )
+            labels = alt.Chart(map_df).mark_text(dx=6, dy=-6, fontSize=11, align='left', color='white').encode(
+                x='x:Q',
+                y='y:Q',
+                text='Слово:N',
+                tooltip=['Слово:N', 'Частота:Q'],
+            )
+            st.altair_chart(
+                (points + labels).properties(height=600).configure_view(strokeWidth=0),
+                use_container_width=True,
+            )
+        
