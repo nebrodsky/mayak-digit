@@ -21,3 +21,7 @@ app/app_pretests/
 # technical files which are not used in current project
 # used for debugging and testing, but not needed in the repo
 archive/
+
+# finetuned models
+# not public yet
+/models/tsdae_mayakovsky/

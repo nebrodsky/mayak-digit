@@ -117,28 +117,39 @@ def cached_get_unique_synonyms(word, top_n=20, depth=50):
     return get_unique_synonyms(word, top_n_to_return=top_n, search_depth=depth)
 
 @st.cache_data
-def compute_vector_map(corpus_records, top_n=100, exclude_stopwords=True):
-    """Возвращает DataFrame с 2D-координатами (PCA) для топ-N лемм корпуса."""
-    freq_counter = compute_frequency_dict(corpus_records, exclude_stopwords=exclude_stopwords)
-    top_words = [word for word, _ in freq_counter.most_common(top_n)]
+def compute_vector_map(corpus_records, top_n=100, exclude_stopwords=True, pca_base_size=300):
+    """
+    Возвращает DataFrame с 2D-координатами (PCA) для топ-N лемм корпуса.
 
-    words_in_navec = [(word, freq_counter[word]) for word in top_words if word in navec]
+    ⚠️  PCA вычисляется на pca_base_size словах, затем берётся подмножество top_n.
+    Это гарантирует статичные координаты независимо от top_n!
+    """
+    # Гарантируем, что pca_base_size >= top_n
+    if pca_base_size < top_n:
+        pca_base_size = top_n
+
+    freq_counter = compute_frequency_dict(corpus_records, exclude_stopwords=exclude_stopwords)
+    # ⭐ Берём все_words_for_pca слов для вычисления PCA
+    all_words_for_pca = [word for word, _ in freq_counter.most_common(pca_base_size)]
+
+    words_in_navec = [(word, freq_counter[word]) for word in all_words_for_pca if word in navec]
     if len(words_in_navec) < 3:
         return None
 
     words, freqs = zip(*words_in_navec)
     matrix = np.array([navec[w] for w in words])
 
-    # PCA через numpy
+    # PCA через numpy (вычисляется на всех словах из pca_base_size)
     centered = matrix - matrix.mean(axis=0)
     _, _, Vt = np.linalg.svd(centered, full_matrices=False)
     coords = centered @ Vt[:2].T
 
+    # ⭐ Берём первые top_n из вычисленного набора
     return pd.DataFrame({
-        'Слово': list(words),
-        'x': coords[:, 0],
-        'y': coords[:, 1],
-        'Частота': list(freqs),
+        'Слово': list(words)[:top_n],
+        'x': coords[:top_n, 0],
+        'y': coords[:top_n, 1],
+        'Частота': list(freqs)[:top_n],
     })
 
 def format_context_with_highlight(text):
@@ -830,7 +841,7 @@ with tab_corpus:
         with col_vm_n:
             vm_top_n = st.slider("Количество слов", 20, 300, 100, key="vm_top_n")
 
-        map_df = compute_vector_map(filtered_corpus_stats, top_n=vm_top_n, exclude_stopwords=vm_exclude_sw)
+        map_df = compute_vector_map(filtered_corpus_stats, top_n=vm_top_n, exclude_stopwords=vm_exclude_sw, pca_base_size=max(300, vm_top_n))
 
         if map_df is None:
             st.warning("Недостаточно слов с векторными представлениями для построения карты.")
