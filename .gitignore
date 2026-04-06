@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 
 venv/
-models/archive/
 
 # macOS system files
 .DS_Store
@@ -11,7 +10,7 @@ models/archive/
 # raw corpora
 # will be published separately later
 corpus/
-# corpora of other poets data
+# corpora of other poets
 !corpus/other_authors/
 !corpus/other_authors/**
 
@@ -31,3 +30,9 @@ archive/
 # finetuned models
 # not public yet
 /models/tsdae_mayakovsky/
+
+# archive of models (for development purposes only)
+models/archive/
+
+# analysis results (for development purposes only)
+results/
