@@ -407,7 +407,7 @@ def calculate_delta_analysis(results_1, results_2, count_stopwords=False):
     }
 
 # 5. Главная координирующая функция
-def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distance=0.95, decay_brks=0.9, decay_sents=0.8, stopwords=None, lemma_forms=None):
+def full_word_analysis(filtered_corpus, target_word, window_size=5, decay_distance=0.95, decay_brks=0.85, decay_sents=0.9, stopwords=None, lemma_forms=None):
 
     if lemma_forms is None:
         lemma_forms = {}
