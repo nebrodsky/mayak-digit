@@ -10,8 +10,6 @@ import json
 import re
 import numpy as np
 import altair as alt
-import ollama # Для взаимодействия с локальной Ollama
-import anthropic # Для взаимодействия с API Claude от Anthropic
 import streamlit as st
 import pandas as pd
 from collections import Counter
@@ -21,9 +19,10 @@ from dotenv import load_dotenv
 
 # --------------------------------------------------------------
 
-# Получаем API-ключ для Claude
+# Получаем API-ключи
 load_dotenv()
 claude_key = os.getenv("ANTHROPIC_API_KEY") # API-ключ для доступа к модели Claude от Anthropic
+deepseek_key = os.getenv("DEEPSEEK_API_KEY") # API-ключ для доступа к DeepSeek
 
 @st.cache_data
 def load_data():
@@ -255,8 +254,8 @@ if compare_periods:
 with st.sidebar.expander("🤖 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
-    ["Локальная (Ollama)", "API (Claude 3.5 Sonnet)"],
-    help="Claude требует ключ в .env и интернет. Ollama требует скачивания модели локально."
+    ["Локальная (Ollama)", "DeepSeek 3.5 (API)", "API (Claude 3.5 Sonnet)"],
+    help="DeepSeek и Claude требуют ключи в .env и интернет. Ollama требует скачивания модели локально."
     )
 
 with st.sidebar.expander("⚙️ Настройки весов (Индекс Маяка)"):
@@ -701,7 +700,9 @@ with tab_search:
                     synonyms=synonyms,
                     synonyms_filtered=synonyms_filtered,
                     syn_proximity=syn_prox_index,
-                    neighbors_for_synonyms=neighbors_for_syns
+                    neighbors_for_synonyms=neighbors_for_syns,
+                    total_occurrences=results['total_occurrences'],
+                    year_dist=results['year_dist']
                 )
 
                 # Убираем временный текст статуса перед выводом результата
@@ -731,30 +732,58 @@ with tab_search:
                     st.error(f"Ошибка при обращении к Ollama: {e}")
                     st.info("Убедитесь, что приложение Ollama запущено и модель llama3:8b скачана.")
 
-            elif model_source == "API (Claude 3.5 Sonnet)":
-                if not claude_key:
-                    st.error("Ключ Anthropic не найден в .env!")
+            elif model_source == "DeepSeek 3.5 (API)":
+                if not deepseek_key:
+                    st.error("Ключ DeepSeek не найден в .env! Добавьте DEEPSEEK_API_KEY.")
                 else:
-                    client = anthropic.Anthropic(api_key=claude_key)
+                    from openai import OpenAI as DeepSeekClient
+                    client_ds = DeepSeekClient(api_key=deepseek_key, base_url="https://api.deepseek.com")
 
-                    with st.spinner("Claude анализирует семантические поля..."):
-
+                    with st.spinner("DeepSeek анализирует семантические поля..."):
                         try:
-
-                            message = client.messages.create(
-                                model="claude-sonnet-4-6",
-                                max_tokens=1024,
-                                system="Ты — эксперт-филолог, специализирующийся на творчестве В. В. Маяковского. Ты работаешь над составлением цифрового словаря авторского языка",
+                            response = client_ds.chat.completions.create(
+                                model="deepseek-chat",
                                 messages=[
                                     {
+                                        "role": "system",
+                                        "content": "Ты — аналитический инструмент для обработки корпусных данных. Обобщай и интерпретируй только те данные, которые тебе предоставлены. Не добавляй внешние знания, биографические сведения или литературоведческие теории, которых нет в переданных данных. Отвечай строго по заданной структуре, кратко и конкретно."
+                                    },
+                                    {
                                         "role": "user",
-                                        "content": interpr_prompt}]
+                                        "content": interpr_prompt
+                                    }
+                                ],
+                                stream=False
                             )
-                            st.markdown(message.content[0].text)
-
+                            st.markdown(response.choices[0].message.content)
                         except Exception as e:
-                            st.error(f"Ошибка API Claude: {e}")
-                            st.info("Убедитесь, что ключ Anthropic корректно настроен.")
+                            st.error(f"Ошибка API DeepSeek: {e}")
+                            st.info("Убедитесь, что ключ DEEPSEEK_API_KEY корректно настроен.")
+
+            # elif model_source == "API (Claude 3.5 Sonnet)":
+            #     if not claude_key:
+            #         st.error("Ключ Anthropic не найден в .env!")
+            #     else:
+            #         client = anthropic.Anthropic(api_key=claude_key)
+            #
+            #         with st.spinner("Claude анализирует семантические поля..."):
+            #
+            #             try:
+            #
+            #                 message = client.messages.create(
+            #                     model="claude-sonnet-4-6",
+            #                     max_tokens=1024,
+            #                     system="Ты — эксперт-филолог, специализирующийся на творчестве В. В. Маяковского. Ты работаешь над составлением цифрового словаря авторского языка",
+            #                     messages=[
+            #                         {
+            #                             "role": "user",
+            #                             "content": interpr_prompt}]
+            #                 )
+            #                 st.markdown(message.content[0].text)
+            #
+            #             except Exception as e:
+            #                 st.error(f"Ошибка API Claude: {e}")
+            #                 st.info("Убедитесь, что ключ Anthropic корректно настроен.")
 
 
 # ══════════════════════════════════════════════════════════════
