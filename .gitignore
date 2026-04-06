@@ -11,6 +11,12 @@ models/archive/
 # raw corpora
 # will be published separately later
 corpus/
+# corpora of other poets data
+!corpus/other_authors/
+!corpus/other_authors/**
+
+# poetree dump preprocessing (temporary, not public)
+src/preprocess_poetree_dump.py
 
 # unpublic tests of the app
 app/app_pretests/
