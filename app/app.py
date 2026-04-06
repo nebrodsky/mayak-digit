@@ -254,7 +254,7 @@ if compare_periods:
 with st.sidebar.expander("🤖 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
-    ["Локальная (Ollama)", "DeepSeek 3.5 (API)", "API (Claude 3.5 Sonnet)"],
+    ["Локальная (Ollama)", "DeepSeek 3.5 (API)", "Claude 3.5 Sonnet (временно недоступен)"],
     help="DeepSeek и Claude требуют ключи в .env и интернет. Ollama требует скачивания модели локально."
     )
 
@@ -669,7 +669,7 @@ with tab_search:
 
     # --- БЛОК ИНТЕРПРЕТАЦИИ ЧЕРЕЗ LLM ---
     if search_word and results:
-        if st.button("🚀 Запустить интерпретацию через LLM"):
+        if st.button("🚀 Запустить анализ через LLM"):
             
             # Импорты перемещены сюда для ускорения процесса загрузки страницы
             
@@ -713,7 +713,7 @@ with tab_search:
             st.code(interpr_prompt, language="text")
 
             st.divider()
-            st.subheader("📝 Филологический комментарий от LLM:")
+            st.subheader("📝 Аналитический комментарий от LLM:")
 
             # --- ЛОГИКА ВЫБОРА МОДЕЛИ ---
 
@@ -742,7 +742,7 @@ with tab_search:
                     with st.spinner("DeepSeek анализирует семантические поля..."):
                         try:
                             response = client_ds.chat.completions.create(
-                                model="deepseek-chat",
+                                model="deepseek-reasoner",
                                 messages=[
                                     {
                                         "role": "system",
