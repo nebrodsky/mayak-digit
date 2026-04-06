@@ -16,7 +16,7 @@ import streamlit as st
 import pandas as pd
 from collections import Counter
 from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, navec, calculate_delta_analysis
-from src.text_utils import morph, russian_stopwords
+from src.text_utils import russian_stopwords
 from dotenv import load_dotenv
 
 # --------------------------------------------------------------
@@ -286,8 +286,24 @@ with tab_search:
 
     if search_word:
 
-        search_word = search_word.strip().lower() # Убираем лишние пробелы и приводим к нижнему регистру
-        target_word = morph.parse(search_word)[0].normal_form # Лемматизируем для надежности
+        search_word = search_word.strip().lower().replace('ё', 'е')
+
+        found_lemma = next(
+            (lemma for lemma in lemmas_forms if lemma.replace('ё', 'е') == search_word),
+            None
+        )
+        if not found_lemma:
+            found_lemma = next(
+                (lemma for lemma, forms in lemmas_forms.items()
+                 if any(f.replace('ё', 'е') == search_word for f in forms)),
+                None
+            )
+        if found_lemma:
+            target_word = found_lemma
+            search_word = found_lemma
+        else:
+            st.warning("Слово не найдено в корпусе.")
+            st.stop()
 
         filtered_corpus = [
             item for item in full_corpus

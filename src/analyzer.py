@@ -129,6 +129,7 @@ def get_occurrence_data(filtered_corpus, target_norm, lemma_forms):
                     context_sentence = f"{context_sentence} {shortest_neighbor}".strip(' / —–-')
 
             # Подсвечиваем все словоформы в контексте
+            context_sentence = context_sentence[:1].upper() + context_sentence[1:] if context_sentence else context_sentence
             display_context = highlight_lemma_forms_in_text(context_sentence, target_forms)
 
             # Для каждого вхождения в этом предложении добавляем отдельную строку
