@@ -1,6 +1,5 @@
 import os
 import re
-import ast
 from collections import Counter
 from navec import Navec
 from src.file_utils import read_text_file
@@ -95,7 +94,6 @@ def get_occurrence_data(filtered_corpus, target_norm, lemma_forms):
     target_forms = lemma_forms.get(target_norm, [])
 
     if not target_forms:
-        print(f"⚠️  Словоформы для '{target_norm}' не найдены в словаре")
         return 0, [], year_dist
 
     for item in filtered_corpus:
@@ -481,7 +479,7 @@ def get_unique_synonyms(target_word, top_n_to_return=20, search_depth=50):
     final_cutoff = min(len(unique_lemmas), top_n_to_return)
     return unique_lemmas[:final_cutoff]
 
-def filter_synonyms_by_corpus(synonyms, corpus_df):
+def filter_synonyms_by_corpus(synonyms):
     """
     Дополнительная фильтрация синонимов через корпус.
     Оставляет только те, которые реально встречаются в текстах.
@@ -513,14 +511,14 @@ def proximity_neighbours_for_synonyms(synonyms_filtered, raw_data, decay_distanc
     Для каждого отфильтрованного синонима считаем его соседей по "Индексу Маяка".
     Позволяет LLM понять, какие слова были близки к каждому синониму, а не только к таргету.
     """
-    neightbors_for_synonyms = {}
+    neighbours_for_synonyms = {}
 
     for syn in synonyms_filtered:
         weights = get_proximity_index_neighbors(raw_data, syn, decay_distance=decay_distance, decay_brks=decay_brks, decay_sents=decay_sents, stopwords=stopwords)
         # Сортируем и берем топ-10 соседей для каждого синонима
-        neightbors_for_synonyms[syn] = weights.most_common(10)
+        neighbours_for_synonyms[syn] = weights.most_common(10)
 
-    return neightbors_for_synonyms
+    return neighbours_for_synonyms
 
 def prepare_llm_prompt(target_word, synonyms, synonyms_filtered, syn_proximity, neighbors_for_synonyms, total_occurrences=0, year_dist=None):
     """
