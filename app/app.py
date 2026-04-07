@@ -448,12 +448,7 @@ if compare_periods:
         min_year, max_year, (min_year, max_year)
     )
 
-# --- Справка об индексе Маяка ---
-st.sidebar.divider()
-if st.sidebar.button("ℹ️ Что такое индекс Маяка?", use_container_width=True):
-    show_mayak_index_help()
-
-with st.sidebar.expander("🤖 Настройки LLM"):
+with st.sidebar.expander("👾 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
     ["Локальная (Ollama)", "DeepSeek 3.5 (API)"],
@@ -477,6 +472,11 @@ with st.sidebar.expander("⚙️ Настройки весов (Индекс М�
         min_value=0.1, max_value=1.0, value=0.85, step=0.05,
         help="Коэффициент затухания за перенос строки или 'лесенку'."
     )
+
+# --- Справка об индексе Маяка ---
+st.sidebar.divider()
+if st.sidebar.button("ℹ️ Что такое индекс Маяка?", use_container_width=True):
+    show_mayak_index_help()
 
 # --- Глобальные вкладки ---
 tab_search, tab_corpus, tab_neologisms = st.tabs(["🔍 Анализ слова", "📊 Статистика корпуса", "📝 Неологизмы (beta)"])
