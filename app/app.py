@@ -252,11 +252,14 @@ if compare_periods:
     )
 
 with st.sidebar.expander("🤖 Настройки LLM"):
+    # строки связанные с Claude временно закомментированы - поддержка модели временно удалена
     model_source = st.radio(
     "Модель анализа:",
-    ["Локальная (Ollama)", "DeepSeek 3.5 (API)", "Claude 3.5 Sonnet (временно недоступен)"],
+    # ["Локальная (Ollama)", "DeepSeek 3.5 (API)", "Claude 3.5 Sonnet (временно недоступен)"],
+    ["Локальная (Ollama)", "DeepSeek 3.5 (API)"],
     index=1,
-    help="DeepSeek и Claude требуют ключи в .env и интернет. Ollama требует скачивания модели локально."
+    # help="DeepSeek и Claude требуют ключи в .env и интернет. Ollama требует скачивания модели локально."
+    help="Ollama требует скачивания модели локально. DeepSeek отправляет запрос через интернет."
     )
 
 with st.sidebar.expander("⚙️ Настройки весов (Индекс Маяка)"):
@@ -671,11 +674,6 @@ with tab_search:
     # --- БЛОК ИНТЕРПРЕТАЦИИ ЧЕРЕЗ LLM ---
     if search_word and results:
         if st.button("🚀 Запустить анализ через LLM"):
-            
-            # Импорты перемещены сюда для ускорения процесса загрузки страницы
-            
-            import ollama
-            import anthropic
 
             status_text = st.empty()
 
@@ -719,6 +717,9 @@ with tab_search:
             # --- ЛОГИКА ВЫБОРА МОДЕЛИ ---
 
             if model_source == "Локальная (Ollama)":
+
+                import ollama
+
                 response_container = st.empty()
                 full_response = ""
 
@@ -737,7 +738,9 @@ with tab_search:
                 if not deepseek_key:
                     st.error("Ключ DeepSeek не найден в .env! Добавьте DEEPSEEK_API_KEY.")
                 else:
+
                     from openai import OpenAI as DeepSeekClient
+                    
                     client_ds = DeepSeekClient(api_key=deepseek_key, base_url="https://api.deepseek.com")
 
                     with st.spinner("DeepSeek анализирует семантические поля..."):
@@ -782,6 +785,8 @@ with tab_search:
                             st.info("Убедитесь, что ключ DEEPSEEK_API_KEY корректно настроен.")
 
             # elif model_source == "API (Claude 3.5 Sonnet)":
+
+            #     st.warning('Интерпретация через Claude 3.5 Sonnet временно недоступна')
             #     if not claude_key:
             #         st.error("Ключ Anthropic не найден в .env!")
             #     else:
