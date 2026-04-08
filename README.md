@@ -58,8 +58,7 @@ mayak-digit/
 │   ├── file_utils.py              # Вспомогательные функции для работы с файлами и путями
 │   ├── text_utils.py              # Морфология и лемматизация
 │   ├── preprocessor.py            # Миграция и обработка Parquet
-│   ├── map_builder.py             # Генерация семантической карты (UMAP + K-Means)
-│   └── preprocess_poetree_dump.py # Обработка дампа корпуса PoeTree
+│   └── map_builder.py             # Генерация семантической карты (UMAP + K-Means)
 ├── models/
 │   └── navec_hudlit_...tar        # Векторная модель Navec
 ├── data/
