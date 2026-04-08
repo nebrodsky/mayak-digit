@@ -6,7 +6,7 @@ import poetree # импортируем модуль для работы с ко
 import csv # импортируем модуль для работы с таблицами
 from razdel import sentenize, tokenize
 from src.file_utils import get_files_in_folder, read_text_file, write_text_file, write_csv_file
-from src.text_utils import morph, lemmatize, format_separate_poem, get_sentences, lemmatize_with_mystem
+from src.text_utils import lemmatize, format_separate_poem, get_sentences, lemmatize_with_mystem
 
 def import_poetree_corpora(author_id, author_name, directory, annual_limit=None, max_poems=None):
     '''
@@ -190,7 +190,7 @@ def process_poetry_corpus(raw_poetry_path, data_path, rewrite=True):
    - Разбиваем на предложения с помощью razdel.sentenize
    - Для каждого предложения:
      - Токенизируем его с помощью razdel.tokenize
-     - Лемматизируем каждое слово, используя pymorphy3
+     - Лемматизируем каждое слово, используя pymystem3
      - Собираем леммы в структуру (список списков) для колонки 'lemmas'
    - Сохраняем оригинальный текст в колонке 'raw_text'
    - Форматируем текст для отображения (заменяем слэши на _BRK_ и добавляем переносы строк) и сохраняем в 'formatted_text'
