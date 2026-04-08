@@ -164,7 +164,7 @@ def lemmatize_with_mystem(sentence):
 
     if last_mystm_pos != len(ms_words):
         print(
-            f"⚠️ Не все слова обработаны MyStem! "
+            f"⚠️ Не все слова обработаны MyStem! Эта ошибка не является критической, но может потребовать дополнительной верификации результата. "
             f"Обработано {last_mystm_pos} из {len(ms_words)}. "
             f"Необработанные: {[w['text'] for w in ms_words[last_mystm_pos:]]}"
         )
