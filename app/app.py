@@ -873,7 +873,7 @@ with tab_search:
                 syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
 
                 # Считаем контекстуальные связи для каждого синонима
-                status_text.text("🤓 Считаем индекс Маяка для синонимов(это может занять время)...")
+                status_text.text("🤓 Считаем индекс Маяка для синонимов (это может занять время)...")
                 neighbors_for_syns = proximity_neighbours_for_synonyms(
                     synonyms_filtered,
                     filtered_corpus,
@@ -965,7 +965,7 @@ with tab_search:
                                     },
                                     {
                                         "role": "user",
-                                        "content": interpr_prompt
+                                        "content": interpr_prompt,
                                     }
                                 ],
                                 stream=False
