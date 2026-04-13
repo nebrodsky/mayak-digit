@@ -11,7 +11,7 @@ import plotly.graph_objects as go
 import streamlit as st
 import pandas as pd
 from collections import Counter, defaultdict
-from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, navec, calculate_delta_analysis
+from src.analyzer import full_word_analysis, get_unique_synonyms, filter_synonyms_by_corpus, prepare_llm_prompt, synonyms_proximity_index, proximity_neighbours_for_synonyms, navec, calculate_delta_analysis, prompt_prefix
 from src.text_utils import russian_stopwords
 from dotenv import load_dotenv
 
@@ -548,23 +548,23 @@ with tab_search:
                 st.caption(f"Период поиска: {year_range[0]} — {year_range[1]}")
 
             # --- УРОВЕНЬ 1.2: Синонимы (из словаря и встречающиеся в корпусе) ---
-            st.subheader("Синонимы")
+            st.subheader("Семантический кластер")
             synonyms = cached_get_unique_synonyms(search_word, top_n=20, depth=50)
             synonyms_filtered = filter_synonyms_by_corpus(synonyms)
 
             if synonyms:
                 if compare_periods:
-                    st.info("Подсчет списка синонимов происходит без привязки к периоду (на основе общего векторного словаря и полного корпуса Маяковского)")
+                    st.info("Подсчет семантически близких слов (векторных синонимов) происходит без привязки к периоду (на основе общего векторного словаря и полного корпуса Маяковского)")
                 show_coefficients = st.checkbox('Показать коэффициенты близости', value=True)
                 if show_coefficients:
                     synonyms_str = ', '.join([f"{syn} ({score:.4f})" for syn, score in synonyms])
-                    st.write(f"Синонимы по общему корпусу художественной литературы с коэффициентами близости: {synonyms_str}")
+                    st.write(f"Семантически близкие слова по общему корпусу художественной литературы (с коэффициентами близости): {synonyms_str}")
                 else:
-                    st.write(f"Синонимы по общему корпусу художественной литературы (без коэффициентов): {', '.join([syn for syn, score in synonyms])}")
+                    st.write(f"Семантически близкие слова по общему корпусу художественной литературы (без коэффициентов): {', '.join([syn for syn, score in synonyms])}")
                 st.info("Список включает слова из общего векторного словаря, которые могут не встречаться в поэтических текстах Маяковского. Ниже — только те слова, которые действительно есть в корпусе")
-                st.write(f"Синонимы, найденные в корпусе: {', '.join(synonyms_filtered)}")
+                st.write(f"Семантически близкие слова, найденные в корпусе: {', '.join(synonyms_filtered)}")
             else:
-                st.write("Синонимы не найдены или слово отсутствует в модели.")
+                st.write("Семантически близкие слова не найдены или слово отсутствует в модели.")
 
             st.divider()
 
@@ -889,8 +889,9 @@ with tab_search:
                     synonyms_filtered=synonyms_filtered,
                     syn_proximity=syn_prox_index,
                     neighbors_for_synonyms=neighbors_for_syns,
-                    total_occurrences=results['total_occurrences'],
-                    year_dist=results['year_dist']
+                    total_occurrences=total_occurrences,
+                    year_dist=year_dist,
+                    proximity_weights=proximity_weights
                 )
 
                 # Убираем временный текст статуса перед выводом результата
@@ -912,10 +913,11 @@ with tab_search:
                 import ollama
 
                 response_container = st.empty()
+                ollama_prompt = prompt_prefix + "\n\n" + interpr_prompt
                 full_response = ""
 
                 try:
-                    stream = ollama.generate(model='llama3:8b', prompt=interpr_prompt, stream=True)
+                    stream = ollama.generate(model='llama3:8b', prompt=ollama_prompt, stream=True)
                     for chunk in stream:
                         full_response += chunk['response']
                         response_container.markdown(full_response + "▌")
@@ -941,27 +943,7 @@ with tab_search:
                                 messages=[
                                     {
                                         "role": "system",
-                                        "content": """
-                                        Ты — филолог-исследователь, работающий с корпусными данными поэтических текстов Маяковского. Твоя задача — написать краткий аналитический комментарий на основе предоставленных данных.
-
-                                        --- МЕТОДОЛОГИЯ И ТЕРМИНЫ ---
-                                        1. "Семантическая близость" (общий корпус): близость слова к таргету в стандартном русском языке (НКРЯ).
-                                        2. "Индекс контекстуальной близости": частота и плотность нахождения слова рядом с таргетом в стихах. Учитывает "лесенку" и границы строк (переход строки снижает вес связи). Высокий индекс = слова "живут" в одном контексте.
-                                        3. Окружение синонимов: топ-10 соседей показывают тематическое поле, в котором этот синоним функционирует у автора.
-
-                                        --- ПРАВИЛА ОТВЕТА ---
-                                        - Пиши 4-5 коротких абзаца.
-                                        - БЕЗ вступлений ("На основе данных...", "Ниже представлен анализ...").
-                                        - БЕЗ технических меток и сырых скобок с весами (пиши "индекс близости составляет 0.8", а не "(0.8)").
-                                        - ТОЛЬКО на основе предоставленных цифр. Не выдумывай факты биографии.
-
-                                        --- ФОРМАТ ---
-                                        Абзац 1: Частотность и динамика (пики, годы, цифры).
-                                        Абзац 2: Синонимы в текстах (кто "дружит" с таргетом, а кто игнорируется).
-                                        Абзац 3: Различия в окружении (сравнение лемм-соседей разных синонимов).
-                                        Абзац 4: Отсутствующие синонимы (что из общего языка Маяковский не взял).
-                                        Абзац 5: Главная аномалия или яркое наблюдение на основе чисел.
-                                        """
+                                        "content": prompt_prefix
                                     },
                                     {
                                         "role": "user",
