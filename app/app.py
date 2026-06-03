@@ -451,7 +451,7 @@ if compare_periods:
 with st.sidebar.expander("👾 Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
-    ["Локальная (Ollama)", "DeepSeek 3.5 (API)"],
+    ["Локальная (Ollama)", "DeepSeek 4 (API)"],
     index=1,
     help="Ollama требует скачивания модели локально. DeepSeek отправляет запрос через интернет."
     )
@@ -927,7 +927,7 @@ with tab_search:
                     st.error(f"Ошибка при обращении к Ollama: {e}")
                     st.info("Убедитесь, что приложение Ollama запущено и модель llama3:8b скачана.")
 
-            elif model_source == "DeepSeek 3.5 (API)":
+            elif model_source == "DeepSeek 4 (API)":
                 if not deepseek_key:
                     st.error("Ключ DeepSeek не найден в .env! Добавьте DEEPSEEK_API_KEY.")
                 else:
@@ -939,7 +939,7 @@ with tab_search:
                     with st.spinner("DeepSeek анализирует семантические поля..."):
                         try:
                             response = client_ds.chat.completions.create(
-                                model="deepseek-reasoner",
+                                model="deepseek-v4-pro",
                                 messages=[
                                     {
                                         "role": "system",
@@ -950,7 +950,8 @@ with tab_search:
                                         "content": interpr_prompt,
                                     }
                                 ],
-                                stream=False
+                                stream=False,
+                                extra_body={"thinking": {"type": "enabled"}}
                             )
                             st.markdown(response.choices[0].message.content)
                         except Exception as e:
