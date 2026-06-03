@@ -396,7 +396,7 @@ def show_mayak_index_help():
 # --- Интерфейс Streamlit ---
 st.set_page_config(page_title="Mayak-2D Prototype", layout="wide")
 
-st.title("Mayak-2D")
+st.title("Mayak Digit")
 st.subheader("Прототип цифрового словаря В. В. Маяковского")
 
 full_corpus = load_data()
