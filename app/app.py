@@ -939,7 +939,7 @@ with tab_search:
                     with st.spinner("DeepSeek анализирует семантические поля..."):
                         try:
                             response = client_ds.chat.completions.create(
-                                model="deepseek-v4-pro",
+                                model="deepseek-v4-flash",
                                 messages=[
                                     {
                                         "role": "system",
