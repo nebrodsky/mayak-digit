@@ -873,7 +873,7 @@ with tab_search:
                 syn_prox_index = synonyms_proximity_index(target_word, synonyms_filtered, results['proximity_weights'])
 
                 # Считаем контекстуальные связи для каждого синонима
-                status_text.text("🤓 Считаем индекс Маяка для синонимов (это может занять время)...")
+                status_text.text("Считаем индекс Маяка для синонимов (это может занять время)...")
                 neighbors_for_syns = proximity_neighbours_for_synonyms(
                     synonyms_filtered,
                     filtered_corpus,
@@ -882,7 +882,7 @@ with tab_search:
                 )
 
                 # Сборка промпта
-                status_text.text("✍️ Формирую аналитическое досье для ИИ...")
+                status_text.text("Формирую аналитическое досье для ИИ...")
                 interpr_prompt = prepare_llm_prompt(
                     target_word=target_word,
                     synonyms=synonyms,
@@ -902,7 +902,7 @@ with tab_search:
             st.code(interpr_prompt, language="text")
 
             st.divider()
-            st.subheader("📝 Аналитический комментарий от LLM:")
+            st.subheader("Аналитический комментарий от LLM:")
 
             st.info("Несмотря на предварительную настройку, LLM может добавлять к реальным данным собственные интерпретации. Пожалуйста, относитесь к результату критически и сверяйтесь с фактическими данными из предыдущих разделов.")
 
