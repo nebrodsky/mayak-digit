@@ -862,7 +862,7 @@ with tab_search:
 
     # --- БЛОК ИНТЕРПРЕТАЦИИ ЧЕРЕЗ LLM ---
     if search_word and results:
-        if st.button("🚀 Запустить анализ через LLM"):
+        if st.button("Запустить анализ через LLM"):
 
             status_text = st.empty()
 
@@ -981,9 +981,9 @@ with tab_corpus:
         st.warning("Нет данных за выбранный период.")
     else:
         tab_corp_metrics, tab_corp_freq, tab_corp_growth = st.tabs([
-            "📋 Общие метрики",
-            "📖 Частотный словарь",
-            "📈 Рост словаря",
+            "Общие метрики",
+            "Частотный словарь",
+            "Рост словаря",
         ])
 
         # --- 2.1: Общие метрики ---
@@ -1140,7 +1140,7 @@ with tab_corpus:
             fig = build_mayak_semantic_map(cluster_map_df, selected_clusters, sm_size_by_freq)
             st.plotly_chart(fig, width='stretch')
 
-            with st.expander("📋 Состав кластеров"):
+            with st.expander("Состав кластеров"):
                 display_df = (
                     cluster_map_df[cluster_map_df["cluster"].isin(selected_clusters)]
                     [["cluster", "word", "freq"]]
@@ -1203,8 +1203,8 @@ with tab_neologisms:
             in_navec, not_in_navec = check_hapax_in_navec(hapax_list)
 
             tab_all_hapax, tab_unknown_vectors = st.tabs([
-                f"📚 Все однократные ({len(hapax_list)})",
-                f"⚠️ Отсутствуют в navec ({len(not_in_navec)})"
+                f"Все однократные ({len(hapax_list)})",
+                f"Отсутствуют в navec ({len(not_in_navec)})"
             ])
 
             # Таблица 1: Все однократные неологизмы
@@ -1219,7 +1219,7 @@ with tab_neologisms:
                 # Скачивание файла
                 csv = hapax_df.to_csv(index_label='№')
                 st.download_button(
-                    label="📥 Скачать список CSV",
+                    label="Скачать список CSV",
                     data=csv,
                     file_name="mayak_hapax_legomena.csv",
                     mime="text/csv"
