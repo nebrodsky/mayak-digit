@@ -448,7 +448,7 @@ if compare_periods:
         min_year, max_year, (min_year, max_year)
     )
 
-with st.sidebar.expander("👾 Настройки LLM"):
+with st.sidebar.expander("Настройки LLM"):
     model_source = st.radio(
     "Модель анализа:",
     ["Локальная (Ollama)", "DeepSeek 4 (API)"],
@@ -456,7 +456,7 @@ with st.sidebar.expander("👾 Настройки LLM"):
     help="Ollama требует скачивания модели локально. DeepSeek отправляет запрос через интернет."
     )
 
-with st.sidebar.expander("⚙️ Настройки весов (Индекс Маяка)"):
+with st.sidebar.expander("Настройки весов (Индекс Маяка)"):
     decay_distance = st.slider(
         "Затухание от расстояния",
         min_value=0.5, max_value=1.0, value=0.95, step=0.01,
@@ -658,7 +658,7 @@ with tab_search:
 
                 delta_analysis = calculate_delta_analysis(results, results_2, count_stopwords=count_stopwords)
 
-                tab_window, tab_index, tab_delta = st.tabs(["🔲 Классическое окно", "🗼 Индекс Маяка", "📈 Дельта-анализ"])
+                tab_window, tab_index, tab_delta = st.tabs(["Классическое окно", "Индекс Маяка", "Дельта-анализ"])
 
                 with tab_window:
                     # Классическое окно для обоих периодов
@@ -777,7 +777,7 @@ with tab_search:
                             st.info("Нет изменяющихся слов.")
             else:
                 # Режим одного периода
-                tab_window, tab_index = st.tabs(["🔲 Классическое окно контекста", "🗼 Индекс Маяка"])
+                tab_window, tab_index = st.tabs(["Классическое окно контекста", "Индекс Маяка"])
 
                 with tab_window:
                     if count_stopwords:
@@ -819,12 +819,12 @@ with tab_search:
                     if contexts:
                         context_format = st.radio(
                             "Формат отображения (период 1):",
-                            ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
+                            ["Таблица (базовая)", "Таблица (с выделением)"],
                             horizontal=True,
                             help="Выберите удобный способ просмотра контекстов",
                             key="ctx_fmt_1"
                         )
-                        if context_format == "📝 Таблица (базовая)":
+                        if context_format == "Таблица (базовая)":
                             display_contexts_table_simple(contexts)
                         else:
                             display_contexts_table_highlighted(contexts)
@@ -834,12 +834,12 @@ with tab_search:
                     if contexts_2:
                         context_format_2 = st.radio(
                             "Формат отображения (период 2):",
-                            ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
+                            ["Таблица (базовая)", "Таблица (с выделением)"],
                             horizontal=True,
                             help="Выберите удобный способ просмотра контекстов",
                             key="ctx_fmt_2"
                         )
-                        if context_format_2 == "📝 Таблица (базовая)":
+                        if context_format_2 == "Таблица (базовая)":
                             display_contexts_table_simple(contexts_2)
                         else:
                             display_contexts_table_highlighted(contexts_2)
@@ -850,12 +850,12 @@ with tab_search:
                 if contexts:
                     context_format = st.radio(
                         "Формат отображения:",
-                        ["📝 Таблица (базовая)", "✍️ Таблица (с выделением)"],
+                        ["Таблица (базовая)", "Таблица (с выделением)"],
                         horizontal=True,
                         help="Выберите удобный способ просмотра контекстов"
                     )
 
-                    if context_format == "📝 Таблица (базовая)":
+                    if context_format == "Таблица (базовая)":
                         display_contexts_table_simple(contexts)
                     else:
                         display_contexts_table_highlighted(contexts)
@@ -1178,7 +1178,7 @@ with tab_neologisms:
         hapax_set = set(hapax_data.get('hapax_legomena', []))
 
         # Показываем статистику
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2 = st.columns(2)
         col1.metric(
             "Произведений Маяка",
             hapax_metadata.get('mayakovsky_poems_count', 0)
@@ -1186,14 +1186,6 @@ with tab_neologisms:
         col2.metric(
             "Уникальных лемм (Маяк)",
             f"{hapax_metadata.get('mayakovsky_unique_lemmas', 0):,}".replace(',', ' ')
-        )
-        col3.metric(
-            "Гапаксы (только Маяк)",
-            f"{hapax_metadata.get('hapax_count', 0):,}".replace(',', ' ')
-        )
-        col4.metric(
-            "% от словаря",
-            f"{100 * hapax_metadata.get('hapax_count', 0) / max(1, hapax_metadata.get('mayakovsky_unique_lemmas', 1)):.1f}%"
         )
 
         st.divider()
@@ -1237,7 +1229,7 @@ with tab_neologisms:
             with tab_unknown_vectors:
                 st.markdown(
                     "Эти слова встречаются только один раз у Маяковского "
-                    "и отсутствуют в векторной модели Navec (вероятно, опечатки или уникальные авторские неологизмы)."
+                    "и отсутствуют в векторной модели Navec (возможно, опечатки или уникальные авторские неологизмы)."
                 )
 
                 if len(not_in_navec) == 0:
@@ -1259,35 +1251,34 @@ with tab_neologisms:
                         mime="text/csv"
                     )
 
-        st.divider()
+        # временно скрыт, в процесс доработки
+        # with st.expander(f"📚 Все гапаксы ({len(hapax_set):,})"):
+        #     st.markdown("*(слова, которые встречаются только у Маяковского, независимо от частоты)*")
 
-        with st.expander(f"📚 Все гапаксы ({len(hapax_set):,})"):
-            st.markdown("*(слова, которые встречаются только у Маяковского, независимо от частоты)*")
+        #     # Сортируем по частотности в корпусе Маяка
+        #     freq_counter = compute_frequency_dict(full_corpus, exclude_stopwords=False)
 
-            # Сортируем по частотности в корпусе Маяка
-            freq_counter = compute_frequency_dict(full_corpus, exclude_stopwords=False)
+        #     all_hapax_list = [
+        #         {"Слово": lemma, "Частота": freq_counter.get(lemma, 0)}
+        #         for lemma in sorted(hapax_set, key=lambda x: freq_counter.get(x, 0), reverse=True)
+        #     ]
 
-            all_hapax_list = [
-                {"Слово": lemma, "Частота": freq_counter.get(lemma, 0)}
-                for lemma in sorted(hapax_set, key=lambda x: freq_counter.get(x, 0), reverse=True)
-            ]
+        #     all_hapax_df = pd.DataFrame(all_hapax_list)
+        #     all_hapax_df.index = range(1, len(all_hapax_df) + 1)
 
-            all_hapax_df = pd.DataFrame(all_hapax_list)
-            all_hapax_df.index = range(1, len(all_hapax_df) + 1)
+        #     st.dataframe(all_hapax_df, width='stretch', height=600)
 
-            st.dataframe(all_hapax_df, width='stretch', height=600)
+        #     # Статистика по частотности
+        #     st.markdown("#### Распределение по частотности")
+        #     freq_counts = Counter(h['Частота'] for h in all_hapax_list)
+        #     freq_dist_df = pd.DataFrame([
+        #         {"Частота": freq, "Количество слов": count}
+        #         for freq, count in sorted(freq_counts.items())
+        #     ])
 
-            # Статистика по частотности
-            st.markdown("#### Распределение по частотности")
-            freq_counts = Counter(h['Частота'] for h in all_hapax_list)
-            freq_dist_df = pd.DataFrame([
-                {"Частота": freq, "Количество слов": count}
-                for freq, count in sorted(freq_counts.items())
-            ])
-
-            col_table, col_chart = st.columns([0.5, 0.5])
-            with col_table:
-                st.dataframe(freq_dist_df, width='stretch')
-            with col_chart:
-                st.bar_chart(freq_dist_df.set_index('Частота')['Количество слов'])
+        #     col_table, col_chart = st.columns([0.5, 0.5])
+        #     with col_table:
+        #         st.dataframe(freq_dist_df, width='stretch')
+        #     with col_chart:
+        #         st.bar_chart(freq_dist_df.set_index('Частота')['Количество слов'])
 
