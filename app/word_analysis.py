@@ -31,29 +31,23 @@ def cached_get_unique_synonyms(word, top_n=20, depth=50):
 
 @st.cache_data
 def cached_full_word_analysis(
-    corpus_records,
-    lemma_forms,
+    _filtered_corpus,
+    _lemma_forms,
     search_word,
-    year_range,
     window_size,
     decay_distance,
     decay_brks,
     decay_sents,
 ):
-    filtered = [
-        item for item in corpus_records
-        if year_range[0] <= item["year_finished"] <= year_range[1]
-    ]
-
     return full_word_analysis(
-        filtered_corpus=filtered,
+        filtered_corpus=_filtered_corpus,
         target_word=search_word,
         window_size=window_size,
         decay_distance=decay_distance,
         decay_brks=decay_brks,
         decay_sents=decay_sents,
         stopwords=russian_stopwords,
-        lemma_forms=lemma_forms,
+        lemma_forms=_lemma_forms,
     )
 
 
@@ -78,10 +72,9 @@ def build_word_analysis_state(
         if year_range[0] <= item["year_finished"] <= year_range[1]
     ]
     results = cached_full_word_analysis(
-        full_corpus,
+        filtered_corpus,
         lemma_forms,
         target_word,
-        year_range,
         window_size,
         decay_distance,
         decay_brks,
@@ -94,10 +87,12 @@ def build_word_analysis_state(
             results_2 = results
         else:
             results_2 = cached_full_word_analysis(
-                full_corpus,
+                [
+                    item for item in full_corpus
+                    if year_range_2[0] <= item["year_finished"] <= year_range_2[1]
+                ],
                 lemma_forms,
                 target_word,
-                year_range_2,
                 window_size,
                 decay_distance,
                 decay_brks,
@@ -108,7 +103,6 @@ def build_word_analysis_state(
     synonyms_filtered = filter_synonyms_by_corpus(synonyms)
 
     return {
-        "search_word": target_word,
         "target_word": target_word,
         "filtered_corpus": filtered_corpus,
         "results": results,

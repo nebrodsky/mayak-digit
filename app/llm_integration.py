@@ -9,6 +9,9 @@ from src.analyzer import (
 from src.text_utils import russian_stopwords
 
 
+DEEPSEEK_MODEL = "deepseek-v4-flash"
+
+
 def render_llm_section(
     model_source,
     deepseek_key,
@@ -92,7 +95,7 @@ def render_llm_section(
         with st.spinner("DeepSeek анализирует семантические поля..."):
             try:
                 response = client_ds.chat.completions.create(
-                    model="deepseek-v4-flash",
+                    model=DEEPSEEK_MODEL,
                     messages=[
                         {"role": "system", "content": prompt_prefix},
                         {"role": "user", "content": interpr_prompt},
